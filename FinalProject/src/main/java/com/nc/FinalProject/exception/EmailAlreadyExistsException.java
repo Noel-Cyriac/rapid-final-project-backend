@@ -1,0 +1,7 @@
+package com.nc.FinalProject.exception;
+
+public class EmailAlreadyExistsException extends RuntimeException {
+    public EmailAlreadyExistsException(String message) {
+        super(message);
+    }
+}

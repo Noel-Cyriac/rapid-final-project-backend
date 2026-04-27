@@ -16,12 +16,27 @@ public class FileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fileName;
+    private String fileName;     // user visible
+
+    private String storedName;   // actual disk name
+
     private String fileType;
+
     private Long size;
+
     private String filePath;
+
+    private Integer downloadCount = 0;
+
+    private Boolean deleted = false;
+
     private LocalDateTime uploadedAt;
+
+    private LocalDateTime lastDownloadedAt;
 
     @ManyToOne
     private Users owner;
+
+    @ManyToOne
+    private Folder folder;
 }

@@ -65,6 +65,7 @@ public class AuthService {
 
 
     public LoginResponse login(LoginRequest request, HttpServletResponse response) {
+
         var auth = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail().trim(),
@@ -72,8 +73,14 @@ public class AuthService {
                 )
         );
 
-        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+        CustomUserDetails userDetails =
+                (CustomUserDetails) auth.getPrincipal();
+
         String email = userDetails.getUsername();
+
+        // 🔥 fetch full user from DB
+        Users user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         String accessToken = jwtUtil.generateAccessToken(email);
         String refreshToken = jwtUtil.generateRefreshToken(email);
@@ -83,13 +90,18 @@ public class AuthService {
         refreshCookie.setSecure(false);
         refreshCookie.setPath("/api/auth/refresh");
         refreshCookie.setMaxAge(7 * 24 * 60 * 60);
+
         response.addCookie(refreshCookie);
 
         logger.info("Login SUCCESS for user: {}", email);
 
-        return new LoginResponse(accessToken);
+        return new LoginResponse(
+                accessToken,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail()
+        );
     }
-
     public LoginResponse refreshToken(String refreshToken, HttpServletResponse response) {
 
         if (refreshToken == null) {
@@ -104,6 +116,9 @@ public class AuthService {
 
         String email = jwtUtil.extractEmail(refreshToken);
 
+        Users user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         String newAccessToken = jwtUtil.generateAccessToken(email);
         String newRefreshToken = jwtUtil.generateRefreshToken(email);
 
@@ -117,9 +132,13 @@ public class AuthService {
 
         logger.info("Refresh SUCCESS for user: {}", email);
 
-        return new LoginResponse(newAccessToken);
+        return new LoginResponse(
+                newAccessToken,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail()
+        );
     }
-
     public void sendResetPasswordEmail(String email) {
         logger.info("Received request to send reset password email for: {}", email);
 
@@ -135,7 +154,7 @@ public class AuthService {
         logger.info("Generated reset token for user {}: {}", email, token);
 
         // TODO: Send email with link containing token
-        String resetLink = "http://localhost:5173/reset-password/" + token;
+        String resetLink = "http://localhost:5175/reset-password/" + token;
         logger.info("Reset password link for {}: {}", email, resetLink);
     }
 

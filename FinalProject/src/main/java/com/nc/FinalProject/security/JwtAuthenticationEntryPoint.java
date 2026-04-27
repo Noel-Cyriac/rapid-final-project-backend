@@ -1,21 +1,26 @@
 package com.nc.FinalProject.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nc.FinalProject.dto.ErrorResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    // Injecting Spring's pre-configured mapper (handles LocalDateTime automatically)
+    private final ObjectMapper objectMapper;
 
     @Override
     public void commence(HttpServletRequest request,
@@ -25,15 +30,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
         log.warn("Unauthorized access: {}", authException.getMessage());
 
-        ErrorResponse error = new ErrorResponse(
-                "Unauthorized",
-                401,
-                null
-        );
+        // Using your new DTO (Message, Errors) - Timestamp is auto-generated
+        ErrorResponse error = new ErrorResponse("Unauthorized: Authentication is required", null);
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
-        new ObjectMapper().writeValue(response.getOutputStream(), error);
+        objectMapper.writeValue(response.getOutputStream(), error);
     }
 }

@@ -1,14 +1,21 @@
 package com.nc.FinalProject.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class ErrorResponse {
-    private String message;        // general message like "Registration failed"
-    private int code;              // HTTP status code
-    private Map<String, String> errors;  // field-specific errors
+    private String message;
+    private LocalDateTime timestamp = LocalDateTime.now(); // Auto-generates on instantiation
+    private Map<String, String> errors;
+
+    // Custom constructor since we don't want to pass timestamp manually
+    public ErrorResponse(String message, Map<String, String> errors) {
+        this.message = message;
+        this.errors = errors;
+        // timestamp is already initialized above
+    }
 }

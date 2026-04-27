@@ -1,116 +1,285 @@
 package com.nc.FinalProject.service;
 
-import com.nc.FinalProject.dto.FileResponse;
-import com.nc.FinalProject.entity.FileEntity;
-import com.nc.FinalProject.entity.Users;
-import com.nc.FinalProject.exception.FileNotFoundException;
-import com.nc.FinalProject.exception.FileUploadException;
-import com.nc.FinalProject.repository.FileRepository;
+import com.nc.FinalProject.dto.*;
+import com.nc.FinalProject.entity.*;
+import com.nc.FinalProject.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class FileService {
 
     private final FileRepository fileRepository;
-    private static final Logger logger = LoggerFactory.getLogger(FileService.class);
+    private final FileActivityRepository activityRepository;
+    private final FolderRepository folderRepository;
 
     @Value("${file.storage.location}")
     private String uploadDir;
 
-    public FileResponse uploadFile(MultipartFile multipartFile, Users user) {
-
+    // ======================
+    // MULTI UPLOAD
+    // ======================
+    public List<FileResponse> uploadFiles(MultipartFile[] files, Users user) {
         try {
-            // Max size check (100 MB)
-            if (multipartFile.getSize() > 100L * 1024 * 1024) {
-                throw new FileUploadException("File exceeds 100 MB");
+            Files.createDirectories(Paths.get(uploadDir));
+
+            List<FileResponse> list = new ArrayList<>();
+
+            for (MultipartFile file : files) {
+
+                if (file.isEmpty()) continue;
+
+                String finalName = generateUniqueName(
+                        file.getOriginalFilename(),
+                        user,
+                        null
+                );
+
+                String storedName =
+                        System.currentTimeMillis() + "_" + finalName;
+
+                Path path = Paths.get(uploadDir, storedName);
+
+                file.transferTo(path);
+
+                FileEntity saved = fileRepository.save(
+                        FileEntity.builder()
+                                .fileName(finalName)
+                                .storedName(storedName)
+                                .fileType(file.getContentType())
+                                .size(file.getSize())
+                                .filePath(path.toString())
+                                .uploadedAt(LocalDateTime.now())
+                                .owner(user)
+                                .deleted(false)
+                                .downloadCount(0)
+                                .build()
+                );
+
+                track(user, saved, "UPLOAD", file.getSize());
+
+                list.add(mapToResponse(saved));
             }
 
-            // Ensure upload directory exists inside project folder
-            Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
-            Files.createDirectories(uploadPath);
+            return list;
 
-            // Sanitize filename
-            String originalFilename = multipartFile.getOriginalFilename().replaceAll("\\s+", "_");
-            Path filePath = uploadPath.resolve(System.currentTimeMillis() + "_" + originalFilename);
-
-            // Save file locally
-            multipartFile.transferTo(filePath.toFile());
-
-            // Save file info in DB
-            FileEntity fileEntity = FileEntity.builder()
-                    .fileName(multipartFile.getOriginalFilename())
-                    .filePath(filePath.toString())
-                    .size(multipartFile.getSize())
-                    .uploadedAt(LocalDateTime.now())
-                    .owner(user)
-                    .build();
-
-            FileEntity saved = fileRepository.save(fileEntity);
-
-            return new FileResponse(
-                    saved.getId(),
-                    saved.getFileName(),
-                    FileResponse.formatSize(saved.getSize()),  // human-readable
-                    saved.getUploadedAt()
-            );
-
-        } catch (IOException e) {
-            logger.error("File upload failed: {}", e.getMessage(), e);
-            throw new FileUploadException("Failed to upload file: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
-    public Page<FileResponse> listFiles(Users user, Pageable pageable) {
-        return fileRepository.findByOwner(user, pageable)
-                .map(f -> new FileResponse(
-                        f.getId(),
-                        f.getFileName(),
-                        FileResponse.formatSize(f.getSize()), // convert bytes to KB/MB/GB
-                        f.getUploadedAt()
-                ));
+
+    // ======================
+    // LIST FILES
+    // ======================
+    public PagedResponse<FileResponse> listFiles(Users user, Pageable pageable) {
+
+        Page<FileEntity> page =
+                fileRepository.findByOwnerAndDeletedFalse(user, pageable);
+
+        Page<FileResponse> dtoPage =
+                page.map(this::mapToResponse);
+
+        return new PagedResponse<>(
+                dtoPage.getContent(),
+                dtoPage.getNumber(),
+                dtoPage.getSize(),
+                dtoPage.getTotalElements(),
+                dtoPage.getTotalPages(),
+                dtoPage.isFirst(),
+                dtoPage.isLast()
+        );
     }
 
-    public Path getFilePath(Long fileId, Users user) {
-        FileEntity fileEntity = fileRepository.findById(fileId)
-                .filter(f -> f.getOwner().getId().equals(user.getId()))
-                .orElseThrow(() -> new FileNotFoundException("File not found or access denied"));
+    // ======================
+    // RECYCLE BIN
+    // ======================
+    public PagedResponse<FileResponse> recycleBin(Users user, Pageable pageable) {
 
-        Path path = Path.of(fileEntity.getFilePath());
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
-            throw new FileNotFoundException("File not found on server");
+        Page<FileEntity> page =
+                fileRepository.findByOwnerAndDeletedTrue(user, pageable);
+
+        Page<FileResponse> dtoPage =
+                page.map(this::mapToResponse);
+
+        return new PagedResponse<>(
+                dtoPage.getContent(),
+                dtoPage.getNumber(),
+                dtoPage.getSize(),
+                dtoPage.getTotalElements(),
+                dtoPage.getTotalPages(),
+                dtoPage.isFirst(),
+                dtoPage.isLast()
+        );
+    }
+
+    // ======================
+    // DOWNLOAD
+    // ======================
+    public Path getFilePath(Long id, Users user) {
+
+        FileEntity file =
+                fileRepository.findByIdAndOwner(id, user)
+                        .orElseThrow();
+
+        file.setDownloadCount(file.getDownloadCount() + 1);
+        file.setLastDownloadedAt(LocalDateTime.now());
+
+        fileRepository.save(file);
+
+        track(user, file, "DOWNLOAD", file.getSize());
+
+        return Paths.get(file.getFilePath());
+    }
+
+    // ======================
+    // DELETE
+    // ======================
+    public void deleteFile(Long id, Users user) {
+
+        FileEntity file =
+                fileRepository.findByIdAndOwner(id, user)
+                        .orElseThrow();
+
+        file.setDeleted(true);
+
+        fileRepository.save(file);
+
+        track(user, file, "DELETE", 0L);
+    }
+
+    // ======================
+    // RESTORE
+    // ======================
+    public void restoreFile(Long id, Users user) {
+
+        FileEntity file =
+                fileRepository.findByIdAndOwner(id, user)
+                        .orElseThrow();
+
+        file.setDeleted(false);
+
+        fileRepository.save(file);
+
+        track(user, file, "RESTORE", 0L);
+    }
+
+    // ======================
+    // DASHBOARD
+    // ======================
+    public DashboardResponse dashboard(Users user) {
+
+        LocalDateTime today =
+                LocalDateTime.now()
+                        .toLocalDate()
+                        .atStartOfDay();
+
+        List<FileResponse> latestUploads =
+                fileRepository
+                        .findTop4ByOwnerAndDeletedFalseOrderByUploadedAtDesc(user)
+                        .stream()
+                        .map(this::mapToResponse)
+                        .toList();
+
+        List<ActivityResponse> latestDownloads =
+                activityRepository
+                        .findTop4ByUserAndActionOrderByCreatedAtDesc(
+                                user,
+                                "DOWNLOAD"
+                        )
+                        .stream()
+                        .map(a -> new ActivityResponse(
+                                a.getFile().getId(),
+                                a.getFile().getFileName(),
+                                a.getAction(),
+                                a.getCreatedAt()
+                        ))
+                        .toList();
+
+        return DashboardResponse.builder()
+                .todayUploads(activityRepository.todayCount(user, "UPLOAD", today))
+                .todayDownloads(activityRepository.todayCount(user, "DOWNLOAD", today))
+                .todayDeletes(activityRepository.todayCount(user, "DELETE", today))
+                .totalUploads(activityRepository.countByAction(user, "UPLOAD"))
+                .totalDownloads(activityRepository.countByAction(user, "DOWNLOAD"))
+                .usedStorage(fileRepository.totalUsed(user))
+                .latestUploads(latestUploads)
+                .latestDownloads(latestDownloads)
+                .build();
+    }
+
+    // ======================
+    // TRACKING
+    // ======================
+    private void track(Users user, FileEntity file, String action, Long size) {
+
+        activityRepository.save(
+                FileActivity.builder()
+                        .user(user)
+                        .file(file)
+                        .action(action)
+                        .size(size)
+                        .createdAt(LocalDateTime.now())
+                        .build()
+        );
+    }
+
+    // ======================
+    // UNIQUE FILE NAME
+    // ======================
+    private String generateUniqueName(
+            String original,
+            Users user,
+            Folder folder
+    ) {
+
+        String name = original;
+        int count = 1;
+
+        while (fileRepository
+                .existsByOwnerAndFolderAndFileNameAndDeletedFalse(
+                        user,
+                        folder,
+                        name
+                )) {
+
+            int dot = original.lastIndexOf(".");
+
+            if (dot == -1) {
+                name = original + "(" + count + ")";
+            } else {
+                String base = original.substring(0, dot);
+                String ext = original.substring(dot);
+                name = base + "(" + count + ")" + ext;
+            }
+
+            count++;
         }
-        return path; // just return Path, no HTTP stuff
+
+        return name;
     }
 
-    public String getFileName(Long fileId) {
-        return fileRepository.findById(fileId)
-                .map(FileEntity::getFileName)
-                .orElse("unknown");
-    }
+    // ======================
+    // ENTITY -> DTO
+    // ======================
+    private FileResponse mapToResponse(FileEntity f) {
 
-    public FileEntity getFile(Long fileId, Users user) {
-        return fileRepository.findById(fileId)
-                .filter(f -> f.getOwner().getId().equals(user.getId()))
-                .orElseThrow(() -> new RuntimeException("File not found"));
-    }
-
-    public void deleteFile(Long fileId, Users user) {
-        FileEntity file = getFile(fileId, user);
-        new File(file.getFilePath()).delete();
-        fileRepository.delete(file);
+        return new FileResponse(
+                f.getId(),
+                f.getFileName(),
+                f.getStoredName(),
+                f.getFileType(),
+                f.getSize(),
+                f.getFilePath(),
+                f.getDownloadCount(),
+                f.getUploadedAt()
+        );
     }
 }

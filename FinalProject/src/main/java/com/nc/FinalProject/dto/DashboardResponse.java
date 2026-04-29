@@ -20,5 +20,7 @@ public class DashboardResponse {
 
     private List<FileResponse> latestUploads;
 
-    private List<ActivityResponse> latestDownloads;
+    private List<FileResponse> latestDownloads;
+
+    private List<FileResponse> recentlyOpened;
 }

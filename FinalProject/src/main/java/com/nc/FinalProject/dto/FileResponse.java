@@ -15,6 +15,5 @@ public class FileResponse {
     private String fileType;
     private Long size;
     private String filePath;
-    private Integer downloadCount;
     private LocalDateTime uploadedAt;
 }

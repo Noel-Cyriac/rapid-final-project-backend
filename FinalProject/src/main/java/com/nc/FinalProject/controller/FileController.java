@@ -1,5 +1,6 @@
 package com.nc.FinalProject.controller;
 
+import com.nc.FinalProject.dto.FileViewResponse;
 import com.nc.FinalProject.dto.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/files")
@@ -39,6 +41,7 @@ public class FileController {
         );
     }
 
+
     @GetMapping("/list")
     public ResponseEntity<SuccessResponse> list(
             Authentication auth,
@@ -56,43 +59,70 @@ public class FileController {
         );
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<SuccessResponse> delete(
+    @GetMapping("/view/{id}")
+    public ResponseEntity<byte[]> view(
             @PathVariable Long id,
             Authentication auth
+    ) throws Exception {
+
+        FileViewResponse file = fileService.viewFile(id, user(auth));
+
+        byte[] bytes = Files.readAllBytes(Path.of(file.path()));
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.type()))
+                .body(bytes);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<SuccessResponse> deleteMultiple(
+            @RequestBody List<Long> ids,
+            Authentication auth
     ) {
-        fileService.deleteFile(id, user(auth));
+        fileService.deleteFiles(ids, user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse(
-                        "File moved to recycle bin",
-                        null
-                )
+                new SuccessResponse("File(s) moved to recycle bin", null)
         );
     }
 
-    @PostMapping("/restore/{id}")
-    public ResponseEntity<SuccessResponse> restore(
-            @PathVariable Long id,
+    @PostMapping("/restore")
+    public ResponseEntity<SuccessResponse> restoreMultiple(
+            @RequestBody List<Long> ids,
             Authentication auth
     ) {
-        fileService.restoreFile(id, user(auth));
+        fileService.restoreFiles(ids, user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse(
-                        "File restored successfully",
-                        null
-                )
+                new SuccessResponse("File(s) restored successfully", null)
         );
     }
 
     @GetMapping("/recycle")
-    public ResponseEntity<SuccessResponse> recycle(Authentication auth) {
+    public ResponseEntity<SuccessResponse> recycle(
+            Authentication auth,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
         return ResponseEntity.ok(
                 new SuccessResponse(
                         "Recycle bin fetched successfully",
-                        fileService.recycleBin(user(auth), PageRequest.of(0, 20))
+                        fileService.recycleBin(
+                                user(auth),
+                                PageRequest.of(page, size)
+                        )
                 )
+        );
+    }
+
+    @DeleteMapping("/permanent-delete")
+    public ResponseEntity<?> deletePermanent(
+            @RequestBody List<Long> ids,
+            Authentication auth
+    ) {
+        fileService.deletePermanent(ids, user(auth));
+        return ResponseEntity.ok(
+                new SuccessResponse("File(s) deleted permanently", null)
         );
     }
 
@@ -119,5 +149,71 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + path.getFileName() + "\"")
                 .body(bytes);
+    }
+
+    @PostMapping("/download")
+    public ResponseEntity<byte[]> downloadMultiple(
+            @RequestBody List<Long> ids,
+            Authentication auth
+    ) throws Exception {
+
+        byte[] zipBytes = fileService.downloadMultiple(ids, user(auth));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"files.zip\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(zipBytes);
+    }
+
+    @GetMapping("/uploaded")
+    public ResponseEntity<SuccessResponse> uploaded(
+            Authentication auth,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Uploaded files fetched",
+                        fileService.getUploadedFiles(
+                                user(auth),
+                                PageRequest.of(page, size)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/downloaded")
+    public ResponseEntity<SuccessResponse> downloaded(
+            Authentication auth,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Downloaded files fetched",
+                        fileService.getDownloadedFiles(
+                                user(auth),
+                                PageRequest.of(page, size)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/recent")
+    public ResponseEntity<SuccessResponse> recent(
+            Authentication auth,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Recently opened files fetched",
+                        fileService.getRecentlyOpenedFiles(
+                                user(auth),
+                                PageRequest.of(page, size)
+                        )
+                )
+        );
     }
 }

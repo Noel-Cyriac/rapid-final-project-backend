@@ -3,15 +3,19 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.*;
 import com.nc.FinalProject.entity.*;
 import com.nc.FinalProject.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 @RequiredArgsConstructor
@@ -139,38 +143,105 @@ public class FileService {
         return Paths.get(file.getFilePath());
     }
 
+    public byte[] downloadMultiple(List<Long> ids, Users user) throws Exception {
+
+        List<FileEntity> files = fileRepository.findAllById(ids);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ZipOutputStream zos = new ZipOutputStream(baos);
+
+        for (FileEntity file : files) {
+
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
+
+            Path path = Paths.get(file.getFilePath());
+
+            zos.putNextEntry(new ZipEntry(file.getFileName()));
+
+            Files.copy(path, zos);
+
+            zos.closeEntry();
+
+            // update stats per file
+            file.setDownloadCount(file.getDownloadCount() + 1);
+            file.setLastDownloadedAt(LocalDateTime.now());
+
+            track(user, file, "DOWNLOAD", file.getSize());
+        }
+
+        zos.finish();
+        zos.close();
+
+        fileRepository.saveAll(files);
+
+        return baos.toByteArray();
+    }
+
     // ======================
     // DELETE
     // ======================
-    public void deleteFile(Long id, Users user) {
+    public void deleteFiles(List<Long> ids, Users user) {
 
-        FileEntity file =
-                fileRepository.findByIdAndOwner(id, user)
-                        .orElseThrow();
+        List<FileEntity> files = fileRepository.findAllById(ids);
 
-        file.setDeleted(true);
+        for (FileEntity file : files) {
 
-        fileRepository.save(file);
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
 
-        track(user, file, "DELETE", 0L);
+            file.setDeleted(true);
+
+            fileRepository.save(file);
+
+            track(user, file, "DELETE", 0L);
+        }
     }
-
     // ======================
     // RESTORE
     // ======================
-    public void restoreFile(Long id, Users user) {
+    public void restoreFiles(List<Long> ids, Users user) {
 
-        FileEntity file =
-                fileRepository.findByIdAndOwner(id, user)
-                        .orElseThrow();
+        List<FileEntity> files = fileRepository.findAllById(ids);
 
-        file.setDeleted(false);
+        for (FileEntity file : files) {
 
-        fileRepository.save(file);
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
 
-        track(user, file, "RESTORE", 0L);
+            file.setDeleted(false);
+
+            fileRepository.save(file);
+
+            track(user, file, "RESTORE", 0L);
+        }
     }
 
+    @Transactional
+    public void deletePermanent(List<Long> ids, Users user) {
+
+        List<FileEntity> files = fileRepository.findAllById(ids);
+
+        for (FileEntity file : files) {
+
+            // ensure ownership
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
+
+            Long fileId = file.getId();
+
+            // 1. delete child rows FIRST (important for FK constraint)
+            activityRepository.deleteByFile_Id(fileId);
+
+            // 2. delete physical file from disk
+            try {
+                Files.deleteIfExists(Paths.get(file.getFilePath()));
+            } catch (Exception ignored) {}
+
+            // 3. delete DB record
+            fileRepository.delete(file);
+        }
+    }
     // ======================
     // DASHBOARD
     // ======================
@@ -188,19 +259,21 @@ public class FileService {
                         .map(this::mapToResponse)
                         .toList();
 
-        List<ActivityResponse> latestDownloads =
+        List<FileResponse> latestDownloads =
                 activityRepository
-                        .findTop4ByUserAndActionOrderByCreatedAtDesc(
+                        .findTop4ByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
                                 user,
                                 "DOWNLOAD"
                         )
                         .stream()
-                        .map(a -> new ActivityResponse(
-                                a.getFile().getId(),
-                                a.getFile().getFileName(),
-                                a.getAction(),
-                                a.getCreatedAt()
-                        ))
+                        .map(a -> mapToResponse(a.getFile()))
+                        .toList();
+
+        List<FileResponse> recentlyOpened =
+                fileRepository
+                        .findTop4ByOwnerAndDeletedFalseAndLastOpenedAtNotNullOrderByLastOpenedAtDesc(user)
+                        .stream()
+                        .map(this::mapToResponse)
                         .toList();
 
         return DashboardResponse.builder()
@@ -212,7 +285,83 @@ public class FileService {
                 .usedStorage(fileRepository.totalUsed(user))
                 .latestUploads(latestUploads)
                 .latestDownloads(latestDownloads)
+                .recentlyOpened(recentlyOpened)
                 .build();
+    }
+
+    public PagedResponse<FileResponse> getUploadedFiles(
+            Users user,
+            Pageable pageable
+    ) {
+
+        Page<FileEntity> page =
+                fileRepository.findByOwnerAndDeletedFalseOrderByUploadedAtDesc(
+                        user,
+                        pageable
+                );
+
+        Page<FileResponse> dtoPage = page.map(this::mapToResponse);
+
+        return new PagedResponse<>(
+                dtoPage.getContent(),
+                dtoPage.getNumber(),
+                dtoPage.getSize(),
+                dtoPage.getTotalElements(),
+                dtoPage.getTotalPages(),
+                dtoPage.isFirst(),
+                dtoPage.isLast()
+        );
+    }
+
+    public PagedResponse<FileResponse> getDownloadedFiles(
+            Users user,
+            Pageable pageable
+    ) {
+
+        Page<FileActivity> page =
+                activityRepository
+                        .findByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
+                                user,
+                                "DOWNLOAD",
+                                pageable
+                        );
+
+        Page<FileResponse> dtoPage =
+                page.map(a -> mapToResponse(a.getFile()));
+
+        return new PagedResponse<>(
+                dtoPage.getContent(),
+                dtoPage.getNumber(),
+                dtoPage.getSize(),
+                dtoPage.getTotalElements(),
+                dtoPage.getTotalPages(),
+                dtoPage.isFirst(),
+                dtoPage.isLast()
+        );
+    }
+    public PagedResponse<FileResponse> getRecentlyOpenedFiles(
+            Users user,
+            Pageable pageable
+    ) {
+
+        Page<FileEntity> page =
+                fileRepository
+                        .findByOwnerAndDeletedFalseAndLastOpenedAtNotNullOrderByLastOpenedAtDesc(
+                                user,
+                                pageable
+                        );
+
+        Page<FileResponse> dtoPage = page.map(this::mapToResponse);
+
+        return new PagedResponse<>(
+                dtoPage.getContent(),
+                dtoPage.getNumber(),
+                dtoPage.getSize(),
+                dtoPage.getTotalElements(),
+                dtoPage.getTotalPages(),
+                dtoPage.isFirst(),
+                dtoPage.isLast()
+        );
     }
 
     // ======================
@@ -278,8 +427,22 @@ public class FileService {
                 f.getFileType(),
                 f.getSize(),
                 f.getFilePath(),
-                f.getDownloadCount(),
                 f.getUploadedAt()
+        );
+    }
+
+    public FileViewResponse viewFile(Long id, Users user) {
+
+        FileEntity file = fileRepository.findByIdAndOwner(id, user)
+                .orElseThrow();
+
+        file.setLastOpenedAt(LocalDateTime.now());
+
+        fileRepository.save(file);
+
+        return new FileViewResponse(
+                file.getFilePath(),
+                file.getFileType()
         );
     }
 }

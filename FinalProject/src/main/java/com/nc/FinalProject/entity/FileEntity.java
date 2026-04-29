@@ -34,6 +34,8 @@ public class FileEntity {
 
     private LocalDateTime lastDownloadedAt;
 
+    private LocalDateTime lastOpenedAt;
+
     @ManyToOne
     private Users owner;
 

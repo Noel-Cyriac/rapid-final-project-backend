@@ -1,16 +1,19 @@
 package com.nc.FinalProject.controller;
 
 import com.nc.FinalProject.dto.FileViewResponse;
+import com.nc.FinalProject.dto.ShareRequest;
 import com.nc.FinalProject.dto.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -214,6 +217,72 @@ public class FileController {
                                 PageRequest.of(page, size)
                         )
                 )
+        );
+    }
+
+    @PostMapping("/star")
+    public ResponseEntity<SuccessResponse> star(
+            @RequestBody List<Long> ids,
+            Authentication auth
+    ) {
+        fileService.starFiles(ids, user(auth));
+
+        return ResponseEntity.ok(
+                new SuccessResponse("Files starred successfully", null)
+        );
+    }
+
+    @PostMapping("/unstar")
+    public ResponseEntity<SuccessResponse> unstar(
+            @RequestBody List<Long> ids,
+            Authentication auth
+    ) {
+        fileService.unstarFiles(ids, user(auth));
+
+        return ResponseEntity.ok(
+                new SuccessResponse("Files unstarred successfully", null)
+        );
+    }
+
+    @GetMapping("/starred")
+    public ResponseEntity<SuccessResponse> starred(Authentication auth, Pageable pageable) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Starred files fetched successfully",
+                        fileService.getStarredFiles(user(auth), pageable)
+                )
+        );
+    }
+
+    @PostMapping("/share/{id}")
+    public ResponseEntity<SuccessResponse> share(
+            @PathVariable Long id,
+            @RequestBody ShareRequest req,
+            Authentication auth
+    ) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "File shared successfully",
+                        fileService.createShare(id, user(auth), req)
+                )
+        );
+    }
+
+    @GetMapping("/shared")
+    public ResponseEntity<SuccessResponse> shared(Authentication auth, Pageable pageable) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Shared files fetched successfully",
+                        fileService.listSharedFiles(user(auth), pageable)
+                )
+        );
+    }
+
+    @DeleteMapping("/share/{shareId}")
+    public ResponseEntity<SuccessResponse> revoke(@PathVariable Long shareId, Authentication auth) {
+        fileService.revokeShare(shareId, user(auth));
+        return ResponseEntity.ok(
+                new SuccessResponse("Share revoked successfully", null)
         );
     }
 }

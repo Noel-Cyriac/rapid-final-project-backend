@@ -24,6 +24,8 @@ public class FileService {
     private final FileRepository fileRepository;
     private final FileActivityRepository activityRepository;
     private final FolderRepository folderRepository;
+    private final SharedFileRepository sharedFileRepository;
+    private final MailService mailService;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -445,4 +447,165 @@ public class FileService {
                 file.getFileType()
         );
     }
+
+    public void starFiles(List<Long> ids, Users user) {
+
+        List<FileEntity> files = fileRepository.findAllById(ids);
+
+        for (FileEntity file : files) {
+
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
+
+            file.setStarred(true);
+            file.setStarredAt(LocalDateTime.now());
+        }
+
+        fileRepository.saveAll(files);
+    }
+
+    public void unstarFiles(List<Long> ids, Users user) {
+
+        List<FileEntity> files = fileRepository.findAllById(ids);
+
+        for (FileEntity file : files) {
+
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
+
+            file.setStarred(false);
+            file.setStarredAt(null);
+        }
+
+        fileRepository.saveAll(files);
+    }
+
+    public PagedResponse<FileResponse> getStarredFiles(Users user, Pageable pageable) {
+
+        Page<FileEntity> page =
+                fileRepository.findByOwnerAndStarredTrue(user, pageable);
+
+        return new PagedResponse<>(
+                page.map(this::mapToResponse).getContent(),
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isFirst(),
+                page.isLast()
+        );
+    }
+
+    public ShareResponse createShare(Long fileId, Users user, ShareRequest req) {
+
+        FileEntity file = fileRepository.findByIdAndOwner(fileId, user)
+                .orElseThrow();
+
+        String token = UUID.randomUUID().toString();
+
+        SharedFile share = SharedFile.builder()
+                .file(file)
+                .owner(user)
+                .shareLink(token)
+                .recipientEmail(req.getEmail())
+                .expireAt(LocalDateTime.now().plusHours(req.getExpireHours()))
+                .maxUses(req.getMaxUses())
+                .usedCount(0)
+                .openCount(0)
+                .active(true)
+                .canDownload(req.getCanDownload())
+                .canView(req.getCanView())
+                .password(req.getPassword())
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        sharedFileRepository.save(share);
+
+        String link = "http://localhost:8080/api/share/" + token;
+
+        mailService.sendShareEmail(req.getEmail(), link);
+
+        return ShareResponse.builder()
+                .id(share.getId())
+                .token(token)
+                .email(req.getEmail())
+                .expiresAt(share.getExpireAt())
+                .maxUses(share.getMaxUses())
+                .usedCount(0)
+                .openCount(0)
+                .active(true)
+                .build();
+    }
+
+    public FileViewResponse openSharedFile(String token, String password) {
+
+        SharedFile share = sharedFileRepository.findByShareLink(token)
+                .orElseThrow();
+
+        if (!share.getActive())
+            throw new RuntimeException("Link disabled");
+
+        if (share.getExpireAt().isBefore(LocalDateTime.now()))
+            throw new RuntimeException("Link expired");
+
+        if (share.getUsedCount() >= share.getMaxUses())
+            throw new RuntimeException("Max uses exceeded");
+
+        if (share.getPassword() != null &&
+                !share.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        share.setUsedCount(share.getUsedCount() + 1);
+        share.setOpenCount(share.getOpenCount() + 1);
+        share.setLastOpenedAt(LocalDateTime.now());
+
+        sharedFileRepository.save(share);
+
+        return new FileViewResponse(
+                share.getFile().getFilePath(),
+                share.getFile().getFileType()
+        );
+    }
+
+    public void revokeShare(Long shareId, Users user) {
+
+        SharedFile share = sharedFileRepository.findById(shareId)
+                .orElseThrow();
+
+        if (!share.getOwner().getId().equals(user.getId()))
+            return;
+
+        share.setActive(false);
+
+        sharedFileRepository.save(share);
+    }
+
+    public PagedResponse<ShareResponse> listSharedFiles(Users user, Pageable pageable) {
+
+        Page<SharedFile> page =
+                sharedFileRepository.findByOwner(user, pageable);
+
+        return new PagedResponse<>(
+                page.map(s -> ShareResponse.builder()
+                        .id(s.getId())
+                        .token(s.getShareLink())
+                        .email(s.getRecipientEmail())
+                        .expiresAt(s.getExpireAt())
+                        .maxUses(s.getMaxUses())
+                        .usedCount(s.getUsedCount())
+                        .openCount(s.getOpenCount())
+                        .active(s.getActive())
+                        .build()
+                ).getContent(),
+                page.getNumber(),
+                page.getSize(),
+                page.getTotalElements(),
+                page.getTotalPages(),
+                page.isFirst(),
+                page.isLast()
+        );
+    }
+
+
 }

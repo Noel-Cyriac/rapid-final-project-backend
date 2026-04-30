@@ -61,4 +61,6 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
             Users user,
             Pageable pageable
     );
+
+    Page<FileEntity> findByOwnerAndStarredTrue(Users user, Pageable pageable);
 }

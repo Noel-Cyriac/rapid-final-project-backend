@@ -1,6 +1,7 @@
 package com.nc.FinalProject.controller;
 
 import com.nc.FinalProject.dto.FileViewResponse;
+import com.nc.FinalProject.dto.OpenShareRequest;
 import com.nc.FinalProject.service.FileService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,13 @@ public class PublicShareController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/{token}")
-    public ResponseEntity<byte[]> open(
+    @PostMapping("/{token}")
+    public ResponseEntity<byte[]> openSharedFile(
             @PathVariable String token,
-            @RequestParam(required = false) String password
+            @RequestBody(required = false) OpenShareRequest request
     ) throws Exception {
+
+        String password = (request != null) ? request.getPassword() : null;
 
         FileViewResponse file = fileService.openSharedFile(token, password);
 

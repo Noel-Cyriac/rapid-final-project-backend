@@ -1,0 +1,719 @@
+2026-05-04T13:51:54.406+05:30  INFO 17735 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 17735 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T13:51:54.409+05:30 DEBUG 17735 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T13:51:54.413+05:30  INFO 17735 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T13:51:56.296+05:30  INFO 17735 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T13:51:56.389+05:30  INFO 17735 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 6 JPA repository interfaces.
+2026-05-04T13:51:57.958+05:30  INFO 17735 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T13:51:57.996+05:30  INFO 17735 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T13:51:57.997+05:30  INFO 17735 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T13:51:58.119+05:30  INFO 17735 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3535 ms
+2026-05-04T13:51:58.739+05:30  INFO 17735 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T13:51:58.843+05:30  INFO 17735 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T13:51:59.757+05:30  INFO 17735 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T13:52:00.014+05:30  INFO 17735 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T13:52:00.477+05:30  INFO 17735 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7227926b
+2026-05-04T13:52:00.480+05:30  INFO 17735 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T13:52:00.709+05:30  WARN 17735 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T13:52:00.741+05:30  INFO 17735 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T13:52:04.314+05:30  INFO 17735 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T13:52:04.674+05:30  INFO 17735 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T13:52:04.808+05:30  INFO 17735 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T13:52:05.809+05:30 DEBUG 17735 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T13:52:06.740+05:30  WARN 17735 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T13:52:07.676+05:30  INFO 17735 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T13:52:07.682+05:30  INFO 17735 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 14.426 seconds (process running for 16.696)
+2026-05-04T13:52:37.206+05:30  INFO 17735 --- [FinalProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T13:52:37.206+05:30  INFO 17735 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T13:52:37.208+05:30  INFO 17735 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-04T13:52:37.450+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Link disabled: Link disabled
+2026-05-04T14:17:16.123+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 9635121 milliseconds ago at 2026-05-04T06:06:41.000Z. Current time: 2026-05-04T08:47:16.121Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T14:17:16.125+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:17:25.080+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:18:03.861+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
+2026-05-04T14:18:16.499+05:30  INFO 17735 --- [FinalProject] [http-nio-8080-exec-8] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-05-04T14:19:30.365+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Method not allowed: GET
+2026-05-04T14:19:40.319+05:30 ERROR 17735 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+
+org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<com.nc.FinalProject.dto.SuccessResponse> com.nc.FinalProject.controller.FileController.share(java.lang.Long,com.nc.FinalProject.dto.ShareRequest,org.springframework.security.core.Authentication)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:184) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:156) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:174) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at com.nc.FinalProject.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:69) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-05-04T14:31:08.507+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:36:41.832+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3093781 milliseconds ago at 2026-05-04T08:15:08.000Z. Current time: 2026-05-04T09:06:41.781Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T14:36:41.832+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3093781 milliseconds ago at 2026-05-04T08:15:08.000Z. Current time: 2026-05-04T09:06:41.781Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T14:36:41.833+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3093780 milliseconds ago at 2026-05-04T08:15:08.000Z. Current time: 2026-05-04T09:06:41.780Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T14:36:41.833+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3093780 milliseconds ago at 2026-05-04T08:15:08.000Z. Current time: 2026-05-04T09:06:41.780Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T14:36:41.912+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:36:41.912+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:36:41.912+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:36:41.912+05:30  WARN 17735 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T14:36:43.171+05:30  INFO 17735 --- [FinalProject] [http-nio-8080-exec-9] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T15:14:29.859+05:30  INFO 17735 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T15:14:29.939+05:30  INFO 17735 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T15:14:30.026+05:30  INFO 17735 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:14:30.096+05:30  INFO 17735 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T15:14:30.100+05:30  INFO 17735 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T15:15:05.957+05:30  INFO 21636 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 21636 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T15:15:05.961+05:30 DEBUG 21636 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T15:15:05.963+05:30  INFO 21636 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T15:15:08.097+05:30  INFO 21636 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T15:15:08.207+05:30  INFO 21636 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91 ms. Found 6 JPA repository interfaces.
+2026-05-04T15:15:09.050+05:30  INFO 21636 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T15:15:09.092+05:30  INFO 21636 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T15:15:09.093+05:30  INFO 21636 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T15:15:09.147+05:30  INFO 21636 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3032 ms
+2026-05-04T15:15:09.438+05:30  INFO 21636 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T15:15:09.542+05:30  INFO 21636 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T15:15:10.145+05:30  INFO 21636 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T15:15:10.199+05:30  INFO 21636 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T15:15:10.464+05:30  INFO 21636 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@45b27ad3
+2026-05-04T15:15:10.466+05:30  INFO 21636 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T15:15:10.833+05:30  WARN 21636 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T15:15:10.889+05:30  INFO 21636 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T15:15:12.445+05:30  INFO 21636 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T15:15:13.312+05:30  INFO 21636 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:15:13.430+05:30  INFO 21636 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T15:15:14.272+05:30 DEBUG 21636 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T15:15:14.936+05:30  WARN 21636 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T15:15:15.507+05:30  INFO 21636 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T15:15:15.512+05:30  INFO 21636 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 10.774 seconds (process running for 12.898)
+2026-05-04T15:15:39.245+05:30  INFO 21636 --- [FinalProject] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T15:15:39.246+05:30  INFO 21636 --- [FinalProject] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T15:15:39.248+05:30  INFO 21636 --- [FinalProject] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-05-04T15:15:39.576+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1436575 milliseconds ago at 2026-05-04T09:21:43.000Z. Current time: 2026-05-04T09:45:39.575Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:15:39.576+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1436575 milliseconds ago at 2026-05-04T09:21:43.000Z. Current time: 2026-05-04T09:45:39.575Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:15:39.576+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1436575 milliseconds ago at 2026-05-04T09:21:43.000Z. Current time: 2026-05-04T09:45:39.575Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:15:39.576+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1436575 milliseconds ago at 2026-05-04T09:21:43.000Z. Current time: 2026-05-04T09:45:39.575Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:15:39.581+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:15:39.581+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:15:39.581+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:15:39.581+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:15:40.451+05:30  INFO 21636 --- [FinalProject] [http-nio-8080-exec-10] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T15:15:44.556+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:16:01.343+05:30  WARN 21636 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:18:36.297+05:30  INFO 21636 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T15:18:36.300+05:30  INFO 21636 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T15:18:36.305+05:30  INFO 21636 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:18:36.307+05:30  INFO 21636 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T15:18:36.325+05:30  INFO 21636 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T15:18:40.257+05:30  INFO 21933 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 21933 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T15:18:40.259+05:30 DEBUG 21933 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T15:18:40.263+05:30  INFO 21933 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T15:18:40.958+05:30  INFO 21933 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T15:18:41.028+05:30  INFO 21933 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 6 JPA repository interfaces.
+2026-05-04T15:18:41.490+05:30  INFO 21933 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T15:18:41.502+05:30  INFO 21933 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T15:18:41.502+05:30  INFO 21933 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T15:18:41.539+05:30  INFO 21933 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1230 ms
+2026-05-04T15:18:41.680+05:30  INFO 21933 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T15:18:41.728+05:30  INFO 21933 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T15:18:42.145+05:30  INFO 21933 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T15:18:42.174+05:30  INFO 21933 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T15:18:42.346+05:30  INFO 21933 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@144440f5
+2026-05-04T15:18:42.348+05:30  INFO 21933 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T15:18:42.398+05:30  WARN 21933 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T15:18:42.415+05:30  INFO 21933 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T15:18:43.475+05:30  INFO 21933 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T15:18:43.588+05:30  INFO 21933 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:18:43.652+05:30  INFO 21933 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T15:18:44.280+05:30 DEBUG 21933 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T15:18:44.839+05:30  WARN 21933 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T15:18:45.379+05:30  INFO 21933 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T15:18:45.385+05:30  INFO 21933 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 5.631 seconds (process running for 6.085)
+2026-05-04T15:18:53.433+05:30  INFO 21933 --- [FinalProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T15:18:53.434+05:30  INFO 21933 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T15:18:53.436+05:30  INFO 21933 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-04T15:18:53.474+05:30  WARN 21933 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:23:38.111+05:30  WARN 21933 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:24:21.404+05:30 ERROR 21933 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource share/300e66c3-bbe0-4611-974f-96faf3c08eaf for request '/share/300e66c3-bbe0-4611-974f-96faf3c08eaf'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at com.nc.FinalProject.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:69) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-05-04T15:25:13.387+05:30  WARN 21933 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3117386 milliseconds ago at 2026-05-04T09:03:16.000Z. Current time: 2026-05-04T09:55:13.386Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:25:13.388+05:30  WARN 21933 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:25:23.066+05:30  INFO 21933 --- [FinalProject] [http-nio-8080-exec-7] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-05-04T15:27:01.595+05:30  WARN 21933 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:38:54.938+05:30  INFO 21933 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T15:38:54.941+05:30  INFO 21933 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T15:38:54.947+05:30  INFO 21933 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:38:54.950+05:30  INFO 21933 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T15:38:54.980+05:30  INFO 21933 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T15:39:02.081+05:30  INFO 23103 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 23103 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T15:39:02.085+05:30 DEBUG 23103 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T15:39:02.086+05:30  INFO 23103 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T15:39:03.278+05:30  INFO 23103 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T15:39:03.347+05:30  INFO 23103 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 6 JPA repository interfaces.
+2026-05-04T15:39:04.304+05:30  INFO 23103 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T15:39:04.343+05:30  INFO 23103 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T15:39:04.344+05:30  INFO 23103 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T15:39:04.392+05:30  INFO 23103 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2180 ms
+2026-05-04T15:39:04.580+05:30  INFO 23103 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T15:39:04.681+05:30  INFO 23103 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T15:39:05.264+05:30  INFO 23103 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T15:39:05.306+05:30  INFO 23103 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T15:39:05.537+05:30  INFO 23103 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@43778371
+2026-05-04T15:39:05.539+05:30  INFO 23103 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T15:39:05.610+05:30  WARN 23103 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T15:39:05.630+05:30  INFO 23103 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T15:39:07.132+05:30  INFO 23103 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T15:39:07.248+05:30  INFO 23103 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:39:07.344+05:30  INFO 23103 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T15:39:08.075+05:30 DEBUG 23103 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T15:39:08.942+05:30  WARN 23103 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T15:39:09.625+05:30  INFO 23103 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T15:39:09.633+05:30  INFO 23103 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 8.456 seconds (process running for 9.18)
+2026-05-04T15:39:39.792+05:30  INFO 23103 --- [FinalProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T15:39:39.793+05:30  INFO 23103 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T15:39:39.794+05:30  INFO 23103 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-04T15:41:47.051+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:41:59.367+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:42:09.840+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 689838 milliseconds ago at 2026-05-04T10:00:40.000Z. Current time: 2026-05-04T10:12:09.838Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:42:09.841+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:42:09.841+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 689837 milliseconds ago at 2026-05-04T10:00:40.000Z. Current time: 2026-05-04T10:12:09.837Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:42:09.842+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:42:09.842+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 689842 milliseconds ago at 2026-05-04T10:00:40.000Z. Current time: 2026-05-04T10:12:09.842Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:42:09.842+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:42:09.843+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 689838 milliseconds ago at 2026-05-04T10:00:40.000Z. Current time: 2026-05-04T10:12:09.838Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T15:42:09.843+05:30  WARN 23103 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T15:42:09.964+05:30  INFO 23103 --- [FinalProject] [http-nio-8080-exec-5] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T15:45:09.353+05:30  INFO 23103 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T15:45:09.356+05:30  INFO 23103 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T15:45:09.361+05:30  INFO 23103 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:45:09.363+05:30  INFO 23103 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T15:45:09.396+05:30  INFO 23103 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T15:45:14.578+05:30  INFO 23580 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 23580 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T15:45:14.581+05:30 DEBUG 23580 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T15:45:14.582+05:30  INFO 23580 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T15:45:15.766+05:30  INFO 23580 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T15:45:15.855+05:30  INFO 23580 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 6 JPA repository interfaces.
+2026-05-04T15:45:16.756+05:30  INFO 23580 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T15:45:16.776+05:30  INFO 23580 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T15:45:16.778+05:30  INFO 23580 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T15:45:16.833+05:30  INFO 23580 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2143 ms
+2026-05-04T15:45:17.169+05:30  INFO 23580 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T15:45:17.275+05:30  INFO 23580 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T15:45:17.892+05:30  INFO 23580 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T15:45:17.928+05:30  INFO 23580 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T15:45:18.224+05:30  INFO 23580 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@56499781
+2026-05-04T15:45:18.226+05:30  INFO 23580 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T15:45:18.304+05:30  WARN 23580 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T15:45:18.322+05:30  INFO 23580 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T15:45:19.954+05:30  INFO 23580 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T15:45:20.188+05:30  INFO 23580 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T15:45:20.345+05:30  INFO 23580 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T15:45:21.180+05:30 DEBUG 23580 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T15:45:21.810+05:30  WARN 23580 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T15:45:22.365+05:30  INFO 23580 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T15:45:22.370+05:30  INFO 23580 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 8.499 seconds (process running for 9.721)
+2026-05-04T15:45:28.609+05:30  INFO 23580 --- [FinalProject] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T15:45:28.609+05:30  INFO 23580 --- [FinalProject] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T15:45:28.612+05:30  INFO 23580 --- [FinalProject] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-05-04T15:47:04.880+05:30  WARN 23580 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:01:09.980+05:30  INFO 23580 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T16:01:09.983+05:30  INFO 23580 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T16:01:09.989+05:30  INFO 23580 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T16:01:09.991+05:30  INFO 23580 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T16:01:09.997+05:30  INFO 23580 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T16:01:14.372+05:30  INFO 24256 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 24256 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T16:01:14.375+05:30 DEBUG 24256 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T16:01:14.376+05:30  INFO 24256 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T16:01:15.070+05:30  INFO 24256 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T16:01:15.151+05:30  INFO 24256 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 6 JPA repository interfaces.
+2026-05-04T16:01:15.626+05:30  INFO 24256 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T16:01:15.638+05:30  INFO 24256 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T16:01:15.639+05:30  INFO 24256 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T16:01:15.695+05:30  INFO 24256 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1270 ms
+2026-05-04T16:01:15.821+05:30  INFO 24256 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T16:01:15.869+05:30  INFO 24256 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T16:01:16.285+05:30  INFO 24256 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T16:01:16.313+05:30  INFO 24256 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T16:01:16.478+05:30  INFO 24256 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@144440f5
+2026-05-04T16:01:16.480+05:30  INFO 24256 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T16:01:16.534+05:30  WARN 24256 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T16:01:16.552+05:30  INFO 24256 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T16:01:17.581+05:30  INFO 24256 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T16:01:17.727+05:30  INFO 24256 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T16:01:17.801+05:30  INFO 24256 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T16:01:18.409+05:30 DEBUG 24256 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T16:01:18.963+05:30  WARN 24256 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T16:01:19.439+05:30  INFO 24256 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T16:01:19.445+05:30  INFO 24256 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 5.595 seconds (process running for 6.053)
+2026-05-04T16:01:28.706+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T16:01:28.706+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T16:01:28.708+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-05-04T16:01:28.743+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:03:04.347+05:30 ERROR 24256 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/share for request '/api/share'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2026-05-04T16:13:39.722+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.981+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.981+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.982+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.982+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.983+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.981+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.984+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.982+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990979 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.979Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.984+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.984+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.982+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.984+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.989+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990989 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.989Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.989+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:39.990+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 990989 milliseconds ago at 2026-05-04T10:27:09.000Z. Current time: 2026-05-04T10:43:39.989Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:13:39.990+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:13:40.528+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-1] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T16:13:40.528+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-6] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T16:14:27.016+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:19:28.061+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Max uses exceeded: Max uses exceeded
+2026-05-04T16:25:12.502+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Max uses exceeded: Max uses exceeded
+2026-05-04T16:28:49.647+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Max uses exceeded: Max uses exceeded
+2026-05-04T16:28:56.400+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 16400 milliseconds ago at 2026-05-04T10:58:40.000Z. Current time: 2026-05-04T10:58:56.400Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:28:56.401+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:28:56.401+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 16401 milliseconds ago at 2026-05-04T10:58:40.000Z. Current time: 2026-05-04T10:58:56.401Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:28:56.401+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:28:56.405+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 16405 milliseconds ago at 2026-05-04T10:58:40.000Z. Current time: 2026-05-04T10:58:56.405Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:28:56.406+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:28:56.408+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 16408 milliseconds ago at 2026-05-04T10:58:40.000Z. Current time: 2026-05-04T10:58:56.408Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:28:56.408+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:28:56.411+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 16411 milliseconds ago at 2026-05-04T10:58:40.000Z. Current time: 2026-05-04T10:58:56.411Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:28:56.411+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:28:56.547+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-7] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T16:29:17.723+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Max uses exceeded: Max uses exceeded
+2026-05-04T16:29:36.198+05:30  INFO 24256 --- [FinalProject] [http-nio-8080-exec-7] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-05-04T16:33:24.343+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T16:37:59.375+05:30  WARN 24256 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T16:54:08.959+05:30  INFO 24256 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T16:54:08.987+05:30  INFO 24256 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T16:54:09.009+05:30  INFO 24256 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T16:54:09.018+05:30  INFO 24256 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T16:54:09.021+05:30  INFO 24256 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-04T16:54:18.973+05:30  INFO 26653 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 26653 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-04T16:54:18.975+05:30 DEBUG 26653 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-04T16:54:18.977+05:30  INFO 26653 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-04T16:54:20.929+05:30  INFO 26653 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-04T16:54:21.015+05:30  INFO 26653 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 6 JPA repository interfaces.
+2026-05-04T16:54:22.020+05:30  INFO 26653 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-04T16:54:22.058+05:30  INFO 26653 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-04T16:54:22.059+05:30  INFO 26653 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-04T16:54:22.114+05:30  INFO 26653 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2955 ms
+2026-05-04T16:54:22.579+05:30  INFO 26653 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-04T16:54:22.731+05:30  INFO 26653 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-04T16:54:23.364+05:30  INFO 26653 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-04T16:54:23.406+05:30  INFO 26653 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-04T16:54:23.694+05:30  INFO 26653 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71beada8
+2026-05-04T16:54:23.696+05:30  INFO 26653 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-04T16:54:23.874+05:30  WARN 26653 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-04T16:54:23.905+05:30  INFO 26653 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-04T16:54:25.345+05:30  INFO 26653 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-04T16:54:25.534+05:30  INFO 26653 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T16:54:25.644+05:30  INFO 26653 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-04T16:54:26.404+05:30 DEBUG 26653 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-04T16:54:27.070+05:30  WARN 26653 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-04T16:54:28.095+05:30  INFO 26653 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-04T16:54:28.103+05:30  INFO 26653 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 10.228 seconds (process running for 12.156)
+2026-05-04T16:57:48.423+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04T16:57:48.424+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-04T16:57:48.427+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-05-04T16:57:48.728+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792725 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.725Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.728+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792726 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.726Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.729+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792726 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.726Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.728+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792726 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.726Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.729+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792726 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.726Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.731+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.728+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792726 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.726Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.731+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.731+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.732+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.732+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.732+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.778+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792777 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.777Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.779+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.780+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792780 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.780Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.781+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792781 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.781Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.781+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.781+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.782+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 792780 milliseconds ago at 2026-05-04T11:14:36.000Z. Current time: 2026-05-04T11:27:48.780Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T16:57:48.783+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T16:57:48.982+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T16:57:49.007+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-6] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T16:57:49.008+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-2] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T16:58:18.723+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T16:58:32.252+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:00:34.435+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:00:43.946+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:00:51.835+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:13:03.846+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:13:20.016+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32016 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.016Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.017+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-10] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.017+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32017 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.017Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.017+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.018+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32018 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.018Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.019+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-1] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.022+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32022 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.022Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.023+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.025+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32025 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.025Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.025+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.025+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 32025 milliseconds ago at 2026-05-04T11:42:48.000Z. Current time: 2026-05-04T11:43:20.025Z. Allowed clock skew: 0 milliseconds.
+2026-05-04T17:13:20.026+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-8] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-04T17:13:20.069+05:30  INFO 26653 --- [FinalProject] [http-nio-8080-exec-9] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noel@gmail.com
+2026-05-04T17:14:49.341+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:15:00.458+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T17:15:02.876+05:30  WARN 26653 --- [FinalProject] [http-nio-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-05-04T18:39:15.806+05:30  INFO 26653 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-04T18:39:15.809+05:30  INFO 26653 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-04T18:39:15.815+05:30  INFO 26653 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-04T18:39:15.818+05:30  INFO 26653 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-04T18:39:15.820+05:30  INFO 26653 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

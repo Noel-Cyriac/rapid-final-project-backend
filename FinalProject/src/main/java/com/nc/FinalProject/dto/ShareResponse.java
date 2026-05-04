@@ -17,4 +17,5 @@ public class ShareResponse {
     private int usedCount;
     private int openCount;
     private boolean active;
+    private String fileName;
 }

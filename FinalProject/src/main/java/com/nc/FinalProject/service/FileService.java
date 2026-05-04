@@ -2,6 +2,10 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.*;
 import com.nc.FinalProject.entity.*;
+import com.nc.FinalProject.exception.InvalidSharePasswordException;
+import com.nc.FinalProject.exception.LinkDisabledException;
+import com.nc.FinalProject.exception.LinkExpiredException;
+import com.nc.FinalProject.exception.MaxUsesExceededException;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -521,7 +525,7 @@ public class FileService {
 
         sharedFileRepository.save(share);
 
-        String link = "http://localhost:8080/api/share/" + token;
+        String link = "http://localhost:5175/share/" + token;
 
         mailService.sendShareEmail(req.getEmail(), link);
 
@@ -534,6 +538,7 @@ public class FileService {
                 .usedCount(0)
                 .openCount(0)
                 .active(true)
+                .fileName(file.getFileName())
                 .build();
     }
 
@@ -543,17 +548,17 @@ public class FileService {
                 .orElseThrow();
 
         if (!share.getActive())
-            throw new RuntimeException("Link disabled");
+            throw new LinkDisabledException("Link disabled");
 
         if (share.getExpireAt().isBefore(LocalDateTime.now()))
-            throw new RuntimeException("Link expired");
+            throw new LinkExpiredException("Link expired");
 
         if (share.getUsedCount() >= share.getMaxUses())
-            throw new RuntimeException("Max uses exceeded");
+            throw new MaxUsesExceededException("Max uses exceeded");
 
         if (share.getPassword() != null &&
                 !share.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid password");
+            throw new InvalidSharePasswordException("Invalid password");
         }
 
         share.setUsedCount(share.getUsedCount() + 1);
@@ -596,6 +601,7 @@ public class FileService {
                         .usedCount(s.getUsedCount())
                         .openCount(s.getOpenCount())
                         .active(s.getActive())
+                        .fileName(s.getFile().getFileName())
                         .build()
                 ).getContent(),
                 page.getNumber(),

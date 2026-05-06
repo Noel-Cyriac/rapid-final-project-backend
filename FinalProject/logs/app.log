@@ -946,3 +946,43 @@ java.util.NoSuchElementException: No value present
 2026-05-06T17:15:01.280+05:30  INFO 44124 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-05-06T17:15:01.282+05:30  INFO 44124 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-05-06T17:15:01.288+05:30  INFO 44124 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-06T17:40:13.679+05:30  INFO 46560 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.10 with PID 46560 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-05-06T17:40:13.682+05:30 DEBUG 46560 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-06T17:40:13.683+05:30  INFO 46560 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-06T17:40:14.631+05:30  INFO 46560 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-06T17:40:14.856+05:30  INFO 46560 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 216 ms. Found 6 JPA repository interfaces.
+2026-05-06T17:40:15.757+05:30  INFO 46560 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-06T17:40:15.784+05:30  INFO 46560 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-06T17:40:15.785+05:30  INFO 46560 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-06T17:40:15.846+05:30  INFO 46560 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2108 ms
+2026-05-06T17:40:16.628+05:30  INFO 46560 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-06T17:40:17.051+05:30  INFO 46560 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-06T17:40:18.107+05:30  INFO 46560 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-06T17:40:18.150+05:30  INFO 46560 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-06T17:40:18.450+05:30  INFO 46560 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ae958b0
+2026-05-06T17:40:18.454+05:30  INFO 46560 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-06T17:40:18.610+05:30  WARN 46560 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-06T17:40:18.645+05:30  INFO 46560 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-06T17:40:20.864+05:30  INFO 46560 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-06T17:40:20.994+05:30  INFO 46560 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-06T17:40:21.318+05:30  INFO 46560 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-06T17:40:22.459+05:30 DEBUG 46560 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-06T17:40:23.434+05:30  WARN 46560 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-06T17:40:24.569+05:30  INFO 46560 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-06T17:40:24.575+05:30  INFO 46560 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 11.648 seconds (process running for 12.794)
+2026-05-06T17:40:31.343+05:30  INFO 46560 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-06T17:40:31.346+05:30  INFO 46560 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-06T17:40:31.351+05:30  INFO 46560 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-06T17:40:31.353+05:30  INFO 46560 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-06T17:40:31.371+05:30  INFO 46560 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -545,7 +545,34 @@ public class FileService {
                 .build();
     }
 
-    public FileViewResponse openSharedFile(String token, String password) {
+    public ShareMetaResponse openShareLink(String token) {
+
+        SharedFile share = sharedFileRepository.findByShareToken(token)
+                .orElseThrow();
+
+        if (!share.getActive())
+            throw new LinkDisabledException("Link disabled");
+
+        if (share.getExpireAt().isBefore(LocalDateTime.now()))
+            throw new LinkExpiredException("Link expired");
+
+        // ✅ increment ONLY openCount
+        share.setOpenCount(share.getOpenCount() + 1);
+        share.setLastOpenedAt(LocalDateTime.now());
+
+        sharedFileRepository.save(share);
+
+        return ShareMetaResponse.builder()
+                .fileName(share.getFile().getFileName())
+                .fileType(share.getFile().getFileType())
+                .requiresPassword(share.getPassword() != null)
+                .canDownload(share.getCanDownload())
+                .canView(share.getCanView())
+                .message(share.getMessage())
+                .build();
+    }
+
+    public FileViewResponse accessSharedFile(String token, String password) {
 
         SharedFile share = sharedFileRepository.findByShareToken(token)
                 .orElseThrow();
@@ -564,9 +591,8 @@ public class FileService {
             throw new InvalidSharePasswordException("Invalid password");
         }
 
+        // ✅ increment ONLY usedCount
         share.setUsedCount(share.getUsedCount() + 1);
-        share.setOpenCount(share.getOpenCount() + 1);
-        share.setLastOpenedAt(LocalDateTime.now());
 
         sharedFileRepository.save(share);
 

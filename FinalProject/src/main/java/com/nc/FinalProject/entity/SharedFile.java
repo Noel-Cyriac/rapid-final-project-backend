@@ -17,7 +17,7 @@ public class SharedFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String shareLink;
+    private String shareToken;
 
     @ManyToOne
     private FileEntity file;
@@ -43,11 +43,9 @@ public class SharedFile {
 
     private String password;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime sharedAt;
 
     private LocalDateTime lastOpenedAt;
-
-    private Integer accessed;
 
     private String message;
 }

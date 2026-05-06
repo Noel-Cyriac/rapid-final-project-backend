@@ -18,4 +18,7 @@ public class ShareResponse {
     private int openCount;
     private boolean active;
     private String fileName;
+    private LocalDateTime sharedAt;
+    private LocalDateTime lastOpenedAt;
+    private String message;
 }

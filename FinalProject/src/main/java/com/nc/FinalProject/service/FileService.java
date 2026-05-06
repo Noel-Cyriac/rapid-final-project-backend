@@ -510,7 +510,7 @@ public class FileService {
         SharedFile share = SharedFile.builder()
                 .file(file)
                 .owner(user)
-                .shareLink(token)
+                .shareToken(token)
                 .recipientEmail(req.getEmail())
                 .expireAt(LocalDateTime.now().plusHours(req.getExpireHours()))
                 .maxUses(req.getMaxUses())
@@ -520,7 +520,8 @@ public class FileService {
                 .canDownload(req.getCanDownload())
                 .canView(req.getCanView())
                 .password(req.getPassword())
-                .createdAt(LocalDateTime.now())
+                .message(req.getMessage())
+                .sharedAt(LocalDateTime.now())
                 .build();
 
         sharedFileRepository.save(share);
@@ -539,12 +540,14 @@ public class FileService {
                 .openCount(0)
                 .active(true)
                 .fileName(file.getFileName())
+                .sharedAt(share.getSharedAt())
+                .message(share.getMessage())
                 .build();
     }
 
     public FileViewResponse openSharedFile(String token, String password) {
 
-        SharedFile share = sharedFileRepository.findByShareLink(token)
+        SharedFile share = sharedFileRepository.findByShareToken(token)
                 .orElseThrow();
 
         if (!share.getActive())
@@ -594,7 +597,7 @@ public class FileService {
         return new PagedResponse<>(
                 page.map(s -> ShareResponse.builder()
                         .id(s.getId())
-                        .token(s.getShareLink())
+                        .token(s.getShareToken())
                         .email(s.getRecipientEmail())
                         .expiresAt(s.getExpireAt())
                         .maxUses(s.getMaxUses())
@@ -602,6 +605,9 @@ public class FileService {
                         .openCount(s.getOpenCount())
                         .active(s.getActive())
                         .fileName(s.getFile().getFileName())
+                        .sharedAt(s.getSharedAt())
+                        .message(s.getMessage())
+                        .lastOpenedAt(s.getLastOpenedAt())
                         .build()
                 ).getContent(),
                 page.getNumber(),

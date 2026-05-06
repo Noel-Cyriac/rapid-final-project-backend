@@ -9,12 +9,8 @@ import java.util.Optional;
 
 public interface SharedFileRepository extends JpaRepository<SharedFile, Long> {
 
-    Optional<SharedFile> findByShareLink(String shareLink);
+    Optional<SharedFile> findByShareToken(String shareLink);
 
     Page<SharedFile> findByOwner(Users owner, Pageable pageable);
 
-    Page<SharedFile> findByFileOwnerEmail(
-            String email,
-            Pageable pageable
-    );
 }

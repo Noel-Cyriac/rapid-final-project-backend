@@ -36,6 +36,10 @@ public class FileEntity {
 
     private LocalDateTime lastOpenedAt;
 
+    private boolean starred = false;
+
+    private LocalDateTime starredAt;
+
     @ManyToOne
     private Users owner;
 

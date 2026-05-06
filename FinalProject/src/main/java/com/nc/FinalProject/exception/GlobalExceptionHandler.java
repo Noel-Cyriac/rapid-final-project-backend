@@ -101,6 +101,34 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse("File error", Map.of("file", ex.getMessage())));
     }
 
+    @ExceptionHandler(LinkDisabledException.class)
+    public ResponseEntity<ErrorResponse> handleLinkDisabled(LinkDisabledException ex) {
+        logger.warn("Link disabled: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(LinkExpiredException.class)
+    public ResponseEntity<ErrorResponse> handleLinkExpired(LinkExpiredException ex) {
+        logger.warn("Link expired: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.GONE)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(MaxUsesExceededException.class)
+    public ResponseEntity<ErrorResponse> handleMaxUses(MaxUsesExceededException ex) {
+        logger.warn("Max uses exceeded: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(InvalidSharePasswordException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidPassword(InvalidSharePasswordException ex) {
+        logger.warn("Invalid share password attempt");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
     // Generic Exception Fallback
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception ex) {

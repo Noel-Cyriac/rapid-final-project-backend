@@ -1,9 +1,9 @@
 package com.nc.FinalProject.service;
 
-import com.nc.FinalProject.dto.LoginRequest;
-import com.nc.FinalProject.dto.LoginResponse;
-import com.nc.FinalProject.dto.RegisterRequest;
-import com.nc.FinalProject.dto.ResetPasswordRequest;
+import com.nc.FinalProject.dto.request.LoginRequest;
+import com.nc.FinalProject.dto.response.LoginResponse;
+import com.nc.FinalProject.dto.request.RegisterRequest;
+import com.nc.FinalProject.dto.request.ResetPasswordRequest;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.exception.EmailAlreadyExistsException;
 import com.nc.FinalProject.exception.InvalidRefreshTokenException;

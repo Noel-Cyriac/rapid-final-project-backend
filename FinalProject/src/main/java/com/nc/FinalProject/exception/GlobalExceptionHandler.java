@@ -1,6 +1,6 @@
 package com.nc.FinalProject.exception;
 
-import com.nc.FinalProject.dto.ErrorResponse;
+import com.nc.FinalProject.dto.response.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

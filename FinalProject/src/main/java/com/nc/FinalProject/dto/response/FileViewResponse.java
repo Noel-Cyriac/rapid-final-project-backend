@@ -1,4 +1,4 @@
-package com.nc.FinalProject.dto;
+package com.nc.FinalProject.dto.response;
 
 public record FileViewResponse(
         String path,

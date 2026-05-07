@@ -1,8 +1,8 @@
 package com.nc.FinalProject.controller;
 
-import com.nc.FinalProject.dto.FileViewResponse;
-import com.nc.FinalProject.dto.OpenShareRequest;
-import com.nc.FinalProject.dto.ShareMetaResponse;
+import com.nc.FinalProject.dto.request.OpenShareRequest;
+import com.nc.FinalProject.dto.response.ShareMetaResponse;
+import com.nc.FinalProject.dto.response.StreamResponse;
 import com.nc.FinalProject.service.FileService;
 import com.nc.FinalProject.service.FileStreamingService;
 import org.springframework.core.io.Resource;
@@ -19,7 +19,8 @@ public class PublicShareController {
     private final FileService fileService;
     private final FileStreamingService fileStreamingService;
 
-    public PublicShareController(FileService fileService, FileStreamingService fileStreamingService) {
+    public PublicShareController(FileService fileService,
+                                 FileStreamingService fileStreamingService) {
         this.fileService = fileService;
         this.fileStreamingService = fileStreamingService;
     }
@@ -32,18 +33,27 @@ public class PublicShareController {
         return ResponseEntity.ok(fileService.openShareLink(token));
     }
 
-    // ✅ 2. ACCESS FILE (increments usedCount + supports streaming)
+    // ✅ 2. VALIDATE ACCESS (password check + returns stream token)
     @PostMapping("/{token}/access")
-    public ResponseEntity<Resource> accessFile(
+    public ResponseEntity<StreamResponse> accessFile(
             @PathVariable String token,
-            @RequestBody(required = false) OpenShareRequest request,
-            HttpServletRequest httpRequest
-    ) throws IOException {
+            @RequestBody(required = false) OpenShareRequest request
+    ) {
 
         String password = (request != null) ? request.getPassword() : null;
 
-        FileViewResponse file = fileService.accessSharedFile(token, password);
+        return ResponseEntity.ok(
+                fileService.accessSharedFile(token, password)
+        );
+    }
 
-        return fileStreamingService.streamFile(file, httpRequest);
+    // ✅ 3. REAL STREAMING ENDPOINT (USED BY VIDEO / PDF / AUDIO)
+    @GetMapping("/stream/{streamToken}")
+    public ResponseEntity<Resource> streamFile(
+            @PathVariable String streamToken,
+            HttpServletRequest request
+    ) throws IOException {
+
+        return fileStreamingService.streamByToken(streamToken, request);
     }
 }

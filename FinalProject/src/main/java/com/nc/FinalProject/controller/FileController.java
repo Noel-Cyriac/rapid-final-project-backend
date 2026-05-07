@@ -1,8 +1,8 @@
 package com.nc.FinalProject.controller;
 
-import com.nc.FinalProject.dto.FileViewResponse;
-import com.nc.FinalProject.dto.ShareRequest;
-import com.nc.FinalProject.dto.SuccessResponse;
+import com.nc.FinalProject.dto.response.FileViewResponse;
+import com.nc.FinalProject.dto.request.ShareRequest;
+import com.nc.FinalProject.dto.response.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.service.FileService;

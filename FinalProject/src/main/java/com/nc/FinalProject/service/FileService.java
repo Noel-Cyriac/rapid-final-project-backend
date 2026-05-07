@@ -1,6 +1,7 @@
 package com.nc.FinalProject.service;
 
-import com.nc.FinalProject.dto.*;
+import com.nc.FinalProject.dto.request.ShareRequest;
+import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
 import com.nc.FinalProject.exception.InvalidSharePasswordException;
 import com.nc.FinalProject.exception.LinkDisabledException;
@@ -30,6 +31,7 @@ public class FileService {
     private final FolderRepository folderRepository;
     private final SharedFileRepository sharedFileRepository;
     private final MailService mailService;
+    private final StreamTokenRepository streamTokenRepository;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -572,7 +574,8 @@ public class FileService {
                 .build();
     }
 
-    public FileViewResponse accessSharedFile(String token, String password) {
+    @Transactional
+    public StreamResponse accessSharedFile(String token, String password) {
 
         SharedFile share = sharedFileRepository.findByShareToken(token)
                 .orElseThrow();
@@ -591,17 +594,25 @@ public class FileService {
             throw new InvalidSharePasswordException("Invalid password");
         }
 
-        // ✅ increment ONLY usedCount
+        // increment usage
         share.setUsedCount(share.getUsedCount() + 1);
-
         sharedFileRepository.save(share);
 
-        return new FileViewResponse(
-                share.getFile().getFilePath(),
-                share.getFile().getFileType()
-        );
-    }
+        // 🔥 create stream token
+        String streamToken = UUID.randomUUID().toString();
 
+        StreamToken st = StreamToken.builder()
+                .token(streamToken)
+                .sharedFile(share)
+                .expiresAt(LocalDateTime.now().plusMinutes(10))
+                .build();
+
+        streamTokenRepository.save(st);
+
+        return StreamResponse.builder()
+                .streamToken(streamToken)
+                .build();
+    }
     public void revokeShare(Long shareId, Users user) {
 
         SharedFile share = sharedFileRepository.findById(shareId)

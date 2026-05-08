@@ -20,5 +20,8 @@ public class StreamToken {
     @ManyToOne
     private SharedFile sharedFile;
 
+    @ManyToOne
+    private SharedBundle sharedBundle;
+
     private LocalDateTime expiresAt;
 }

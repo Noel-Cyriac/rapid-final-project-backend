@@ -2,10 +2,13 @@ package com.nc.FinalProject.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class SuccessResponse {
+@NoArgsConstructor
+public class SuccessResponse<T> {
+
     private String message;
-    private Object data; // Optional, can hold extra info like email, id, etc.
+    private T data;
 }

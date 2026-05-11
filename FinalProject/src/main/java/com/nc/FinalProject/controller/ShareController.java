@@ -101,14 +101,14 @@ public class ShareController {
     // =========================
     // OPEN SHARE LINK
     // =========================
-    @GetMapping("/{token}")
+    @GetMapping("public/{token}")
     public ResponseEntity<ShareMetaResponse> openShare(
             @PathVariable String token
     ) {
         return ResponseEntity.ok(fileService.openShareLink(token));
     }
 
-    @GetMapping("/bundle/{token}")
+    @GetMapping("public/bundle/{token}")
     public ResponseEntity<ShareMetaResponse> openBundleShare(
             @PathVariable String token
     ) {
@@ -121,7 +121,7 @@ public class ShareController {
     // VALIDATE PASSWORD
     // RETURNS STREAM TOKEN
     // =========================
-    @PostMapping("/{token}/access")
+    @PostMapping("public/{token}/access")
     public ResponseEntity<StreamResponse> accessFile(
             @PathVariable String token,
             @RequestBody(required = false) OpenShareRequest request
@@ -136,7 +136,7 @@ public class ShareController {
         );
     }
 
-    @PostMapping("/bundle/{token}/access")
+    @PostMapping("public/bundle/{token}/access")
     public ResponseEntity<StreamResponse> accessBundle(
             @PathVariable String token,
             @RequestBody(required = false) OpenShareRequest request
@@ -154,7 +154,7 @@ public class ShareController {
     // =========================
     // VIEW / STREAM
     // =========================
-    @GetMapping("/stream/{streamToken}")
+    @GetMapping("public/stream/{streamToken}")
     public ResponseEntity<Resource> streamFile(
             @PathVariable String streamToken,
             HttpServletRequest request
@@ -169,7 +169,7 @@ public class ShareController {
     // =========================
     // DOWNLOAD
     // =========================
-    @GetMapping("/download/{streamToken}")
+    @GetMapping("public/download/{streamToken}")
     public ResponseEntity<Resource> downloadFile(
             @PathVariable String streamToken
     ) throws IOException {
@@ -177,7 +177,7 @@ public class ShareController {
         return fileStreamingService.downloadByToken(streamToken);
     }
 
-    @GetMapping("/bundle/download/{streamToken}")
+    @GetMapping("public/bundle/download/{streamToken}")
     public ResponseEntity<StreamingResponseBody> downloadBundle(
             @PathVariable String streamToken
     ) {

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -48,4 +50,7 @@ public class SharedFile {
     private LocalDateTime lastOpenedAt;
 
     private String message;
+
+    @OneToMany(mappedBy = "sharedFile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StreamToken> streamTokens = new ArrayList<>();
 }

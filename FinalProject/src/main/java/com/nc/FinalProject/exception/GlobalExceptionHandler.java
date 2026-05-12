@@ -129,6 +129,18 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(ex.getMessage(), null));
     }
 
+    @ExceptionHandler(SharedFileDeleteException.class)
+    public ResponseEntity<ErrorResponse> handleSharedDelete(SharedFileDeleteException ex) {
+
+        logger.warn("Shared file delete warning: {}", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(
+                        "Delete warning",
+                        Map.of("sharedFiles", String.join(", ", ex.getSharedFiles()))
+                ));
+    }
+
     // Generic Exception Fallback
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception ex) {

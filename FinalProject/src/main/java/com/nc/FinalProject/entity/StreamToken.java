@@ -18,11 +18,7 @@ public class StreamToken {
     private String token;
 
     @ManyToOne
-    private SharedBundle sharedBundle;
+    private Share share;
 
     private LocalDateTime expiresAt;
-
-    @ManyToOne
-    @JoinColumn(name = "shared_file_id")
-    private SharedFile sharedFile;
 }

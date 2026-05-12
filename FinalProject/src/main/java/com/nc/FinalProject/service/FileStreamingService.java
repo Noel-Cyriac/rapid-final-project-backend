@@ -2,7 +2,7 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.response.FileViewResponse;
 import com.nc.FinalProject.entity.FileEntity;
-import com.nc.FinalProject.entity.SharedBundle;
+import com.nc.FinalProject.entity.Share;
 import com.nc.FinalProject.entity.StreamToken;
 import com.nc.FinalProject.repository.StreamTokenRepository;
 import org.springframework.core.io.InputStreamResource;
@@ -23,9 +23,7 @@ public class FileStreamingService {
 
     private final StreamTokenRepository streamTokenRepository;
 
-    public FileStreamingService(
-            StreamTokenRepository streamTokenRepository
-    ) {
+    public FileStreamingService(StreamTokenRepository streamTokenRepository) {
         this.streamTokenRepository = streamTokenRepository;
     }
 
@@ -34,247 +32,91 @@ public class FileStreamingService {
     // =====================================================
     public ResponseEntity<Resource> streamByToken(
             String streamToken,
+            Long fileId,
             HttpServletRequest request
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
+        Share share = token.getShare();
 
-        FileViewResponse file = new FileViewResponse(
-                token.getSharedFile().getFile().getFilePath(),
-                token.getSharedFile().getFile().getFileType()
+        FileEntity file = resolveFileFromShare(share, fileId);
+
+        return streamFile(
+                new FileViewResponse(file.getFilePath(), file.getFileType()),
+                request
         );
+    }
 
-        return streamFile(file, request);
+    private FileEntity resolveFileFromShare(Share share, Long fileId) {
+
+        if (share.getType() == Share.ShareType.FILE) {
+
+            if (!share.getFile().getId().equals(fileId)) {
+                throw new RuntimeException("File not part of share");
+            }
+
+            return share.getFile();
+        }
+
+        return share.getFiles().stream()
+                .filter(f -> f.getId().equals(fileId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("File not in bundle"));
     }
 
     // =====================================================
-    // DOWNLOAD
+    // DOWNLOAD SINGLE FILE
     // =====================================================
     public ResponseEntity<Resource> downloadByToken(
-            String streamToken
+            String streamToken,
+            Long fileId
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
+        Share share = token.getShare();
 
-        Path path = Paths.get(
-                token.getSharedFile().getFile().getFilePath()
-        );
+        FileEntity file = resolveFileFromShare(share, fileId);
 
-        String contentType =
-                token.getSharedFile().getFile().getFileType();
+        Path path = Paths.get(file.getFilePath());
 
         InputStream inputStream =
-                new BufferedInputStream(
-                        new FileInputStream(path.toFile())
-                );
+                new BufferedInputStream(new FileInputStream(path.toFile()));
 
-        Resource resource =
-                new InputStreamResource(inputStream);
+        Resource resource = new InputStreamResource(inputStream);
 
         return ResponseEntity.ok()
-                .contentType(
-                        MediaType.parseMediaType(contentType)
-                )
+                .contentType(MediaType.parseMediaType(file.getFileType()))
                 .contentLength(Files.size(path))
-                .header(
-                        HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" +
-                                path.getFileName().toString() +
-                                "\""
-                )
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + file.getFileName() + "\"")
                 .body(resource);
     }
-
     // =====================================================
-    // INTERNAL STREAMING LOGIC
+    // BUNDLE DOWNLOAD
     // =====================================================
-    public ResponseEntity<Resource> streamFile(
-            FileViewResponse file,
-            HttpServletRequest request
-    ) throws IOException {
-
-        Path path = Paths.get(file.path());
-
-        long fileSize = Files.size(path);
-
-        String contentType = file.type();
-
-        String rangeHeader = request.getHeader("Range");
-
-        // ============================================
-        // NO RANGE
-        // ============================================
-        if (rangeHeader == null) {
-
-            InputStream inputStream =
-                    new BufferedInputStream(
-                            new FileInputStream(path.toFile())
-                    );
-
-            return ResponseEntity.ok()
-                    .contentType(
-                            MediaType.parseMediaType(contentType)
-                    )
-                    .contentLength(fileSize)
-                    .header(
-                            HttpHeaders.ACCEPT_RANGES,
-                            "bytes"
-                    )
-                    .header(
-                            HttpHeaders.CONTENT_DISPOSITION,
-                            "inline"
-                    )
-                    .body(new InputStreamResource(inputStream));
-        }
-
-        // ============================================
-        // RANGE STREAMING
-        // ============================================
-        String[] ranges =
-                rangeHeader.replace("bytes=", "").split("-");
-
-        long start = Long.parseLong(ranges[0]);
-
-        long end =
-                (ranges.length > 1 && !ranges[1].isEmpty())
-                        ? Long.parseLong(ranges[1])
-                        : fileSize - 1;
-
-        if (end >= fileSize) {
-            end = fileSize - 1;
-        }
-
-        long contentLength = end - start + 1;
-
-        RandomAccessFile randomAccessFile =
-                new RandomAccessFile(path.toFile(), "r");
-
-        randomAccessFile.seek(start);
-
-        InputStream inputStream = new BufferedInputStream(
-                new InputStream() {
-
-                    private long remaining = contentLength;
-
-                    @Override
-                    public int read() throws IOException {
-
-                        if (remaining <= 0) {
-                            return -1;
-                        }
-
-                        remaining--;
-
-                        return randomAccessFile.read();
-                    }
-
-                    @Override
-                    public int read(
-                            byte[] b,
-                            int off,
-                            int len
-                    ) throws IOException {
-
-                        if (remaining <= 0) {
-                            return -1;
-                        }
-
-                        int toRead =
-                                (int) Math.min(len, remaining);
-
-                        int read =
-                                randomAccessFile.read(
-                                        b,
-                                        off,
-                                        toRead
-                                );
-
-                        if (read > 0) {
-                            remaining -= read;
-                        }
-
-                        return read;
-                    }
-
-                    @Override
-                    public void close() throws IOException {
-                        randomAccessFile.close();
-                    }
-                }
-        );
-
-        return ResponseEntity.status(
-                        HttpStatus.PARTIAL_CONTENT
-                )
-                .contentType(
-                        MediaType.parseMediaType(contentType)
-                )
-                .header(
-                        HttpHeaders.ACCEPT_RANGES,
-                        "bytes"
-                )
-                .header(
-                        HttpHeaders.CONTENT_RANGE,
-                        "bytes " +
-                                start +
-                                "-" +
-                                end +
-                                "/" +
-                                fileSize
-                )
-                .contentLength(contentLength)
-                .header(
-                        HttpHeaders.CONTENT_DISPOSITION,
-                        "inline"
-                )
-                .body(new InputStreamResource(inputStream));
-    }
-
-    // =====================================================
-    // TOKEN VALIDATION
-    // =====================================================
-    private StreamToken validateToken(String streamToken) {
-
-        StreamToken token =
-                streamTokenRepository.findByToken(streamToken)
-                        .orElseThrow(() ->
-                                new RuntimeException(
-                                        "Invalid stream token"
-                                )
-                        );
-
-        if (token.getExpiresAt()
-                .isBefore(LocalDateTime.now())) {
-
-            throw new RuntimeException("Stream expired");
-        }
-
-        return token;
-    }
-
     public void downloadBundle(
             String streamToken,
             OutputStream outputStream
     ) throws IOException {
 
-        StreamToken token =
-                streamTokenRepository.findByToken(streamToken)
-                        .orElseThrow(() -> new RuntimeException("Invalid stream token"));
+        StreamToken token = validateToken(streamToken);
 
-        SharedBundle bundle = token.getSharedBundle();
+        Share share = token.getShare();
+
+        if (share.getType() != Share.ShareType.BUNDLE) {
+            throw new RuntimeException("Not a bundle share");
+        }
 
         ZipOutputStream zos = new ZipOutputStream(outputStream);
-
         byte[] buffer = new byte[8192];
 
-        for (FileEntity file : bundle.getFiles()) {
+        for (FileEntity file : share.getFiles()) {
 
             Path path = Paths.get(file.getFilePath());
 
             zos.putNextEntry(new ZipEntry(file.getFileName()));
 
             try (InputStream fis = Files.newInputStream(path)) {
-
                 int len;
                 while ((len = fis.read(buffer)) > 0) {
                     zos.write(buffer, 0, len);
@@ -286,5 +128,131 @@ public class FileStreamingService {
 
         zos.finish();
         zos.close();
+    }
+
+    // =====================================================
+    // SHARE RESOLUTION
+    // =====================================================
+    private FileViewResponse resolveFileView(Share share) {
+
+        if (share.getType() == Share.ShareType.FILE) {
+
+            FileEntity file = share.getFile();
+
+            return new FileViewResponse(
+                    file.getFilePath(),
+                    file.getFileType()
+            );
+        }
+
+        // BUNDLE → just pick first file for preview OR custom UI
+        FileEntity file = share.getFiles().get(0);
+
+        return new FileViewResponse(
+                file.getFilePath(),
+                file.getFileType()
+        );
+    }
+
+    // =====================================================
+    // STREAM FILE (UNCHANGED)
+    // =====================================================
+    public ResponseEntity<Resource> streamFile(
+            FileViewResponse file,
+            HttpServletRequest request
+    ) throws IOException {
+
+        Path path = Paths.get(file.path());
+
+        long fileSize = Files.size(path);
+        String contentType = file.type();
+
+        String rangeHeader = request.getHeader("Range");
+
+        if (rangeHeader == null) {
+
+            InputStream inputStream =
+                    new BufferedInputStream(new FileInputStream(path.toFile()));
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .contentLength(fileSize)
+                    .header(HttpHeaders.ACCEPT_RANGES, "bytes")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
+                    .body(new InputStreamResource(inputStream));
+        }
+
+        String[] ranges = rangeHeader.replace("bytes=", "").split("-");
+
+        long start = Long.parseLong(ranges[0]);
+        long end = (ranges.length > 1 && !ranges[1].isEmpty())
+                ? Long.parseLong(ranges[1])
+                : fileSize - 1;
+
+        if (end >= fileSize) end = fileSize - 1;
+
+        long contentLength = end - start + 1;
+
+        RandomAccessFile randomAccessFile = new RandomAccessFile(path.toFile(), "r");
+        randomAccessFile.seek(start);
+
+        InputStream inputStream = new BufferedInputStream(new InputStream() {
+
+            private long remaining = contentLength;
+
+            @Override
+            public int read() throws IOException {
+                if (remaining <= 0) return -1;
+                remaining--;
+                return randomAccessFile.read();
+            }
+
+            @Override
+            public int read(byte[] b, int off, int len) throws IOException {
+                if (remaining <= 0) return -1;
+
+                int toRead = (int) Math.min(len, remaining);
+                int read = randomAccessFile.read(b, off, toRead);
+
+                if (read > 0) remaining -= read;
+                return read;
+            }
+
+            @Override
+            public void close() throws IOException {
+                randomAccessFile.close();
+            }
+        });
+
+        return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.ACCEPT_RANGES, "bytes")
+                .header(HttpHeaders.CONTENT_RANGE,
+                        "bytes " + start + "-" + end + "/" + fileSize)
+                .contentLength(contentLength)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
+                .body(new InputStreamResource(inputStream));
+    }
+
+    // =====================================================
+    // TOKEN VALIDATION
+    // =====================================================
+    private StreamToken validateToken(String streamToken) {
+
+        StreamToken token = streamTokenRepository.findByToken(streamToken)
+                .orElseThrow(() -> new RuntimeException("Invalid stream token"));
+
+        if (token.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Stream expired");
+        }
+
+        return token;
+    }
+
+    public boolean isBundle(String streamToken) {
+
+        StreamToken token = validateToken(streamToken);
+
+        return token.getShare().getType() == Share.ShareType.BUNDLE;
     }
 }

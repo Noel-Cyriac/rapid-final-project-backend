@@ -87,12 +87,21 @@ public class FileController {
     @DeleteMapping("/delete")
     public ResponseEntity<SuccessResponse> deleteMultiple(
             @RequestBody List<Long> ids,
+            @RequestParam(defaultValue = "false") boolean force,
             Authentication auth
     ) {
-        fileService.deleteFiles(ids, user(auth));
+
+        fileService.deleteFiles(
+                ids,
+                user(auth),
+                force
+        );
 
         return ResponseEntity.ok(
-                new SuccessResponse("File(s) moved to recycle bin", null)
+                new SuccessResponse(
+                        "File(s) moved to recycle bin",
+                        null
+                )
         );
     }
 

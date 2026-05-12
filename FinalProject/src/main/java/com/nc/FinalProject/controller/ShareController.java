@@ -99,35 +99,29 @@ public class ShareController {
     }
 
     // =========================
-    // OPEN SHARE LINK
-    // =========================
-    @GetMapping("public/{token}")
+// OPEN SHARE LINK
+// =========================
+    @GetMapping("/public/{token}")
     public ResponseEntity<ShareMetaResponse> openShare(
             @PathVariable String token
     ) {
-        return ResponseEntity.ok(fileService.openShareLink(token));
-    }
 
-    @GetMapping("public/bundle/{token}")
-    public ResponseEntity<ShareMetaResponse> openBundleShare(
-            @PathVariable String token
-    ) {
         return ResponseEntity.ok(
-                fileService.openBundleShare(token)
+                fileService.openShareLink(token)
         );
     }
 
     // =========================
-    // VALIDATE PASSWORD
-    // RETURNS STREAM TOKEN
-    // =========================
-    @PostMapping("public/{token}/access")
-    public ResponseEntity<StreamResponse> accessFile(
+// VALIDATE PASSWORD
+// RETURNS STREAM TOKEN
+// =========================
+    @PostMapping("/public/{token}/access")
+    public ResponseEntity<StreamResponse> accessShare(
             @PathVariable String token,
             @RequestBody(required = false) OpenShareRequest request
     ) {
 
-        String password = request != null
+        String password = (request != null)
                 ? request.getPassword()
                 : null;
 
@@ -136,48 +130,34 @@ public class ShareController {
         );
     }
 
-    @PostMapping("public/bundle/{token}/access")
-    public ResponseEntity<StreamResponse> accessBundle(
-            @PathVariable String token,
-            @RequestBody(required = false) OpenShareRequest request
-    ) {
-
-        String password = request != null
-                ? request.getPassword()
-                : null;
-
-        return ResponseEntity.ok(
-                fileService.accessBundle(token, password)
-        );
-    }
-
     // =========================
-    // VIEW / STREAM
-    // =========================
-    @GetMapping("public/stream/{streamToken}")
+// VIEW / STREAM
+// =========================
+    @GetMapping("/public/stream/{streamToken}/{fileId}")
     public ResponseEntity<Resource> streamFile(
             @PathVariable String streamToken,
+            @PathVariable Long fileId,
             HttpServletRequest request
     ) throws IOException {
 
-        return fileStreamingService.streamByToken(
-                streamToken,
-                request
-        );
+        return fileStreamingService.streamByToken(streamToken, fileId, request);
     }
 
     // =========================
-    // DOWNLOAD
-    // =========================
-    @GetMapping("public/download/{streamToken}")
+// DOWNLOAD
+// FILE -> direct file
+// BUNDLE -> zip download
+// =========================
+    @GetMapping("/public/download/{streamToken}/{fileId}")
     public ResponseEntity<Resource> downloadFile(
-            @PathVariable String streamToken
+            @PathVariable String streamToken,
+            @PathVariable Long fileId
     ) throws IOException {
 
-        return fileStreamingService.downloadByToken(streamToken);
+        return fileStreamingService.downloadByToken(streamToken, fileId);
     }
 
-    @GetMapping("public/bundle/download/{streamToken}")
+    @GetMapping("/public/download/{streamToken}")
     public ResponseEntity<StreamingResponseBody> downloadBundle(
             @PathVariable String streamToken
     ) {
@@ -186,11 +166,10 @@ public class ShareController {
                 fileStreamingService.downloadBundle(streamToken, outputStream);
 
         return ResponseEntity.ok()
-                .header(
-                        HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"share-bundle.zip\""
-                )
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"share-bundle.zip\"")
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(stream);
     }
+
 }

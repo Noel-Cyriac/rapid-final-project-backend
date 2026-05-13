@@ -1,6 +1,6 @@
 package com.nc.FinalProject.exception;
 
-import com.nc.FinalProject.dto.ErrorResponse;
+import com.nc.FinalProject.dto.response.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -127,6 +127,18 @@ public class GlobalExceptionHandler {
         logger.warn("Invalid share password attempt");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(SharedFileDeleteException.class)
+    public ResponseEntity<ErrorResponse> handleSharedDelete(SharedFileDeleteException ex) {
+
+        logger.warn("Shared file delete warning: {}", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(
+                        "Delete warning",
+                        Map.of("sharedFiles", String.join(", ", ex.getSharedFiles()))
+                ));
     }
 
     // Generic Exception Fallback

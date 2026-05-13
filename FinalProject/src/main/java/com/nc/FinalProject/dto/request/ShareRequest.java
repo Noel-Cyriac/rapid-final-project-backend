@@ -1,11 +1,19 @@
-package com.nc.FinalProject.dto;
+package com.nc.FinalProject.dto.request;
 
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ShareRequest {
 
-    private String email;
+    private Long fileId;
+
+    private List<Long> fileIds;
+
+    // ✅ multiple recipients
+    private List<String> emails;
+
     private Integer expireHours;
     private Integer maxUses;
     private String password;

@@ -1,11 +1,15 @@
 package com.nc.FinalProject.controller;
 
-import com.nc.FinalProject.dto.*;
+import com.nc.FinalProject.dto.request.ForgotPasswordRequest;
+import com.nc.FinalProject.dto.request.LoginRequest;
+import com.nc.FinalProject.dto.request.RegisterRequest;
+import com.nc.FinalProject.dto.request.ResetPasswordRequest;
+import com.nc.FinalProject.dto.response.LoginResponse;
+import com.nc.FinalProject.dto.response.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.security.JwtUtil;
 import com.nc.FinalProject.service.AuthService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

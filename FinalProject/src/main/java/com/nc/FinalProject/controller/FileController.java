@@ -1,20 +1,28 @@
 package com.nc.FinalProject.controller;
 
-import com.nc.FinalProject.dto.FileViewResponse;
-import com.nc.FinalProject.dto.ShareRequest;
-import com.nc.FinalProject.dto.SuccessResponse;
+import com.nc.FinalProject.dto.response.FileViewResponse;
+import com.nc.FinalProject.dto.response.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.service.FileService;
+import com.nc.FinalProject.service.FileStreamingService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -26,6 +34,7 @@ public class FileController {
 
     private final FileService fileService;
     private final UserRepository userRepository;
+    private final FileStreamingService fileStreamingService;
 
     private Users user(Authentication auth) {
         return userRepository.findByEmail(auth.getName()).orElseThrow();
@@ -63,29 +72,36 @@ public class FileController {
     }
 
     @GetMapping("/view/{id}")
-    public ResponseEntity<byte[]> view(
+    public ResponseEntity<Resource> view(
             @PathVariable Long id,
-            Authentication auth
+            Authentication auth,
+            HttpServletRequest request
     ) throws Exception {
 
-        FileViewResponse file = fileService.viewFile(id, user(auth));
+        FileViewResponse file =
+                fileService.viewFile(id, user(auth));
 
-        byte[] bytes = Files.readAllBytes(Path.of(file.path()));
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(file.type()))
-                .body(bytes);
+        return fileStreamingService.streamFile(file, request);
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<SuccessResponse> deleteMultiple(
             @RequestBody List<Long> ids,
+            @RequestParam(defaultValue = "false") boolean force,
             Authentication auth
     ) {
-        fileService.deleteFiles(ids, user(auth));
+
+        fileService.deleteFiles(
+                ids,
+                user(auth),
+                force
+        );
 
         return ResponseEntity.ok(
-                new SuccessResponse("File(s) moved to recycle bin", null)
+                new SuccessResponse(
+                        "File(s) moved to recycle bin",
+                        null
+                )
         );
     }
 
@@ -140,33 +156,63 @@ public class FileController {
     }
 
     @GetMapping("/download/{id}")
-    public ResponseEntity<byte[]> download(
+    public ResponseEntity<Resource> download(
             @PathVariable Long id,
             Authentication auth
     ) throws Exception {
 
         Path path = fileService.getFilePath(id, user(auth));
-        byte[] bytes = Files.readAllBytes(path);
+
+        InputStream inputStream =
+                new BufferedInputStream(
+                        new FileInputStream(path.toFile())
+                );
+
+        Resource resource =
+                new InputStreamResource(inputStream);
+
+        String contentType =
+                Files.probeContentType(path);
+
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + path.getFileName() + "\"")
-                .body(bytes);
+                .contentType(
+                        MediaType.parseMediaType(contentType)
+                )
+                .contentLength(Files.size(path))
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" +
+                                path.getFileName().toString() +
+                                "\""
+                )
+                .body(resource);
     }
 
     @PostMapping("/download")
-    public ResponseEntity<byte[]> downloadMultiple(
+    public ResponseEntity<StreamingResponseBody> downloadMultiple(
             @RequestBody List<Long> ids,
             Authentication auth
-    ) throws Exception {
+    ) {
 
-        byte[] zipBytes = fileService.downloadMultiple(ids, user(auth));
+        StreamingResponseBody stream = outputStream -> {
+            fileService.downloadMultiple(
+                    ids,
+                    user(auth),
+                    outputStream
+            );
+        };
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"files.zip\"")
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"files.zip\""
+                )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(zipBytes);
+                .body(stream);
     }
 
     @GetMapping("/uploaded")
@@ -254,35 +300,4 @@ public class FileController {
         );
     }
 
-    @PostMapping("/share/{id}")
-    public ResponseEntity<SuccessResponse> share(
-            @PathVariable Long id,
-            @RequestBody ShareRequest req,
-            Authentication auth
-    ) {
-        return ResponseEntity.ok(
-                new SuccessResponse(
-                        "File shared successfully",
-                        fileService.createShare(id, user(auth), req)
-                )
-        );
-    }
-
-    @GetMapping("/shared")
-    public ResponseEntity<SuccessResponse> shared(Authentication auth, Pageable pageable) {
-        return ResponseEntity.ok(
-                new SuccessResponse(
-                        "Shared files fetched successfully",
-                        fileService.listSharedFiles(user(auth), pageable)
-                )
-        );
-    }
-
-    @DeleteMapping("/share/{shareId}")
-    public ResponseEntity<SuccessResponse> revoke(@PathVariable Long shareId, Authentication auth) {
-        fileService.revokeShare(shareId, user(auth));
-        return ResponseEntity.ok(
-                new SuccessResponse("Share revoked successfully", null)
-        );
-    }
 }

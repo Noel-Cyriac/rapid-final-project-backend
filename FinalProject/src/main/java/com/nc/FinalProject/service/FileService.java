@@ -1,11 +1,9 @@
 package com.nc.FinalProject.service;
 
-import com.nc.FinalProject.dto.*;
+import com.nc.FinalProject.dto.request.ShareRequest;
+import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
-import com.nc.FinalProject.exception.InvalidSharePasswordException;
-import com.nc.FinalProject.exception.LinkDisabledException;
-import com.nc.FinalProject.exception.LinkExpiredException;
-import com.nc.FinalProject.exception.MaxUsesExceededException;
+import com.nc.FinalProject.exception.*;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -28,8 +29,9 @@ public class FileService {
     private final FileRepository fileRepository;
     private final FileActivityRepository activityRepository;
     private final FolderRepository folderRepository;
-    private final SharedFileRepository sharedFileRepository;
+    private final ShareRepository shareRepository;
     private final MailService mailService;
+    private final StreamTokenRepository streamTokenRepository;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -149,52 +151,111 @@ public class FileService {
         return Paths.get(file.getFilePath());
     }
 
-    public byte[] downloadMultiple(List<Long> ids, Users user) throws Exception {
+    public void downloadMultiple(
+            List<Long> ids,
+            Users user,
+            OutputStream outputStream
+    ) throws IOException {
 
-        List<FileEntity> files = fileRepository.findAllById(ids);
+        List<FileEntity> files =
+                fileRepository.findAllById(ids);
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ZipOutputStream zos = new ZipOutputStream(baos);
+        ZipOutputStream zos =
+                new ZipOutputStream(outputStream);
+
+        byte[] buffer = new byte[8192];
 
         for (FileEntity file : files) {
 
-            if (!file.getOwner().getId().equals(user.getId()))
+            if (!file.getOwner()
+                    .getId()
+                    .equals(user.getId())) {
                 continue;
+            }
 
             Path path = Paths.get(file.getFilePath());
 
-            zos.putNextEntry(new ZipEntry(file.getFileName()));
+            zos.putNextEntry(
+                    new ZipEntry(file.getFileName())
+            );
 
-            Files.copy(path, zos);
+            try (
+                    InputStream fis =
+                            Files.newInputStream(path)
+            ) {
+
+                int len;
+
+                while ((len = fis.read(buffer)) > 0) {
+                    zos.write(buffer, 0, len);
+                }
+            }
 
             zos.closeEntry();
 
-            // update stats per file
-            file.setDownloadCount(file.getDownloadCount() + 1);
-            file.setLastDownloadedAt(LocalDateTime.now());
+            // update stats
+            file.setDownloadCount(
+                    file.getDownloadCount() + 1
+            );
 
-            track(user, file, "DOWNLOAD", file.getSize());
+            file.setLastDownloadedAt(
+                    LocalDateTime.now()
+            );
+
+            track(
+                    user,
+                    file,
+                    "DOWNLOAD",
+                    file.getSize()
+            );
         }
 
         zos.finish();
         zos.close();
 
         fileRepository.saveAll(files);
-
-        return baos.toByteArray();
     }
-
     // ======================
     // DELETE
     // ======================
-    public void deleteFiles(List<Long> ids, Users user) {
+    public void deleteFiles(List<Long> ids, Users user, boolean force) {
 
         List<FileEntity> files = fileRepository.findAllById(ids);
+
+        List<String> shared = new ArrayList<>();
 
         for (FileEntity file : files) {
 
             if (!file.getOwner().getId().equals(user.getId()))
                 continue;
+
+            boolean sharedExists =
+                    shareRepository.existsByFileAndActiveTrue(file)
+                            || shareRepository.existsByFilesContainsAndActiveTrue(file);
+
+            if (sharedExists && !force) {
+                shared.add(file.getFileName());
+            }
+        }
+
+        if (!shared.isEmpty()) {
+            throw new SharedFileDeleteException(
+                    "Files are currently shared",
+                    shared
+            );
+        }
+
+        for (FileEntity file : files) {
+
+            if (!file.getOwner().getId().equals(user.getId()))
+                continue;
+
+            // revoke shares
+            List<Share> shares =
+                    shareRepository.findAllByFileOrFilesContains(file, file);
+
+            shares.forEach(s -> s.setActive(false));
+            shareRepository.saveAll(shares);
 
             file.setDeleted(true);
 
@@ -500,54 +561,171 @@ public class FileService {
         );
     }
 
-    public ShareResponse createShare(Long fileId, Users user, ShareRequest req) {
+    public ShareResponse createShareUnified(
+            ShareRequest req,
+            Users user
+    ) {
 
-        FileEntity file = fileRepository.findByIdAndOwner(fileId, user)
-                .orElseThrow();
+        boolean isBundle =
+                req.getFileIds() != null &&
+                        req.getFileIds().size() > 1;
 
-        String token = UUID.randomUUID().toString();
+        Share share = new Share();
 
-        SharedFile share = SharedFile.builder()
-                .file(file)
-                .owner(user)
-                .shareToken(token)
-                .recipientEmail(req.getEmail())
-                .expireAt(LocalDateTime.now().plusHours(req.getExpireHours()))
-                .maxUses(req.getMaxUses())
-                .usedCount(0)
-                .openCount(0)
-                .active(true)
-                .canDownload(req.getCanDownload())
-                .canView(req.getCanView())
-                .password(req.getPassword())
-                .message(req.getMessage())
-                .sharedAt(LocalDateTime.now())
-                .build();
+        share.setOwner(user);
+        share.setShareToken(UUID.randomUUID().toString());
+        share.setExpireAt(
+                LocalDateTime.now()
+                        .plusHours(req.getExpireHours())
+        );
+        share.setMaxUses(req.getMaxUses());
+        share.setUsedCount(0);
+        share.setOpenCount(0);
+        share.setActive(true);
+        share.setPassword(req.getPassword());
+        share.setMessage(req.getMessage());
+        share.setSharedAt(LocalDateTime.now());
 
-        sharedFileRepository.save(share);
+        // multiple recipient emails
+        share.setRecipientEmails(req.getEmails());
 
-        String link = "http://localhost:5175/share/" + token;
+        // ======================
+        // SINGLE FILE
+        // ======================
+        if (!isBundle) {
 
-        mailService.sendShareEmail(req.getEmail(), link);
+            Long fileId =
+                    (req.getFileId() != null)
+                            ? req.getFileId()
+                            : req.getFileIds().get(0);
+
+            FileEntity file =
+                    fileRepository.findByIdAndOwner(fileId, user)
+                            .orElseThrow();
+
+            share.setType(Share.ShareType.FILE);
+            share.setFile(file);
+        }
+
+        // ======================
+        // BUNDLE SHARE
+        // ======================
+        else {
+
+            List<FileEntity> files =
+                    fileRepository.findAllById(req.getFileIds());
+
+            share.setType(Share.ShareType.BUNDLE);
+            share.setFiles(files);
+        }
+
+        share = shareRepository.save(share);
+
+        // ======================
+        // SEND EMAILS
+        // ======================
+        String link =
+                "http://localhost:5175/share/" +
+                        share.getShareToken();
+
+        for (String email : req.getEmails()) {
+            mailService.sendShareEmail(email, link);
+        }
 
         return ShareResponse.builder()
                 .id(share.getId())
-                .token(token)
-                .email(req.getEmail())
+                .token(share.getShareToken())
+
+                // all recipient emails
+                .emails(share.getRecipientEmails())
+
                 .expiresAt(share.getExpireAt())
                 .maxUses(share.getMaxUses())
-                .usedCount(0)
-                .openCount(0)
-                .active(true)
-                .fileName(file.getFileName())
+                .usedCount(share.getUsedCount())
+                .openCount(share.getOpenCount())
+                .active(share.getActive())
+
+                .fileName(
+                        share.getType() == Share.ShareType.FILE
+                                ? share.getFile().getFileName()
+                                : "Bundle (" +
+                                share.getFiles().size() +
+                                  " files)"
+                )
+
                 .sharedAt(share.getSharedAt())
                 .message(share.getMessage())
+                .type(share.getType().name())
+                .build();
+    }
+    public ShareMetaResponse openShareLink(String token) {
+
+        Share share = shareRepository.findByShareToken(token)
+                .orElseThrow();
+
+        if (!share.getActive())
+            throw new LinkDisabledException("Link disabled");
+
+        if (share.getExpireAt().isBefore(LocalDateTime.now()))
+            throw new LinkExpiredException("Link expired");
+
+        share.setOpenCount(share.getOpenCount() + 1);
+        share.setLastOpenedAt(LocalDateTime.now());
+
+        shareRepository.save(share);
+
+        // =========================
+        // FILE LIST (FOR BUNDLE SUPPORT)
+        // =========================
+        List<FileMiniResponse> files;
+
+        if (share.getType() == Share.ShareType.FILE) {
+
+            files = List.of(
+                    new FileMiniResponse(
+                            share.getFile().getId(),
+                            share.getFile().getFileName(),
+                            share.getFile().getFileType()
+                    )
+            );
+
+        } else {
+
+            files = share.getFiles().stream()
+                    .map(f -> new FileMiniResponse(
+                            f.getId(),
+                            f.getFileName(),
+                            f.getFileType()
+                    ))
+                    .toList();
+        }
+
+        return ShareMetaResponse.builder()
+                .fileName(
+                        share.getType() == Share.ShareType.FILE
+                                ? share.getFile().getFileName()
+                                : "Bundle (" + share.getFiles().size() + " files)"
+                )
+                .fileType(
+                        share.getType() == Share.ShareType.FILE
+                                ? share.getFile().getFileType()
+                                : "BUNDLE"
+                )
+                .requiresPassword(share.getPassword() != null)
+                .canDownload(true)
+                .canView(true)
+                .message(share.getMessage())
+
+                // ✅ NEW FIELD (IMPORTANT)
+                .files(files)
+
                 .build();
     }
 
-    public FileViewResponse openSharedFile(String token, String password) {
+    @Transactional
+    public StreamResponse accessSharedFile(String token, String password) {
 
-        SharedFile share = sharedFileRepository.findByShareToken(token)
+        Share share = shareRepository.findByShareToken(token)
                 .orElseThrow();
 
         if (!share.getActive())
@@ -565,20 +743,25 @@ public class FileService {
         }
 
         share.setUsedCount(share.getUsedCount() + 1);
-        share.setOpenCount(share.getOpenCount() + 1);
-        share.setLastOpenedAt(LocalDateTime.now());
+        shareRepository.save(share);
 
-        sharedFileRepository.save(share);
+        String streamToken = UUID.randomUUID().toString();
 
-        return new FileViewResponse(
-                share.getFile().getFilePath(),
-                share.getFile().getFileType()
-        );
+        StreamToken st = StreamToken.builder()
+                .token(streamToken)
+                .share(share)   // ✅ IMPORTANT: single relation now
+                .expiresAt(LocalDateTime.now().plusMinutes(10))
+                .build();
+
+        streamTokenRepository.save(st);
+
+        return StreamResponse.builder()
+                .streamToken(streamToken)
+                .build();
     }
-
     public void revokeShare(Long shareId, Users user) {
 
-        SharedFile share = sharedFileRepository.findById(shareId)
+        Share share = shareRepository.findById(shareId)
                 .orElseThrow();
 
         if (!share.getOwner().getId().equals(user.getId()))
@@ -586,30 +769,50 @@ public class FileService {
 
         share.setActive(false);
 
-        sharedFileRepository.save(share);
+        shareRepository.save(share);
     }
 
-    public PagedResponse<ShareResponse> listSharedFiles(Users user, Pageable pageable) {
+    public PagedResponse<ShareResponse> listSharedFiles(
+            Users user,
+            Pageable pageable
+    ) {
 
-        Page<SharedFile> page =
-                sharedFileRepository.findByOwner(user, pageable);
+        Page<Share> page =
+                shareRepository.findByOwner(user, pageable);
 
         return new PagedResponse<>(
+
                 page.map(s -> ShareResponse.builder()
+
                         .id(s.getId())
                         .token(s.getShareToken())
-                        .email(s.getRecipientEmail())
+
+                        // all emails
+                        .emails(s.getRecipientEmails())
+
                         .expiresAt(s.getExpireAt())
                         .maxUses(s.getMaxUses())
                         .usedCount(s.getUsedCount())
                         .openCount(s.getOpenCount())
                         .active(s.getActive())
-                        .fileName(s.getFile().getFileName())
+
+                        .fileName(
+                                s.getType() == Share.ShareType.FILE
+                                        ? s.getFile().getFileName()
+                                        : "Bundle (" +
+                                        s.getFiles().size() +
+                                          " files)"
+                        )
+
                         .sharedAt(s.getSharedAt())
                         .message(s.getMessage())
                         .lastOpenedAt(s.getLastOpenedAt())
+                        .type(s.getType().name())
+
                         .build()
+
                 ).getContent(),
+
                 page.getNumber(),
                 page.getSize(),
                 page.getTotalElements(),
@@ -618,6 +821,27 @@ public class FileService {
                 page.isLast()
         );
     }
+    @Transactional
+    public void cleanupShares(Users user) {
 
+        LocalDateTime now = LocalDateTime.now();
 
+        List<Share> shares =
+                shareRepository.findAllByOwner(user);
+
+        List<Share> toDelete = shares.stream()
+                .filter(s ->
+                        !s.getActive() ||
+                                s.getExpireAt().isBefore(now)
+                )
+                .toList();
+
+        // delete stream tokens first
+        for (Share share : toDelete) {
+            streamTokenRepository.deleteByShare(share);
+        }
+
+        // then delete shares
+        shareRepository.deleteAll(toDelete);
+    }
 }

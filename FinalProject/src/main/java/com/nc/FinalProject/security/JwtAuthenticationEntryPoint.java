@@ -1,7 +1,7 @@
 package com.nc.FinalProject.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nc.FinalProject.dto.ErrorResponse;
+import com.nc.FinalProject.dto.response.ErrorResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

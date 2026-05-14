@@ -1,24 +1,33 @@
 package com.nc.FinalProject.service;
 
-import com.nc.FinalProject.dto.request.ShareRequest;
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
-import com.nc.FinalProject.exception.*;
-import com.nc.FinalProject.repository.*;
+import com.nc.FinalProject.exception.SharedFileDeleteException;
+import com.nc.FinalProject.repository.FileActivityRepository;
+import com.nc.FinalProject.repository.FileRepository;
+import com.nc.FinalProject.repository.FolderRepository;
+import com.nc.FinalProject.repository.ShareRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -30,8 +39,6 @@ public class FileService {
     private final FileActivityRepository activityRepository;
     private final FolderRepository folderRepository;
     private final ShareRepository shareRepository;
-    private final MailService mailService;
-    private final StreamTokenRepository streamTokenRepository;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -312,48 +319,245 @@ public class FileService {
     // ======================
     // DASHBOARD
     // ======================
-    public DashboardResponse dashboard(Users user) {
+    public List<FileResponse> latestUploads(Users user) {
+
+        return fileRepository
+                .findTop4ByOwnerAndDeletedFalseOrderByUploadedAtDesc(user)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public List<FileResponse> latestDownloads(Users user) {
+
+        return activityRepository
+                .findTop4ByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
+                        user,
+                        "DOWNLOAD"
+                )
+                .stream()
+                .map(a -> mapToResponse(a.getFile()))
+                .toList();
+    }
+
+    public List<FileResponse> recentlyOpened(Users user) {
+
+        return fileRepository
+                .findTop4ByOwnerAndDeletedFalseAndLastOpenedAtNotNullOrderByLastOpenedAtDesc(user)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public DashboardStatsResponse dashboardStats(Users user) {
 
         LocalDateTime today =
-                LocalDateTime.now()
-                        .toLocalDate()
-                        .atStartOfDay();
+                LocalDate.now().atStartOfDay();
 
-        List<FileResponse> latestUploads =
-                fileRepository
-                        .findTop4ByOwnerAndDeletedFalseOrderByUploadedAtDesc(user)
-                        .stream()
-                        .map(this::mapToResponse)
-                        .toList();
-
-        List<FileResponse> latestDownloads =
-                activityRepository
-                        .findTop4ByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
+        return DashboardStatsResponse.builder()
+                .todayUploads(
+                        activityRepository.todayCount(
+                                user,
+                                "UPLOAD",
+                                today
+                        )
+                )
+                .todayDownloads(
+                        activityRepository.todayCount(
+                                user,
+                                "DOWNLOAD",
+                                today
+                        )
+                )
+                .todayDeletes(
+                        activityRepository.todayCount(
+                                user,
+                                "DELETE",
+                                today
+                        )
+                )
+                .totalUploads(
+                        activityRepository.countByAction(
+                                user,
+                                "UPLOAD"
+                        )
+                )
+                .totalDownloads(
+                        activityRepository.countByAction(
                                 user,
                                 "DOWNLOAD"
                         )
-                        .stream()
-                        .map(a -> mapToResponse(a.getFile()))
-                        .toList();
-
-        List<FileResponse> recentlyOpened =
-                fileRepository
-                        .findTop4ByOwnerAndDeletedFalseAndLastOpenedAtNotNullOrderByLastOpenedAtDesc(user)
-                        .stream()
-                        .map(this::mapToResponse)
-                        .toList();
-
-        return DashboardResponse.builder()
-                .todayUploads(activityRepository.todayCount(user, "UPLOAD", today))
-                .todayDownloads(activityRepository.todayCount(user, "DOWNLOAD", today))
-                .todayDeletes(activityRepository.todayCount(user, "DELETE", today))
-                .totalUploads(activityRepository.countByAction(user, "UPLOAD"))
-                .totalDownloads(activityRepository.countByAction(user, "DOWNLOAD"))
-                .usedStorage(fileRepository.totalUsed(user))
-                .latestUploads(latestUploads)
-                .latestDownloads(latestDownloads)
-                .recentlyOpened(recentlyOpened)
+                )
+                .usedStorage(
+                        fileRepository.totalUsed(user)
+                )
                 .build();
+    }
+
+    public List<FileTypeStorageResponse> storageBreakdown(Users user) {
+
+        Map<String, Long> grouped = new HashMap<>();
+
+        List<Object[]> rows =
+                fileRepository.storageBreakdown(user);
+
+        for (Object[] r : rows) {
+
+            String mime =
+                    (String) r[0];
+
+            Long size =
+                    ((Number) r[1]).longValue();
+
+            String category =
+                    categorizeMime(mime);
+
+            grouped.put(
+                    category,
+                    grouped.getOrDefault(category, 0L) + size
+            );
+        }
+
+        return grouped.entrySet()
+                .stream()
+                .map(e -> new FileTypeStorageResponse(
+                        e.getKey(),
+                        e.getValue()
+                ))
+                .toList();
+    }
+
+    private String categorizeMime(String mime) {
+
+        if (mime == null)
+            return "Others";
+
+        if (mime.startsWith("image/"))
+            return "Images";
+
+        if (mime.startsWith("video/"))
+            return "Videos";
+
+        if (mime.startsWith("audio/"))
+            return "Audio";
+
+        if (mime.contains("pdf")
+                || mime.contains("document")
+                || mime.contains("text")
+                || mime.contains("sheet")
+                || mime.contains("presentation"))
+            return "Documents";
+
+        return "Others";
+    }
+
+    public List<ActivityTrendResponse> activityTrend(
+            Users user,
+            int days
+    ) {
+
+        LocalDateTime start =
+                LocalDateTime.now().minusDays(days);
+
+        Map<LocalDate, Long> uploadMap =
+                toMap(
+                        activityRepository.countPerDay(
+                                user,
+                                "UPLOAD",
+                                start
+                        )
+                );
+
+        Map<LocalDate, Long> downloadMap =
+                toMap(
+                        activityRepository.countPerDay(
+                                user,
+                                "DOWNLOAD",
+                                start
+                        )
+                );
+
+        Map<LocalDate, Long> shareMap =
+                toMap(
+                        shareRepository.sharesPerDay(
+                                user,
+                                start
+                        )
+                );
+
+        List<ActivityTrendResponse> result =
+                new ArrayList<>();
+
+        for (int i = days - 1; i >= 0; i--) {
+
+            LocalDate date =
+                    LocalDate.now().minusDays(i);
+
+            result.add(
+                    new ActivityTrendResponse(
+                            date,
+                            uploadMap.getOrDefault(date, 0L),
+                            downloadMap.getOrDefault(date, 0L),
+                            shareMap.getOrDefault(date, 0L)
+                    )
+            );
+        }
+
+        return result;
+    }
+    public List<UsageTrendResponse> transferUsage(
+            Users user,
+            int days
+    ) {
+
+        LocalDateTime start =
+                LocalDateTime.now().minusDays(days);
+
+        Map<LocalDate, Long> uploadMap =
+                toMap(
+                        activityRepository.usagePerDay(
+                                user,
+                                "UPLOAD",
+                                start
+                        )
+                );
+
+        Map<LocalDate, Long> downloadMap =
+                toMap(
+                        activityRepository.usagePerDay(
+                                user,
+                                "DOWNLOAD",
+                                start
+                        )
+                );
+
+        List<UsageTrendResponse> result =
+                new ArrayList<>();
+
+        for (int i = days - 1; i >= 0; i--) {
+
+            LocalDate date =
+                    LocalDate.now().minusDays(i);
+
+            result.add(
+                    new UsageTrendResponse(
+                            date,
+                            uploadMap.getOrDefault(date, 0L),
+                            downloadMap.getOrDefault(date, 0L)
+                    )
+            );
+        }
+
+        return result;
+    }
+
+    private Map<LocalDate, Long> toMap(List<Object[]> rows) {
+
+        return rows.stream()
+                .collect(Collectors.toMap(
+                        r -> ((java.sql.Date) r[0]).toLocalDate(),
+                        r -> ((Number) r[1]).longValue()
+                ));
     }
 
     public PagedResponse<FileResponse> getUploadedFiles(
@@ -559,289 +763,5 @@ public class FileService {
                 page.isFirst(),
                 page.isLast()
         );
-    }
-
-    public ShareResponse createShareUnified(
-            ShareRequest req,
-            Users user
-    ) {
-
-        boolean isBundle =
-                req.getFileIds() != null &&
-                        req.getFileIds().size() > 1;
-
-        Share share = new Share();
-
-        share.setOwner(user);
-        share.setShareToken(UUID.randomUUID().toString());
-        share.setExpireAt(
-                LocalDateTime.now()
-                        .plusHours(req.getExpireHours())
-        );
-        share.setMaxUses(req.getMaxUses());
-        share.setUsedCount(0);
-        share.setOpenCount(0);
-        share.setActive(true);
-        share.setPassword(req.getPassword());
-        share.setMessage(req.getMessage());
-        share.setSharedAt(LocalDateTime.now());
-
-        // multiple recipient emails
-        share.setRecipientEmails(req.getEmails());
-
-        // ======================
-        // SINGLE FILE
-        // ======================
-        if (!isBundle) {
-
-            Long fileId =
-                    (req.getFileId() != null)
-                            ? req.getFileId()
-                            : req.getFileIds().get(0);
-
-            FileEntity file =
-                    fileRepository.findByIdAndOwner(fileId, user)
-                            .orElseThrow();
-
-            share.setType(Share.ShareType.FILE);
-            share.setFile(file);
-        }
-
-        // ======================
-        // BUNDLE SHARE
-        // ======================
-        else {
-
-            List<FileEntity> files =
-                    fileRepository.findAllById(req.getFileIds());
-
-            share.setType(Share.ShareType.BUNDLE);
-            share.setFiles(files);
-        }
-
-        share = shareRepository.save(share);
-
-        // ======================
-        // SEND EMAILS
-        // ======================
-        String link =
-                "http://localhost:5175/share/" +
-                        share.getShareToken();
-
-        for (String email : req.getEmails()) {
-            mailService.sendShareEmail(email, link);
-        }
-
-        return ShareResponse.builder()
-                .id(share.getId())
-                .token(share.getShareToken())
-
-                // all recipient emails
-                .emails(share.getRecipientEmails())
-
-                .expiresAt(share.getExpireAt())
-                .maxUses(share.getMaxUses())
-                .usedCount(share.getUsedCount())
-                .openCount(share.getOpenCount())
-                .active(share.getActive())
-
-                .fileName(
-                        share.getType() == Share.ShareType.FILE
-                                ? share.getFile().getFileName()
-                                : "Bundle (" +
-                                share.getFiles().size() +
-                                  " files)"
-                )
-
-                .sharedAt(share.getSharedAt())
-                .message(share.getMessage())
-                .type(share.getType().name())
-                .build();
-    }
-    public ShareMetaResponse openShareLink(String token) {
-
-        Share share = shareRepository.findByShareToken(token)
-                .orElseThrow();
-
-        if (!share.getActive())
-            throw new LinkDisabledException("Link disabled");
-
-        if (share.getExpireAt().isBefore(LocalDateTime.now()))
-            throw new LinkExpiredException("Link expired");
-
-        share.setOpenCount(share.getOpenCount() + 1);
-        share.setLastOpenedAt(LocalDateTime.now());
-
-        shareRepository.save(share);
-
-        // =========================
-        // FILE LIST (FOR BUNDLE SUPPORT)
-        // =========================
-        List<FileMiniResponse> files;
-
-        if (share.getType() == Share.ShareType.FILE) {
-
-            files = List.of(
-                    new FileMiniResponse(
-                            share.getFile().getId(),
-                            share.getFile().getFileName(),
-                            share.getFile().getFileType()
-                    )
-            );
-
-        } else {
-
-            files = share.getFiles().stream()
-                    .map(f -> new FileMiniResponse(
-                            f.getId(),
-                            f.getFileName(),
-                            f.getFileType()
-                    ))
-                    .toList();
-        }
-
-        return ShareMetaResponse.builder()
-                .fileName(
-                        share.getType() == Share.ShareType.FILE
-                                ? share.getFile().getFileName()
-                                : "Bundle (" + share.getFiles().size() + " files)"
-                )
-                .fileType(
-                        share.getType() == Share.ShareType.FILE
-                                ? share.getFile().getFileType()
-                                : "BUNDLE"
-                )
-                .requiresPassword(share.getPassword() != null)
-                .canDownload(true)
-                .canView(true)
-                .message(share.getMessage())
-
-                // ✅ NEW FIELD (IMPORTANT)
-                .files(files)
-
-                .build();
-    }
-
-    @Transactional
-    public StreamResponse accessSharedFile(String token, String password) {
-
-        Share share = shareRepository.findByShareToken(token)
-                .orElseThrow();
-
-        if (!share.getActive())
-            throw new LinkDisabledException("Link disabled");
-
-        if (share.getExpireAt().isBefore(LocalDateTime.now()))
-            throw new LinkExpiredException("Link expired");
-
-        if (share.getUsedCount() >= share.getMaxUses())
-            throw new MaxUsesExceededException("Max uses exceeded");
-
-        if (share.getPassword() != null &&
-                !share.getPassword().equals(password)) {
-            throw new InvalidSharePasswordException("Invalid password");
-        }
-
-        share.setUsedCount(share.getUsedCount() + 1);
-        shareRepository.save(share);
-
-        String streamToken = UUID.randomUUID().toString();
-
-        StreamToken st = StreamToken.builder()
-                .token(streamToken)
-                .share(share)   // ✅ IMPORTANT: single relation now
-                .expiresAt(LocalDateTime.now().plusMinutes(10))
-                .build();
-
-        streamTokenRepository.save(st);
-
-        return StreamResponse.builder()
-                .streamToken(streamToken)
-                .build();
-    }
-    public void revokeShare(Long shareId, Users user) {
-
-        Share share = shareRepository.findById(shareId)
-                .orElseThrow();
-
-        if (!share.getOwner().getId().equals(user.getId()))
-            return;
-
-        share.setActive(false);
-
-        shareRepository.save(share);
-    }
-
-    public PagedResponse<ShareResponse> listSharedFiles(
-            Users user,
-            Pageable pageable
-    ) {
-
-        Page<Share> page =
-                shareRepository.findByOwner(user, pageable);
-
-        return new PagedResponse<>(
-
-                page.map(s -> ShareResponse.builder()
-
-                        .id(s.getId())
-                        .token(s.getShareToken())
-
-                        // all emails
-                        .emails(s.getRecipientEmails())
-
-                        .expiresAt(s.getExpireAt())
-                        .maxUses(s.getMaxUses())
-                        .usedCount(s.getUsedCount())
-                        .openCount(s.getOpenCount())
-                        .active(s.getActive())
-
-                        .fileName(
-                                s.getType() == Share.ShareType.FILE
-                                        ? s.getFile().getFileName()
-                                        : "Bundle (" +
-                                        s.getFiles().size() +
-                                          " files)"
-                        )
-
-                        .sharedAt(s.getSharedAt())
-                        .message(s.getMessage())
-                        .lastOpenedAt(s.getLastOpenedAt())
-                        .type(s.getType().name())
-
-                        .build()
-
-                ).getContent(),
-
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalElements(),
-                page.getTotalPages(),
-                page.isFirst(),
-                page.isLast()
-        );
-    }
-    @Transactional
-    public void cleanupShares(Users user) {
-
-        LocalDateTime now = LocalDateTime.now();
-
-        List<Share> shares =
-                shareRepository.findAllByOwner(user);
-
-        List<Share> toDelete = shares.stream()
-                .filter(s ->
-                        !s.getActive() ||
-                                s.getExpireAt().isBefore(now)
-                )
-                .toList();
-
-        // delete stream tokens first
-        for (Share share : toDelete) {
-            streamTokenRepository.deleteByShare(share);
-        }
-
-        // then delete shares
-        shareRepository.deleteAll(toDelete);
     }
 }

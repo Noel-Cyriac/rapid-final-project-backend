@@ -63,4 +63,15 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
     );
 
     Page<FileEntity> findByOwnerAndStarredTrue(Users user, Pageable pageable);
+
+    @Query("""
+        SELECT 
+            COALESCE(f.fileType, 'UNKNOWN'),
+            COALESCE(SUM(f.size), 0)
+        FROM FileEntity f
+        WHERE f.owner = :user
+        AND f.deleted = false
+        GROUP BY f.fileType
+    """)
+    List<Object[]> storageBreakdown(@Param("user") Users user);
 }

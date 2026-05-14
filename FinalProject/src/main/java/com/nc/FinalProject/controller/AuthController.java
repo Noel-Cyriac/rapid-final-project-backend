@@ -5,6 +5,7 @@ import com.nc.FinalProject.dto.request.LoginRequest;
 import com.nc.FinalProject.dto.request.RegisterRequest;
 import com.nc.FinalProject.dto.request.ResetPasswordRequest;
 import com.nc.FinalProject.dto.response.LoginResponse;
+import com.nc.FinalProject.dto.response.RefreshResponse;
 import com.nc.FinalProject.dto.response.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
@@ -52,7 +53,7 @@ public class AuthController {
     public ResponseEntity<SuccessResponse> refreshToken(
             @CookieValue(value = "refreshToken", required = false) String refreshToken,
             HttpServletResponse response) {
-        LoginResponse res = authService.refreshToken(refreshToken, response);
+        RefreshResponse res = authService.refreshToken(refreshToken, response);
         return ResponseEntity.ok(
                 new SuccessResponse("Token refreshed successfully", res)
         );

@@ -4,6 +4,7 @@ import com.nc.FinalProject.dto.request.LoginRequest;
 import com.nc.FinalProject.dto.response.LoginResponse;
 import com.nc.FinalProject.dto.request.RegisterRequest;
 import com.nc.FinalProject.dto.request.ResetPasswordRequest;
+import com.nc.FinalProject.dto.response.RefreshResponse;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.exception.EmailAlreadyExistsException;
 import com.nc.FinalProject.exception.InvalidRefreshTokenException;
@@ -78,7 +79,6 @@ public class AuthService {
 
         String email = userDetails.getUsername();
 
-        // 🔥 fetch full user from DB
         Users user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -102,42 +102,53 @@ public class AuthService {
                 user.getEmail()
         );
     }
-    public LoginResponse refreshToken(String refreshToken, HttpServletResponse response) {
+    public RefreshResponse refreshToken(
+            String refreshToken,
+            HttpServletResponse response
+    ) {
 
         if (refreshToken == null) {
             logger.warn("Refresh FAILED: Missing token");
-            throw new InvalidRefreshTokenException("Refresh token missing");
+            throw new InvalidRefreshTokenException(
+                    "Refresh token missing"
+            );
         }
 
         if (!jwtUtil.validateRefreshToken(refreshToken)) {
             logger.warn("Refresh FAILED: Invalid or expired token");
-            throw new InvalidRefreshTokenException("Invalid or expired refresh token");
+
+            throw new InvalidRefreshTokenException(
+                    "Invalid or expired refresh token"
+            );
         }
 
-        String email = jwtUtil.extractEmail(refreshToken);
+        String email =
+                jwtUtil.extractEmail(refreshToken);
 
-        Users user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        String newAccessToken =
+                jwtUtil.generateAccessToken(email);
 
-        String newAccessToken = jwtUtil.generateAccessToken(email);
-        String newRefreshToken = jwtUtil.generateRefreshToken(email);
+        String newRefreshToken =
+                jwtUtil.generateRefreshToken(email);
 
-        Cookie refreshCookie = new Cookie("refreshToken", newRefreshToken);
+        Cookie refreshCookie =
+                new Cookie(
+                        "refreshToken",
+                        newRefreshToken
+                );
+
         refreshCookie.setHttpOnly(true);
         refreshCookie.setSecure(false);
         refreshCookie.setPath("/api/auth/refresh");
-        refreshCookie.setMaxAge((int) (jwtUtil.getRefreshExpiration() / 1000));
+        refreshCookie.setMaxAge(
+                (int) (jwtUtil.getRefreshExpiration() / 1000)
+        );
 
         response.addCookie(refreshCookie);
 
         logger.info("Refresh SUCCESS for user: {}", email);
 
-        return new LoginResponse(
-                newAccessToken,
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail()
-        );
+        return new RefreshResponse(newAccessToken);
     }
     public void sendResetPasswordEmail(String email) {
         logger.info("Received request to send reset password email for: {}", email);

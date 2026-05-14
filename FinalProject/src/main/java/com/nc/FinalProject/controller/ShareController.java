@@ -5,8 +5,8 @@ import com.nc.FinalProject.dto.request.ShareRequest;
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.repository.UserRepository;
-import com.nc.FinalProject.service.FileService;
 import com.nc.FinalProject.service.FileStreamingService;
+import com.nc.FinalProject.service.ShareService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
@@ -25,16 +25,15 @@ import java.io.IOException;
 @RequestMapping("/api/share")
 public class ShareController {
 
-    private final FileService fileService;
     private final FileStreamingService fileStreamingService;
     private final UserRepository userRepository;
+    private final ShareService shareService;
 
 
     public ShareController(
-            FileService fileService,
-            FileStreamingService fileStreamingService, UserRepository userRepository
+            FileStreamingService fileStreamingService, UserRepository userRepository, ShareService shareService
     ) {
-        this.fileService = fileService;
+        this.shareService = shareService;
         this.fileStreamingService = fileStreamingService;
         this.userRepository = userRepository;
     }
@@ -50,7 +49,7 @@ public class ShareController {
     ) {
 
         return ResponseEntity.ok(
-                fileService.createShareUnified(req, user(auth))
+                shareService.createShareUnified(req, user(auth))
         );
     }
 
@@ -67,14 +66,14 @@ public class ShareController {
         return ResponseEntity.ok(
                 new SuccessResponse<>(
                         "Shared files fetched successfully",
-                        fileService.listSharedFiles(user(auth), pageable)
+                        shareService.listSharedFiles(user(auth), pageable)
                 )
         );
     }
 
     @DeleteMapping("/{shareId}")
     public ResponseEntity<SuccessResponse> revoke(@PathVariable Long shareId, Authentication auth) {
-        fileService.revokeShare(shareId, user(auth));
+        shareService.revokeShare(shareId, user(auth));
         return ResponseEntity.ok(
                 new SuccessResponse<Void>(
                         "Share revoked successfully",
@@ -88,7 +87,7 @@ public class ShareController {
             Authentication auth
     ) {
 
-        fileService.cleanupShares(user(auth));
+        shareService.cleanupShares(user(auth));
 
         return ResponseEntity.ok(
                 new SuccessResponse<>(
@@ -107,7 +106,7 @@ public class ShareController {
     ) {
 
         return ResponseEntity.ok(
-                fileService.openShareLink(token)
+                shareService.openShareLink(token)
         );
     }
 
@@ -126,7 +125,7 @@ public class ShareController {
                 : null;
 
         return ResponseEntity.ok(
-                fileService.accessSharedFile(token, password)
+                shareService.accessSharedFile(token, password)
         );
     }
 

@@ -145,12 +145,111 @@ public class FileController {
         );
     }
 
-    @GetMapping("/dashboard")
-    public ResponseEntity<SuccessResponse> dashboard(Authentication auth) {
+    @GetMapping("/dashboard/latest-uploads")
+    public ResponseEntity<SuccessResponse> latestUploads(
+            Authentication auth
+    ) {
+
         return ResponseEntity.ok(
                 new SuccessResponse(
-                        "Dashboard fetched successfully",
-                        fileService.dashboard(user(auth))
+                        "Latest uploads fetched",
+                        fileService.latestUploads(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/latest-downloads")
+    public ResponseEntity<SuccessResponse> latestDownloads(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Latest downloads fetched",
+                        fileService.latestDownloads(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/recently-opened")
+    public ResponseEntity<SuccessResponse> recentlyOpened(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Recently opened files fetched",
+                        fileService.recentlyOpened(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/stats")
+    public ResponseEntity<SuccessResponse> dashboardStats(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Dashboard stats fetched",
+                        fileService.dashboardStats(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/storage-breakdown")
+    public ResponseEntity<SuccessResponse> storageBreakdown(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Storage breakdown fetched",
+                        fileService.storageBreakdown(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/activity-trend")
+    public ResponseEntity<SuccessResponse> activityTrend(
+            Authentication auth,
+            @RequestParam(defaultValue = "7") int days
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Activity trend fetched",
+                        fileService.activityTrend(
+                                user(auth),
+                                days
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/transfer-usage")
+    public ResponseEntity<SuccessResponse> transferUsage(
+            Authentication auth,
+            @RequestParam(defaultValue = "7") int days
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Transfer usage fetched",
+                        fileService.transferUsage(
+                                user(auth),
+                                days
+                        )
                 )
         );
     }

@@ -2,15 +2,13 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.request.ShareRequest;
 import com.nc.FinalProject.dto.response.*;
-import com.nc.FinalProject.entity.FileEntity;
-import com.nc.FinalProject.entity.Share;
-import com.nc.FinalProject.entity.StreamToken;
-import com.nc.FinalProject.entity.Users;
+import com.nc.FinalProject.entity.*;
 import com.nc.FinalProject.exception.InvalidSharePasswordException;
 import com.nc.FinalProject.exception.LinkDisabledException;
 import com.nc.FinalProject.exception.LinkExpiredException;
 import com.nc.FinalProject.exception.MaxUsesExceededException;
 import com.nc.FinalProject.repository.FileRepository;
+import com.nc.FinalProject.repository.ShareRecipientRepository;
 import com.nc.FinalProject.repository.ShareRepository;
 import com.nc.FinalProject.repository.StreamTokenRepository;
 import jakarta.transaction.Transactional;
@@ -31,6 +29,7 @@ public class ShareService {
     private final FileRepository fileRepository;
     private final StreamTokenRepository streamTokenRepository;
     private final MailService mailService;
+    private final ShareRecipientRepository shareRecipientRepository;
 
     // ======================
     // CREATE SHARE
@@ -47,6 +46,8 @@ public class ShareService {
         Share share = new Share();
 
         share.setOwner(user);
+
+        // internal/master token
         share.setShareToken(UUID.randomUUID().toString());
 
         share.setExpireAt(
@@ -61,8 +62,6 @@ public class ShareService {
         share.setPassword(req.getPassword());
         share.setMessage(req.getMessage());
         share.setSharedAt(LocalDateTime.now());
-
-        share.setRecipientEmails(req.getEmails());
 
         // ======================
         // SINGLE FILE
@@ -90,19 +89,40 @@ public class ShareService {
             share.setFiles(files);
         }
 
+        // save share first
         share = shareRepository.save(share);
 
-        String link =
-                "http://localhost:5175/share/" +
-                        share.getShareToken();
-
+        // ======================
+        // CREATE UNIQUE EMAIL LINKS
+        // ======================
         for (String email : req.getEmails()) {
-            mailService.sendShareEmail(email, link);
+
+            String accessToken =
+                    UUID.randomUUID().toString();
+
+            ShareRecipient recipient =
+                    new ShareRecipient();
+
+            recipient.setEmail(email);
+            recipient.setAccessToken(accessToken);
+            recipient.setOpened(false);
+            recipient.setShare(share);
+
+            shareRecipientRepository.save(recipient);
+
+            String link =
+                    "http://localhost:5175/share/access/"
+                            + accessToken;
+
+            mailService.sendShareEmail(
+                    email,
+                    link,
+                    req.getMessage()
+            );
         }
 
         return mapToResponse(share);
     }
-
     // ======================
     // OPEN SHARE LINK
     // ======================

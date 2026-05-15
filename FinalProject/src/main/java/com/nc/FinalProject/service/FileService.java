@@ -3,10 +3,7 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
 import com.nc.FinalProject.exception.SharedFileDeleteException;
-import com.nc.FinalProject.repository.FileActivityRepository;
-import com.nc.FinalProject.repository.FileRepository;
-import com.nc.FinalProject.repository.FolderRepository;
-import com.nc.FinalProject.repository.ShareRepository;
+import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +36,7 @@ public class FileService {
     private final FileActivityRepository activityRepository;
     private final FolderRepository folderRepository;
     private final ShareRepository shareRepository;
+    private final StreamTokenRepository streamTokenRepository;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -304,15 +302,56 @@ public class FileService {
 
             Long fileId = file.getId();
 
-            // 1. delete child rows FIRST (important for FK constraint)
+            // 1. delete activity rows
             activityRepository.deleteByFile_Id(fileId);
 
-            // 2. delete physical file from disk
+            // 2. handle shares referencing this file
+            List<Share> relatedShares =
+                    shareRepository.findAllByFileOrFilesContains(file, file);
+
+            for (Share share : relatedShares) {
+
+                // remove single-file relation
+                if (share.getFile() != null &&
+                        share.getFile().getId().equals(fileId)) {
+
+                    share.setFile(null);
+                }
+
+                // remove from bundle
+                if (share.getFiles() != null) {
+
+                    share.getFiles().removeIf(f ->
+                            f.getId().equals(fileId));
+                }
+
+                // determine if share is now empty
+                boolean emptySingle =
+                        share.getFile() == null;
+
+                boolean emptyBundle =
+                        share.getFiles() == null ||
+                                share.getFiles().isEmpty();
+
+                // delete empty share
+                if (emptySingle && emptyBundle) {
+
+                    streamTokenRepository.deleteByShare_Id(share.getId());
+                    shareRepository.delete(share);
+
+                } else {
+
+                    // otherwise update modified share
+                    shareRepository.save(share);
+                }
+            }
+
+            // 3. delete physical file
             try {
                 Files.deleteIfExists(Paths.get(file.getFilePath()));
             } catch (Exception ignored) {}
 
-            // 3. delete DB record
+            // 4. delete file record
             fileRepository.delete(file);
         }
     }

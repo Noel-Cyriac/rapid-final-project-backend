@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface StreamTokenRepository extends JpaRepository<StreamToken, Long> {
     Optional<StreamToken> findByToken(String token);
     void deleteByShare(Share share);
+    void deleteByShare_Id(Long shareId);
 }

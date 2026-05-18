@@ -210,7 +210,7 @@ public class AuthService {
         logger.info("Changing password for user: {}", user.getEmail());
 
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new InvalidTokenException("Old password is incorrect");
+            throw new PasswordMismatchException("Old password is incorrect");
         }
 
         if (!newPassword.equals(confirmPassword)) {

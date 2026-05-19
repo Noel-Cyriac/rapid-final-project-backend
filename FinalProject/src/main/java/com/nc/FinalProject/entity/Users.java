@@ -25,4 +25,6 @@ public class Users {
     private String password;
 
     private LocalDate dob;
+
+    private String profilePicture;
 }

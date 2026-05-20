@@ -56,6 +56,26 @@ public class ProfileService {
 
                 Files.createDirectories(profileDir);
 
+                // Delete old profile picture
+                if (user.getProfilePicture() != null &&
+                        !user.getProfilePicture().isBlank()) {
+
+                    Path oldFile =
+                            profileDir.resolve(
+                                    user.getProfilePicture()
+                            );
+
+                    try {
+                        Files.deleteIfExists(oldFile);
+                    } catch (Exception e) {
+                        System.out.println(
+                                "Failed to delete old profile picture: "
+                                        + e.getMessage()
+                        );
+                    }
+                }
+
+                // Save new profile picture
                 String fileName =
                         System.currentTimeMillis()
                                 + "_"
@@ -97,10 +117,11 @@ public class ProfileService {
                 return ResponseEntity.notFound().build();
             }
 
-            Path path =
-                    Paths.get(
-                            user.getProfilePicture()
-                    );
+            Path path = Paths.get(
+                    uploadDir,
+                    "profile",
+                    user.getProfilePicture()
+            );
 
             if (!Files.exists(path)) {
                 return ResponseEntity.notFound().build();

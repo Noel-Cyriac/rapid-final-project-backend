@@ -47,6 +47,7 @@ public class SecurityConfig {
                                 "/api/auth/refresh",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password",
+                                "/api/files/stream/**",
                                 "/api/share/public/**"
                         ).permitAll()
 

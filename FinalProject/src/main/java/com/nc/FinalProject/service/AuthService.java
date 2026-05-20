@@ -5,6 +5,7 @@ import com.nc.FinalProject.dto.response.LoginResponse;
 import com.nc.FinalProject.dto.request.RegisterRequest;
 import com.nc.FinalProject.dto.request.ResetPasswordRequest;
 import com.nc.FinalProject.dto.response.RefreshResponse;
+import com.nc.FinalProject.entity.NotificationType;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.exception.EmailAlreadyExistsException;
 import com.nc.FinalProject.exception.InvalidRefreshTokenException;
@@ -39,6 +40,8 @@ public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // Map to store reset tokens temporarily (replace with DB in production)
     private final Map<String, String> resetTokens = new HashMap<>();
+    private final NotificationService notificationService;
+
 
     public Users register(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -202,6 +205,13 @@ public class AuthService {
         // ✅ Invalidate token
         resetTokens.remove(request.getToken());
         logger.info("Password reset successful for user: {}", email);
+
+            notificationService.create(
+                    user,
+                    "Password Reset Successful",
+                    "Your password was reset using email link",
+                    NotificationType.SECURITY
+            );
     }
     }
 
@@ -221,5 +231,12 @@ public class AuthService {
         userRepository.save(user);
 
         logger.info("Password successfully updated for user: {}", user.getEmail());
+
+        notificationService.create(
+                user,
+                "Password Changed",
+                "Your password was updated successfully",
+                NotificationType.SECURITY
+        );
     }
 }

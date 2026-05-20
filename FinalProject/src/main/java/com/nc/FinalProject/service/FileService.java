@@ -37,6 +37,7 @@ public class FileService {
     private final FolderRepository folderRepository;
     private final ShareRepository shareRepository;
     private final StreamTokenRepository streamTokenRepository;
+    private final NotificationService notificationService;
 
     @Value("${file.storage.location}")
     private String uploadDir;
@@ -44,52 +45,89 @@ public class FileService {
     // ======================
     // MULTI UPLOAD
     // ======================
-    public List<FileResponse> uploadFiles(MultipartFile[] files, Users user) {
+    public List<FileResponse> uploadFiles(
+            MultipartFile[] files,
+            Users user
+    ) {
         try {
+
             Files.createDirectories(Paths.get(uploadDir));
 
-            List<FileResponse> list = new ArrayList<>();
+            List<FileResponse> list =
+                    new ArrayList<>();
+
+            int uploadedCount = 0;
+            long totalSize = 0;
 
             for (MultipartFile file : files) {
 
                 if (file.isEmpty()) continue;
 
-                String finalName = generateUniqueName(
-                        file.getOriginalFilename(),
-                        user,
-                        null
-                );
+                String finalName =
+                        generateUniqueName(
+                                file.getOriginalFilename(),
+                                user,
+                                null
+                        );
 
                 String storedName =
-                        System.currentTimeMillis() + "_" + finalName;
+                        System.currentTimeMillis()
+                                + "_"
+                                + finalName;
 
-                Path path = Paths.get(uploadDir, storedName);
+                Path path =
+                        Paths.get(uploadDir, storedName);
 
                 file.transferTo(path);
 
-                FileEntity saved = fileRepository.save(
-                        FileEntity.builder()
-                                .fileName(finalName)
-                                .storedName(storedName)
-                                .fileType(file.getContentType())
-                                .size(file.getSize())
-                                .filePath(path.toString())
-                                .uploadedAt(LocalDateTime.now())
-                                .owner(user)
-                                .deleted(false)
-                                .downloadCount(0)
-                                .build()
+                FileEntity saved =
+                        fileRepository.save(
+                                FileEntity.builder()
+                                        .fileName(finalName)
+                                        .storedName(storedName)
+                                        .fileType(file.getContentType())
+                                        .size(file.getSize())
+                                        .filePath(path.toString())
+                                        .uploadedAt(LocalDateTime.now())
+                                        .owner(user)
+                                        .deleted(false)
+                                        .downloadCount(0)
+                                        .build()
+                        );
+
+                track(
+                        user,
+                        saved,
+                        "UPLOAD",
+                        file.getSize()
                 );
 
-                track(user, saved, "UPLOAD", file.getSize());
+                list.add(
+                        mapToResponse(saved)
+                );
 
-                list.add(mapToResponse(saved));
+                uploadedCount++;
+                totalSize += file.getSize();
+            }
+
+            // ADD HERE
+            if (uploadedCount > 0) {
+
+                notificationService.create(
+                        user,
+                        "Upload Completed",
+                        uploadedCount +
+                                " file(s) uploaded successfully",
+                        NotificationType.UPLOAD
+                );
             }
 
             return list;
 
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(
+                    e.getMessage()
+            );
         }
     }
 
@@ -146,16 +184,35 @@ public class FileService {
                 fileRepository.findByIdAndOwner(id, user)
                         .orElseThrow();
 
-        file.setDownloadCount(file.getDownloadCount() + 1);
-        file.setLastDownloadedAt(LocalDateTime.now());
+        file.setDownloadCount(
+                file.getDownloadCount() + 1
+        );
+
+        file.setLastDownloadedAt(
+                LocalDateTime.now()
+        );
 
         fileRepository.save(file);
 
-        track(user, file, "DOWNLOAD", file.getSize());
+        track(
+                user,
+                file,
+                "DOWNLOAD",
+                file.getSize()
+        );
 
-        return Paths.get(file.getFilePath());
+        // ADD HERE
+        notificationService.create(
+                user,
+                "Download Completed",
+                file.getFileName() + " downloaded",
+                NotificationType.DOWNLOAD
+        );
+
+        return Paths.get(
+                file.getFilePath()
+        );
     }
-
     public void downloadMultiple(
             List<Long> ids,
             Users user,
@@ -170,6 +227,8 @@ public class FileService {
 
         byte[] buffer = new byte[8192];
 
+        int downloadedCount = 0;
+
         for (FileEntity file : files) {
 
             if (!file.getOwner()
@@ -178,7 +237,8 @@ public class FileService {
                 continue;
             }
 
-            Path path = Paths.get(file.getFilePath());
+            Path path =
+                    Paths.get(file.getFilePath());
 
             zos.putNextEntry(
                     new ZipEntry(file.getFileName())
@@ -213,12 +273,26 @@ public class FileService {
                     "DOWNLOAD",
                     file.getSize()
             );
+
+            downloadedCount++;
         }
 
         zos.finish();
         zos.close();
 
         fileRepository.saveAll(files);
+
+        // ADD HERE
+        if (downloadedCount > 0) {
+
+            notificationService.create(
+                    user,
+                    "Download Completed",
+                    downloadedCount +
+                            " file(s) downloaded",
+                    NotificationType.DOWNLOAD
+            );
+        }
     }
     // ======================
     // DELETE
@@ -802,5 +876,39 @@ public class FileService {
                 page.isFirst(),
                 page.isLast()
         );
+    }
+
+    public String createStreamToken(
+            Long fileId,
+            Users user
+    ) {
+
+        FileEntity file =
+                fileRepository
+                        .findByIdAndOwner(fileId, user)
+                        .orElseThrow();
+
+        Share tempShare =
+                Share.builder()
+                        .type(Share.ShareType.FILE)
+                        .file(file)
+                        .active(true)
+                        .build();
+
+        shareRepository.save(tempShare);
+
+        StreamToken token =
+                StreamToken.builder()
+                        .token(java.util.UUID.randomUUID().toString())
+                        .share(tempShare)
+                        .expiresAt(
+                                LocalDateTime.now()
+                                        .plusMinutes(2)
+                        )
+                        .build();
+
+        streamTokenRepository.save(token);
+
+        return token.getToken();
     }
 }

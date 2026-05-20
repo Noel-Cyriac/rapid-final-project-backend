@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/files")
@@ -82,6 +83,44 @@ public class FileController {
                 fileService.viewFile(id, user(auth));
 
         return fileStreamingService.streamFile(file, request);
+    }
+
+    @GetMapping("/{id}/stream-token")
+    public SuccessResponse getStreamToken(
+            @PathVariable Long id,
+            Authentication auth
+    ) {
+
+        String token =
+                fileService.createStreamToken(
+                        id,
+                        user(auth)
+                );
+
+        return new SuccessResponse(
+                "Stream token created",
+                Map.of(
+                        "url",
+                        "http://localhost:8080/api/files/stream/"
+                                + token
+                                + "/"
+                                + id
+                )
+        );
+    }
+
+    @GetMapping("/stream/{token}/{fileId}")
+    public ResponseEntity<Resource> streamByToken(
+            @PathVariable String token,
+            @PathVariable Long fileId,
+            HttpServletRequest request
+    ) throws Exception {
+
+        return fileStreamingService.streamByToken(
+                token,
+                fileId,
+                request
+        );
     }
 
     @DeleteMapping("/delete")

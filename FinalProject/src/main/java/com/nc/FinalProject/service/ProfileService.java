@@ -160,6 +160,48 @@ public class ProfileService {
             );
         }
     }
+
+    public ProfileResponse deleteProfilePicture(
+            Users user
+    ) {
+
+        try {
+
+            String profilePicture =
+                    user.getProfilePicture();
+
+            if (profilePicture == null ||
+                    profilePicture.isBlank()) {
+
+                throw new RuntimeException(
+                        "No profile picture found"
+                );
+            }
+
+            Path path = Paths.get(
+                    uploadDir,
+                    "profile",
+                    profilePicture
+            );
+
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+
+            user.setProfilePicture(null);
+
+            Users saved =
+                    userRepository.save(user);
+
+            return map(saved);
+
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    e.getMessage()
+            );
+        }
+    }
+
     private ProfileResponse map(
             Users user
     ) {

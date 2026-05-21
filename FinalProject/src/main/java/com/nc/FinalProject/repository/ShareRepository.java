@@ -2,6 +2,7 @@ package com.nc.FinalProject.repository;
 
 import com.nc.FinalProject.entity.FileEntity;
 import com.nc.FinalProject.entity.Share;
+import com.nc.FinalProject.entity.ShareRecipient;
 import com.nc.FinalProject.entity.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +18,6 @@ public interface ShareRepository extends JpaRepository<Share, Long> {
 
     Page<Share> findByOwner(Users owner, Pageable pageable);
 
-    Optional<Share> findByShareToken(String token);
-
     boolean existsByFileAndActiveTrue(FileEntity file);
 
     boolean existsByFilesContainsAndActiveTrue(FileEntity file);
@@ -28,15 +27,13 @@ public interface ShareRepository extends JpaRepository<Share, Long> {
     List<Share> findAllByOwner(Users owner);
 
     @Query("""
-    SELECT 
-        FUNCTION('DATE', s.sharedAt),
-        COUNT(s)
-    FROM Share s
-    WHERE s.owner = :user
-    AND s.sharedAt >= :start
-    GROUP BY FUNCTION('DATE', s.sharedAt)
-    ORDER BY FUNCTION('DATE', s.sharedAt)
-""")
+        SELECT FUNCTION('DATE', s.sharedAt), COUNT(s)
+        FROM Share s
+        WHERE s.owner = :user
+        AND s.sharedAt >= :start
+        GROUP BY FUNCTION('DATE', s.sharedAt)
+        ORDER BY FUNCTION('DATE', s.sharedAt)
+    """)
     List<Object[]> sharesPerDay(
             @Param("user") Users user,
             @Param("start") LocalDateTime start

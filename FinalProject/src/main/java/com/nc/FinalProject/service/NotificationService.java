@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -70,6 +71,7 @@ public class NotificationService {
         notificationRepository.save(notification);
     }
 
+    @Transactional
     public void clearAll(Users user) {
         notificationRepository.deleteByUser(user);
     }
@@ -77,5 +79,25 @@ public class NotificationService {
     public long unreadCount(Users user) {
         return notificationRepository
                 .countByUserAndReadStatusFalse(user);
+    }
+
+    @Transactional
+    public void clearOne(
+            Long id,
+            Users user
+    ) {
+        notificationRepository
+                .deleteByIdAndUser(
+                        id,
+                        user
+                );
+    }
+
+    @Transactional
+    public void markAllRead(
+            Users user
+    ) {
+        notificationRepository
+                .markAllAsRead(user);
     }
 }

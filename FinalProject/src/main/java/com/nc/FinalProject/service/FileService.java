@@ -20,10 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -213,6 +210,7 @@ public class FileService {
                 file.getFilePath()
         );
     }
+
     public void downloadMultiple(
             List<Long> ids,
             Users user,
@@ -294,6 +292,7 @@ public class FileService {
             );
         }
     }
+
     // ======================
     // DELETE
     // ======================
@@ -343,6 +342,7 @@ public class FileService {
             track(user, file, "DELETE", 0L);
         }
     }
+
     // ======================
     // RESTORE
     // ======================
@@ -409,10 +409,8 @@ public class FileService {
 
                 // delete empty share
                 if (emptySingle && emptyBundle) {
-
-                    streamTokenRepository.deleteByShare_Id(share.getId());
+                    streamTokenRepository.deleteByRecipient_Share_Id(share.getId());
                     shareRepository.delete(share);
-
                 } else {
 
                     // otherwise update modified share
@@ -423,12 +421,14 @@ public class FileService {
             // 3. delete physical file
             try {
                 Files.deleteIfExists(Paths.get(file.getFilePath()));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
 
             // 4. delete file record
             fileRepository.delete(file);
         }
     }
+
     // ======================
     // DASHBOARD
     // ======================
@@ -618,6 +618,7 @@ public class FileService {
 
         return result;
     }
+
     public List<UsageTrendResponse> transferUsage(
             Users user,
             int days
@@ -723,6 +724,7 @@ public class FileService {
                 dtoPage.isLast()
         );
     }
+
     public PagedResponse<FileResponse> getRecentlyOpenedFiles(
             Users user,
             Pageable pageable
@@ -878,34 +880,17 @@ public class FileService {
         );
     }
 
-    public String createStreamToken(
-            Long fileId,
-            Users user
-    ) {
+    public String createStreamToken(Long fileId, Users user) {
 
-        FileEntity file =
-                fileRepository
-                        .findByIdAndOwner(fileId, user)
-                        .orElseThrow();
+        FileEntity file = fileRepository
+                .findByIdAndOwner(fileId, user)
+                .orElseThrow();
 
-        Share tempShare =
-                Share.builder()
-                        .type(Share.ShareType.FILE)
-                        .file(file)
-                        .active(true)
-                        .build();
-
-        shareRepository.save(tempShare);
-
-        StreamToken token =
-                StreamToken.builder()
-                        .token(java.util.UUID.randomUUID().toString())
-                        .share(tempShare)
-                        .expiresAt(
-                                LocalDateTime.now()
-                                        .plusMinutes(2)
-                        )
-                        .build();
+        StreamToken token = StreamToken.builder()
+                .token(UUID.randomUUID().toString())
+                .file(file)
+                .expiresAt(LocalDateTime.now().plusMinutes(2))
+                .build();
 
         streamTokenRepository.save(token);
 

@@ -80,4 +80,21 @@ public class ProfileController {
                 user(auth)
         );
     }
+
+    @DeleteMapping("/picture")
+    public ResponseEntity<SuccessResponse> deleteProfilePicture(
+            Authentication auth
+    ) {
+
+        profileService.deleteProfilePicture(
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Profile picture deleted successfully",
+                        null
+                )
+        );
+    }
 }

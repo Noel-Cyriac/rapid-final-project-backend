@@ -60,6 +60,23 @@ public class NotificationController {
         );
     }
 
+    @PatchMapping("/read-all")
+    public ResponseEntity<SuccessResponse> readAll(
+            Authentication auth
+    ) {
+
+        notificationService.markAllRead(
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "All notifications marked read",
+                        null
+                )
+        );
+    }
+
     @DeleteMapping("/clear")
     public ResponseEntity<SuccessResponse> clear(
             Authentication auth
@@ -72,6 +89,25 @@ public class NotificationController {
         return ResponseEntity.ok(
                 new SuccessResponse(
                         "Notifications cleared",
+                        null
+                )
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SuccessResponse> clearOne(
+            @PathVariable Long id,
+            Authentication auth
+    ) {
+
+        notificationService.clearOne(
+                id,
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Notification removed",
                         null
                 )
         );

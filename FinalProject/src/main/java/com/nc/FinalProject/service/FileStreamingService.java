@@ -3,6 +3,7 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.response.FileViewResponse;
 import com.nc.FinalProject.entity.FileEntity;
 import com.nc.FinalProject.entity.Share;
+import com.nc.FinalProject.entity.ShareRecipient;
 import com.nc.FinalProject.entity.StreamToken;
 import com.nc.FinalProject.repository.StreamTokenRepository;
 import org.springframework.core.io.InputStreamResource;
@@ -37,16 +38,26 @@ public class FileStreamingService {
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
-        Share share = token.getShare();
 
-        FileEntity file = resolveFileFromShare(share, fileId);
+        FileEntity file;
+
+        if (token.getRecipient() != null) {
+            // Share recipient flow
+            Share share = token.getRecipient().getShare();
+            file = resolveFileFromShare(share, fileId);
+        } else {
+            // Owner viewing their own file
+            file = token.getFile();
+            if (file == null || !file.getId().equals(fileId)) {
+                throw new RuntimeException("File not associated with this token");
+            }
+        }
 
         return streamFile(
                 new FileViewResponse(file.getFilePath(), file.getFileType()),
                 request
         );
     }
-
     private FileEntity resolveFileFromShare(Share share, Long fileId) {
 
         if (share.getType() == Share.ShareType.FILE) {
@@ -73,8 +84,7 @@ public class FileStreamingService {
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
-        Share share = token.getShare();
-
+        Share share = token.getRecipient().getShare();
         FileEntity file = resolveFileFromShare(share, fileId);
 
         Path path = Paths.get(file.getFilePath());
@@ -101,7 +111,7 @@ public class FileStreamingService {
 
         StreamToken token = validateToken(streamToken);
 
-        Share share = token.getShare();
+        Share share = token.getRecipient().getShare();
 
         if (share.getType() != Share.ShareType.BUNDLE) {
             throw new RuntimeException("Not a bundle share");
@@ -253,6 +263,7 @@ public class FileStreamingService {
 
         StreamToken token = validateToken(streamToken);
 
-        return token.getShare().getType() == Share.ShareType.BUNDLE;
-    }
+        return token.getRecipient()
+                .getShare()
+                .getType() == Share.ShareType.BUNDLE;    }
 }

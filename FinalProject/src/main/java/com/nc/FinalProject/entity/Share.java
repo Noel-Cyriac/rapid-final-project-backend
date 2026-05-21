@@ -18,11 +18,6 @@ public class Share {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String shareToken;
-
-    // =========================
-    // TYPE OF SHARE
-    // =========================
     @Enumerated(EnumType.STRING)
     private ShareType type;
 
@@ -31,15 +26,9 @@ public class Share {
         BUNDLE
     }
 
-    // =========================
-    // FILE SHARE (single file)
-    // =========================
     @ManyToOne
     private FileEntity file;
 
-    // =========================
-    // BUNDLE SHARE (multiple files)
-    // =========================
     @ManyToMany
     @JoinTable(
             name = "share_bundle_files",
@@ -48,35 +37,26 @@ public class Share {
     )
     private List<FileEntity> files;
 
-    // =========================
-    // COMMON FIELDS
-    // =========================
     @ManyToOne
     private Users owner;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "share_emails",
-            joinColumns = @JoinColumn(name = "share_id")
-    )
-    @Column(name = "email")
-    private List<String> recipientEmails;
-
     private LocalDateTime expireAt;
 
+    // global config
     private Integer maxUses;
-
-    private Integer usedCount;
-
-    private Integer openCount;
-
-    private Boolean active;
 
     private String password;
 
     private String message;
 
+    private Boolean active;
+
     private LocalDateTime sharedAt;
 
-    private LocalDateTime lastOpenedAt;
+    @OneToMany(
+            mappedBy = "share",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<ShareRecipient> recipients;
 }

@@ -9,5 +9,5 @@ public interface ShareRecipientRepository
         extends JpaRepository<ShareRecipient, Long> {
 
     Optional<ShareRecipient>
-    findByAccessToken(String accessToken);
+    findByAccessToken(String token);
 }

@@ -23,5 +23,7 @@ public class StreamToken {
     @ManyToOne
     private FileEntity file;
 
+    private boolean bundle;    // optional flag
+
     private LocalDateTime expiresAt;
 }

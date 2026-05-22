@@ -30,8 +30,6 @@ public class ShareRecipient {
 
     private Integer usedCount;
 
-    private LocalDateTime openedAt;
-
     private LocalDateTime lastOpenedAt;
 
     // revoke individual recipient

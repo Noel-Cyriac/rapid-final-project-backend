@@ -53,6 +53,9 @@ public class Share {
 
     private LocalDateTime sharedAt;
 
+    private Boolean canDownload;
+    private Boolean canView;
+
     @OneToMany(
             mappedBy = "share",
             cascade = CascadeType.ALL,

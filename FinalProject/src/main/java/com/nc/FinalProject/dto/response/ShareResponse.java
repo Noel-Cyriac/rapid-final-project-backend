@@ -8,19 +8,22 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ShareResponse {
 
     private Long id;
-    private String token;
-    private List<String> emails;
-    private LocalDateTime expiresAt;
-    private int maxUses;
-    private int usedCount;
-    private int openCount;
-    private boolean active;
+
     private String fileName;
-    private LocalDateTime sharedAt;
-    private LocalDateTime lastOpenedAt;
-    private String message;
     private String type; // FILE or BUNDLE
+
+    private LocalDateTime expiresAt;
+    private Integer maxUses;
+
+    private Boolean active;
+    private String message;
+    private LocalDateTime sharedAt;
+
+    // recipient details
+    private List<RecipientResponse> recipients;
 }

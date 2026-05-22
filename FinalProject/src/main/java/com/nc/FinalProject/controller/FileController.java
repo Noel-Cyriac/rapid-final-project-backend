@@ -103,22 +103,18 @@ public class FileController {
                         "url",
                         "http://localhost:8080/api/files/stream/"
                                 + token
-                                + "/"
-                                + id
                 )
         );
     }
 
-    @GetMapping("/stream/{token}/{fileId}")
+    @GetMapping("/stream/{token}")
     public ResponseEntity<Resource> streamByToken(
             @PathVariable String token,
-            @PathVariable Long fileId,
             HttpServletRequest request
     ) throws Exception {
 
-        return fileStreamingService.streamByToken(
+        return fileStreamingService.streamByTokenForViewing(
                 token,
-                fileId,
                 request
         );
     }

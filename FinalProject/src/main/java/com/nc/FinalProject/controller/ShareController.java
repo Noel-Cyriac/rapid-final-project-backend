@@ -86,13 +86,12 @@ public class ShareController {
     }
 
     // ================= STREAM =================
-    @GetMapping("/public/stream/{streamToken}/{fileId}")
+    @GetMapping("/public/stream/{streamToken}")
     public ResponseEntity<Resource> stream(
             @PathVariable String streamToken,
-            @PathVariable Long fileId,
             HttpServletRequest request
     ) throws IOException {
-        return fileStreamingService.streamByToken(streamToken, fileId, request);
+        return fileStreamingService.streamByToken(streamToken, request);
     }
 
     // ================= DOWNLOAD =================

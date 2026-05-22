@@ -880,11 +880,14 @@ public class FileService {
         );
     }
 
+    @Transactional
     public String createStreamToken(Long fileId, Users user) {
 
         FileEntity file = fileRepository
                 .findByIdAndOwner(fileId, user)
                 .orElseThrow();
+
+        file.setLastOpenedAt(LocalDateTime.now());
 
         StreamToken token = StreamToken.builder()
                 .token(UUID.randomUUID().toString())

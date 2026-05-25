@@ -3,6 +3,7 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.response.FileViewResponse;
 import com.nc.FinalProject.entity.FileEntity;
 import com.nc.FinalProject.entity.Share;
+import com.nc.FinalProject.entity.ShareRecipient;
 import com.nc.FinalProject.entity.StreamToken;
 import com.nc.FinalProject.repository.StreamTokenRepository;
 import org.springframework.core.io.InputStreamResource;
@@ -30,6 +31,27 @@ public class FileStreamingService {
     // =====================================================
     // STREAM / VIEW
     // =====================================================
+    public ResponseEntity<Resource> streamByTokenForViewing(
+            String streamToken,
+            HttpServletRequest request
+    ) throws IOException {
+
+        // 1. Fetch and validate the token (checks expiry, existence)
+        StreamToken token = validateToken(streamToken);
+
+        // 2. Extract the file securely from the token mapping
+        FileEntity file = token.getFile();
+        if (file == null) {
+            throw new RuntimeException("No file associated with this stream token");
+        }
+
+        // 3. Stream it out safely
+        return streamFile(
+                new FileViewResponse(file.getFilePath(), file.getFileType()),
+                request
+        );
+    }
+
     public ResponseEntity<Resource> streamByToken(
             String streamToken,
             Long fileId,
@@ -37,16 +59,25 @@ public class FileStreamingService {
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
-        Share share = token.getShare();
 
-        FileEntity file = resolveFileFromShare(share, fileId);
+        ShareRecipient recipient = token.getRecipient();
+        Share share = recipient.getShare();
+
+        if (!Boolean.TRUE.equals(share.getCanView())) {
+            throw new RuntimeException("Viewing not allowed");
+        }
+
+        FileEntity file =
+                resolveFileFromShare(share, fileId);
 
         return streamFile(
-                new FileViewResponse(file.getFilePath(), file.getFileType()),
+                new FileViewResponse(
+                        file.getFilePath(),
+                        file.getFileType()
+                ),
                 request
         );
     }
-
     private FileEntity resolveFileFromShare(Share share, Long fileId) {
 
         if (share.getType() == Share.ShareType.FILE) {
@@ -67,42 +98,35 @@ public class FileStreamingService {
     // =====================================================
     // DOWNLOAD SINGLE FILE
     // =====================================================
-    public ResponseEntity<Resource> downloadByToken(
-            String streamToken,
-            Long fileId
-    ) throws IOException {
-
+    public ResponseEntity<Resource> downloadByToken(String streamToken, Long fileId) throws IOException {
         StreamToken token = validateToken(streamToken);
-        Share share = token.getShare();
+        Share share = token.getRecipient().getShare();
+
+        if (!Boolean.TRUE.equals(share.getCanDownload())) {
+            throw new RuntimeException("Download not allowed");
+        }
 
         FileEntity file = resolveFileFromShare(share, fileId);
-
         Path path = Paths.get(file.getFilePath());
-
-        InputStream inputStream =
-                new BufferedInputStream(new FileInputStream(path.toFile()));
-
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(path.toFile()));
         Resource resource = new InputStreamResource(inputStream);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(file.getFileType()))
                 .contentLength(Files.size(path))
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + file.getFileName() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
                 .body(resource);
     }
     // =====================================================
     // BUNDLE DOWNLOAD
     // =====================================================
-    public void downloadBundle(
-            String streamToken,
-            OutputStream outputStream
-    ) throws IOException {
-
+    public void downloadBundle(String streamToken, OutputStream outputStream) throws IOException {
         StreamToken token = validateToken(streamToken);
+        Share share = token.getRecipient().getShare();
 
-        Share share = token.getShare();
-
+        if (!Boolean.TRUE.equals(share.getCanDownload())) {
+            throw new RuntimeException("Download not allowed");
+        }
         if (share.getType() != Share.ShareType.BUNDLE) {
             throw new RuntimeException("Not a bundle share");
         }
@@ -111,9 +135,7 @@ public class FileStreamingService {
         byte[] buffer = new byte[8192];
 
         for (FileEntity file : share.getFiles()) {
-
             Path path = Paths.get(file.getFilePath());
-
             zos.putNextEntry(new ZipEntry(file.getFileName()));
 
             try (InputStream fis = Files.newInputStream(path)) {
@@ -122,7 +144,6 @@ public class FileStreamingService {
                     zos.write(buffer, 0, len);
                 }
             }
-
             zos.closeEntry();
         }
 
@@ -253,6 +274,7 @@ public class FileStreamingService {
 
         StreamToken token = validateToken(streamToken);
 
-        return token.getShare().getType() == Share.ShareType.BUNDLE;
-    }
+        return token.getRecipient()
+                .getShare()
+                .getType() == Share.ShareType.BUNDLE;    }
 }

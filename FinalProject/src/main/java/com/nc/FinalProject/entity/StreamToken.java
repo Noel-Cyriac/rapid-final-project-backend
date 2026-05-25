@@ -18,7 +18,12 @@ public class StreamToken {
     private String token;
 
     @ManyToOne
-    private Share share;
+    private ShareRecipient recipient;
+
+    @ManyToOne
+    private FileEntity file;
+
+    private boolean bundle;    // optional flag
 
     private LocalDateTime expiresAt;
 }

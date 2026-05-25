@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
         logger.error("Password mismatch: {}", ex.getMessage());
 
         return ResponseEntity.badRequest()
-                .body(new ErrorResponse("Registration failed", errors));
+                .body(new ErrorResponse("Password update failed", errors));
     }
 
     @ExceptionHandler(BadCredentialsException.class)

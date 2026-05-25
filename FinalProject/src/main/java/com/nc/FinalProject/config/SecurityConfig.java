@@ -41,7 +41,23 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/api/share/public/**").permitAll()
+                        .requestMatchers(
+                                "/api/auth/register",
+                                "/api/auth/login",
+                                "/api/auth/refresh",
+                                "/api/auth/forgot-password",
+                                "/api/auth/reset-password",
+                                "/api/files/stream/**",
+                                "/api/share/public/**"
+                        ).permitAll()
+
+                        // Requires JWT token
+                        .requestMatchers(
+                                "/api/auth/reset-link",
+                                "/api/auth/change-password"
+                        ).authenticated()
+
+                        // All remaining endpoints
                         .anyRequest().authenticated()
                 )
 

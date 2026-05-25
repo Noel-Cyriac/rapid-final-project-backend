@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/files")
@@ -82,6 +83,40 @@ public class FileController {
                 fileService.viewFile(id, user(auth));
 
         return fileStreamingService.streamFile(file, request);
+    }
+
+    @GetMapping("/{id}/stream-token")
+    public SuccessResponse getStreamToken(
+            @PathVariable Long id,
+            Authentication auth
+    ) {
+
+        String token =
+                fileService.createStreamToken(
+                        id,
+                        user(auth)
+                );
+
+        return new SuccessResponse(
+                "Stream token created",
+                Map.of(
+                        "url",
+                        "http://localhost:8080/api/files/stream/"
+                                + token
+                )
+        );
+    }
+
+    @GetMapping("/stream/{token}")
+    public ResponseEntity<Resource> streamByToken(
+            @PathVariable String token,
+            HttpServletRequest request
+    ) throws Exception {
+
+        return fileStreamingService.streamByTokenForViewing(
+                token,
+                request
+        );
     }
 
     @DeleteMapping("/delete")
@@ -145,12 +180,111 @@ public class FileController {
         );
     }
 
-    @GetMapping("/dashboard")
-    public ResponseEntity<SuccessResponse> dashboard(Authentication auth) {
+    @GetMapping("/dashboard/latest-uploads")
+    public ResponseEntity<SuccessResponse> latestUploads(
+            Authentication auth
+    ) {
+
         return ResponseEntity.ok(
                 new SuccessResponse(
-                        "Dashboard fetched successfully",
-                        fileService.dashboard(user(auth))
+                        "Latest uploads fetched",
+                        fileService.latestUploads(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/latest-downloads")
+    public ResponseEntity<SuccessResponse> latestDownloads(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Latest downloads fetched",
+                        fileService.latestDownloads(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/recently-opened")
+    public ResponseEntity<SuccessResponse> recentlyOpened(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Recently opened files fetched",
+                        fileService.recentlyOpened(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/stats")
+    public ResponseEntity<SuccessResponse> dashboardStats(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Dashboard stats fetched",
+                        fileService.dashboardStats(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/storage-breakdown")
+    public ResponseEntity<SuccessResponse> storageBreakdown(
+            Authentication auth
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Storage breakdown fetched",
+                        fileService.storageBreakdown(
+                                user(auth)
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/activity-trend")
+    public ResponseEntity<SuccessResponse> activityTrend(
+            Authentication auth,
+            @RequestParam(defaultValue = "7") int days
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Activity trend fetched",
+                        fileService.activityTrend(
+                                user(auth),
+                                days
+                        )
+                )
+        );
+    }
+
+    @GetMapping("/dashboard/transfer-usage")
+    public ResponseEntity<SuccessResponse> transferUsage(
+            Authentication auth,
+            @RequestParam(defaultValue = "7") int days
+    ) {
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Transfer usage fetched",
+                        fileService.transferUsage(
+                                user(auth),
+                                days
+                        )
                 )
         );
     }

@@ -1,5 +1,6 @@
 package com.nc.FinalProject.dto.request;
 
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.List;
@@ -11,13 +12,29 @@ public class ShareRequest {
 
     private List<Long> fileIds;
 
-    // ✅ multiple recipients
-    private List<String> emails;
+    @NotEmpty(message = "At least one recipient email is required")
+    private List<
+            @Email(message = "Invalid email format")
+            @NotBlank(message = "Email cannot be blank")
+                    String
+            > emails;
 
+    @NotNull(message = "Expire hours is required")
+    @Min(value = 1, message = "Minimum expiry is 1 hour")
+    @Max(value = 720, message = "Maximum expiry is 720 hours")
     private Integer expireHours;
+
+    @NotNull(message = "Max uses is required")
+    @Min(value = 1, message = "Max uses must be at least 1")
     private Integer maxUses;
+
+    @Size(max = 100, message = "Password too long")
     private String password;
-    private Boolean canDownload;
-    private Boolean canView;
+
+    private Boolean canDownload = true;
+
+    private Boolean canView = true;
+
+    @Size(max = 500, message = "Message too long")
     private String message;
 }

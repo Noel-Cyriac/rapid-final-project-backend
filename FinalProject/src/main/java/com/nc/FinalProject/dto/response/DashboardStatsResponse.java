@@ -1,13 +1,11 @@
 package com.nc.FinalProject.dto.response;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.List;
-
-@Data
+@Getter
 @Builder
-public class DashboardResponse {
+public class DashboardStatsResponse {
 
     private Long todayUploads;
     private Long todayDownloads;
@@ -17,10 +15,4 @@ public class DashboardResponse {
     private Long totalDownloads;
 
     private Long usedStorage;
-
-    private List<FileResponse> latestUploads;
-
-    private List<FileResponse> latestDownloads;
-
-    private List<FileResponse> recentlyOpened;
 }

@@ -68,4 +68,38 @@ public interface FileActivityRepository extends JpaRepository<FileActivity, Long
             String action
     );
 
+    @Query("""
+    SELECT 
+        FUNCTION('DATE', a.createdAt),
+        COUNT(a)
+    FROM FileActivity a
+    WHERE a.user = :user
+    AND a.action = :action
+    AND a.createdAt >= :start
+    GROUP BY FUNCTION('DATE', a.createdAt)
+    ORDER BY FUNCTION('DATE', a.createdAt)
+""")
+    List<Object[]> countPerDay(
+            @Param("user") Users user,
+            @Param("action") String action,
+            @Param("start") LocalDateTime start
+    );
+
+    @Query("""
+    SELECT 
+        FUNCTION('DATE', a.createdAt),
+        COALESCE(SUM(a.size),0)
+    FROM FileActivity a
+    WHERE a.user = :user
+    AND a.action = :action
+    AND a.createdAt >= :start
+    GROUP BY FUNCTION('DATE', a.createdAt)
+    ORDER BY FUNCTION('DATE', a.createdAt)
+""")
+    List<Object[]> usagePerDay(
+            @Param("user") Users user,
+            @Param("action") String action,
+            @Param("start") LocalDateTime start
+    );
+
 }

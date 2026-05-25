@@ -4,6 +4,8 @@ import com.nc.FinalProject.dto.request.LoginRequest;
 import com.nc.FinalProject.dto.response.LoginResponse;
 import com.nc.FinalProject.dto.request.RegisterRequest;
 import com.nc.FinalProject.dto.request.ResetPasswordRequest;
+import com.nc.FinalProject.dto.response.RefreshResponse;
+import com.nc.FinalProject.entity.NotificationType;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.exception.EmailAlreadyExistsException;
 import com.nc.FinalProject.exception.InvalidRefreshTokenException;
@@ -34,9 +36,12 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
     private final JwtUtil jwtUtil;
+    private final MailService mailService;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
     // Map to store reset tokens temporarily (replace with DB in production)
     private final Map<String, String> resetTokens = new HashMap<>();
+    private final NotificationService notificationService;
+
 
     public Users register(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -78,7 +83,6 @@ public class AuthService {
 
         String email = userDetails.getUsername();
 
-        // 🔥 fetch full user from DB
         Users user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -102,60 +106,76 @@ public class AuthService {
                 user.getEmail()
         );
     }
-    public LoginResponse refreshToken(String refreshToken, HttpServletResponse response) {
+    public RefreshResponse refreshToken(
+            String refreshToken,
+            HttpServletResponse response
+    ) {
 
         if (refreshToken == null) {
             logger.warn("Refresh FAILED: Missing token");
-            throw new InvalidRefreshTokenException("Refresh token missing");
+            throw new InvalidRefreshTokenException(
+                    "Refresh token missing"
+            );
         }
 
         if (!jwtUtil.validateRefreshToken(refreshToken)) {
             logger.warn("Refresh FAILED: Invalid or expired token");
-            throw new InvalidRefreshTokenException("Invalid or expired refresh token");
+
+            throw new InvalidRefreshTokenException(
+                    "Invalid or expired refresh token"
+            );
         }
 
-        String email = jwtUtil.extractEmail(refreshToken);
+        String email =
+                jwtUtil.extractEmail(refreshToken);
 
-        Users user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        String newAccessToken =
+                jwtUtil.generateAccessToken(email);
 
-        String newAccessToken = jwtUtil.generateAccessToken(email);
-        String newRefreshToken = jwtUtil.generateRefreshToken(email);
+        String newRefreshToken =
+                jwtUtil.generateRefreshToken(email);
 
-        Cookie refreshCookie = new Cookie("refreshToken", newRefreshToken);
+        Cookie refreshCookie =
+                new Cookie(
+                        "refreshToken",
+                        newRefreshToken
+                );
+
         refreshCookie.setHttpOnly(true);
         refreshCookie.setSecure(false);
         refreshCookie.setPath("/api/auth/refresh");
-        refreshCookie.setMaxAge((int) (jwtUtil.getRefreshExpiration() / 1000));
+        refreshCookie.setMaxAge(
+                (int) (jwtUtil.getRefreshExpiration() / 1000)
+        );
 
         response.addCookie(refreshCookie);
 
         logger.info("Refresh SUCCESS for user: {}", email);
 
-        return new LoginResponse(
-                newAccessToken,
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail()
-        );
+        return new RefreshResponse(newAccessToken);
     }
     public void sendResetPasswordEmail(String email) {
+
         logger.info("Received request to send reset password email for: {}", email);
 
         Users user = userRepository.findByEmail(email).orElse(null);
+
         if (user == null) {
-            logger.warn("No user found with email: {}. Skipping sending reset link.", email);
-            return; // Don't reveal if user exists
+            logger.warn("No user found with email: {}. Skipping email send.", email);
+            return;
         }
 
-        // Generate a random token
         String token = UUID.randomUUID().toString();
         resetTokens.put(token, user.getEmail());
-        logger.info("Generated reset token for user {}: {}", email, token);
 
-        // TODO: Send email with link containing token
         String resetLink = "http://localhost:5175/reset-password/" + token;
-        logger.info("Reset password link for {}: {}", email, resetLink);
+
+        logger.info("Generated reset link for {}: {}", email, resetLink);
+
+        // ✅ ACTUAL EMAIL SEND USING YOUR MAIL SERVICE
+        mailService.sendResetPasswordEmail(user.getEmail(), resetLink);
+
+        logger.info("Reset password email sent successfully to {}", email);
     }
 
     public void resetPassword(ResetPasswordRequest request) {
@@ -185,24 +205,38 @@ public class AuthService {
         // ✅ Invalidate token
         resetTokens.remove(request.getToken());
         logger.info("Password reset successful for user: {}", email);
+
+            notificationService.create(
+                    user,
+                    "Password Reset Successful",
+                    "Your password was reset using email link",
+                    NotificationType.SECURITY
+            );
     }
     }
 
     public void changePassword(Users user, String oldPassword, String newPassword, String confirmPassword) {
+
         logger.info("Changing password for user: {}", user.getEmail());
 
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            logger.warn("Old password is incorrect for user: {}", user.getEmail());
-            throw new RuntimeException("Old password is incorrect");
+            throw new PasswordMismatchException("Old password is incorrect");
         }
 
         if (!newPassword.equals(confirmPassword)) {
-            logger.warn("New passwords do not match for user: {}", user.getEmail());
-            throw new RuntimeException("New passwords do not match");
+            throw new PasswordMismatchException("New passwords do not match");
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
+
         logger.info("Password successfully updated for user: {}", user.getEmail());
+
+        notificationService.create(
+                user,
+                "Password Changed",
+                "Your password was updated successfully",
+                NotificationType.SECURITY
+        );
     }
 }

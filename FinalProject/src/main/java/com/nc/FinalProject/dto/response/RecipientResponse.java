@@ -19,7 +19,6 @@ public class RecipientResponse {
     private String token;
 
     // analytics
-    private Boolean opened;
     private Integer openCount;
     private Integer usedCount;
 

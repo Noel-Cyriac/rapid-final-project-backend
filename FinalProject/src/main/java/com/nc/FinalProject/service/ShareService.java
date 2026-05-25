@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,7 +63,6 @@ public class ShareService {
 
         validate(s, r);
 
-        r.setOpened(true);
         r.setOpenCount(r.getOpenCount() + 1);
         r.setLastOpenedAt(LocalDateTime.now());
         shareRecipientRepository.save(r);
@@ -100,11 +100,41 @@ public class ShareService {
     }
 
     // ================= REVOKE =================
+    @Transactional
     public void revokeShare(Long id, Users user) {
-        Share s = shareRepository.findById(id).orElseThrow();
-        if (!s.getOwner().getId().equals(user.getId())) return;
+        Share s = shareRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Share not found"));
+
+        if (!s.getOwner().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized");
+        }
+
         s.setActive(false);
+
+        if (s.getRecipients() != null) {
+            s.getRecipients().forEach(r -> r.setActive(false));
+        }
+
         shareRepository.save(s);
+    }
+
+    @Transactional
+    public void revokeRecipient(Long recipientId, Users user) {
+
+        ShareRecipient r = shareRecipientRepository.findById(recipientId)
+                .orElseThrow(() -> new RuntimeException("Recipient not found"));
+
+        Share share = r.getShare();
+
+        if (!share.getOwner().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        r.setActive(false);
+
+        shareRecipientRepository.save(r);
+
+        streamTokenRepository.deleteByRecipient_Id(recipientId);
     }
 
     // ================= LIST =================
@@ -168,22 +198,26 @@ public class ShareService {
     }
 
     private void createRecipients(Share share, ShareRequest req) {
-        List<ShareRecipient> recipients = req.getEmails().stream().map(email -> {
-            ShareRecipient r = ShareRecipient.builder()
-                    .email(email)
-                    .accessToken(UUID.randomUUID().toString())
-                    .opened(false).openCount(0).usedCount(0)
-                    .lastOpenedAt(null).active(true)
-                    .share(share)
-                    .build();
-
-            String url = "http://localhost:5175/share/" + r.getAccessToken();
-            mailService.sendShareEmail(email, url, req.getMessage());
-            return r;
-        }).toList();
+        List<ShareRecipient> recipients = req.getEmails().stream()
+                .map(email -> ShareRecipient.builder()
+                        .email(email)
+                        .accessToken(UUID.randomUUID().toString())
+                        .openCount(0)
+                        .usedCount(0)
+                        .lastOpenedAt(null)
+                        .active(true)
+                        .share(share)
+                        .build())
+                .collect(Collectors.toList());
 
         shareRecipientRepository.saveAll(recipients);
         share.setRecipients(recipients);
+
+        // send emails AFTER save
+        for (ShareRecipient recipient : recipients) {
+            String url = "http://localhost:5175/share/" + recipient.getAccessToken();
+            mailService.sendShareEmail(recipient.getEmail(), url, req.getMessage());
+        }
     }
     // ================= MAPPING =================
     private ShareResponse map(Share s) {
@@ -209,7 +243,6 @@ public class ShareService {
                                         .id(r.getId())
                                         .email(r.getEmail())
                                         .token(r.getAccessToken())
-                                        .opened(r.getOpened())
                                         .openCount(r.getOpenCount())
                                         .usedCount(r.getUsedCount())
                                         .lastOpenedAt(r.getLastOpenedAt())
@@ -222,6 +255,24 @@ public class ShareService {
     }
 
     private ShareMetaResponse mapMeta(Share s) {
+        List<FileMiniResponse> files;
+
+        if (s.getType() == Share.ShareType.FILE) {
+            files = List.of(new FileMiniResponse(
+                    s.getFile().getId(),
+                    s.getFile().getFileName(),
+                    s.getFile().getFileType()
+            ));
+        } else {
+            files = s.getFiles().stream()
+                    .map(file -> new FileMiniResponse(
+                            file.getId(),
+                            file.getFileName(),
+                            file.getFileType()
+                    ))
+                    .toList();
+        }
+
         return ShareMetaResponse.builder()
                 .fileName(s.getType() == Share.ShareType.FILE
                         ? s.getFile().getFileName()
@@ -230,9 +281,10 @@ public class ShareService {
                         ? s.getFile().getFileType()
                         : "BUNDLE")
                 .requiresPassword(s.getPassword() != null)
-                .canDownload(true)
-                .canView(true)
+                .canDownload(Boolean.TRUE.equals(s.getCanDownload()))
+                .canView(Boolean.TRUE.equals(s.getCanView()))
                 .message(s.getMessage())
+                .files(files)
                 .build();
     }
 }

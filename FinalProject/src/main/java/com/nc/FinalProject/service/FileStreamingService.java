@@ -54,18 +54,30 @@ public class FileStreamingService {
 
     public ResponseEntity<Resource> streamByToken(
             String streamToken,
+            Long fileId,
             HttpServletRequest request
     ) throws IOException {
 
         StreamToken token = validateToken(streamToken);
-        FileEntity file = token.getFile();
+
+        ShareRecipient recipient = token.getRecipient();
+        Share share = recipient.getShare();
+
+        if (!Boolean.TRUE.equals(share.getCanView())) {
+            throw new RuntimeException("Viewing not allowed");
+        }
+
+        FileEntity file =
+                resolveFileFromShare(share, fileId);
 
         return streamFile(
-                new FileViewResponse(file.getFilePath(), file.getFileType()),
+                new FileViewResponse(
+                        file.getFilePath(),
+                        file.getFileType()
+                ),
                 request
         );
     }
-
     private FileEntity resolveFileFromShare(Share share, Long fileId) {
 
         if (share.getType() == Share.ShareType.FILE) {

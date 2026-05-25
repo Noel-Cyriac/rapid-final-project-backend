@@ -8,6 +8,7 @@ import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.service.FileStreamingService;
 import com.nc.FinalProject.service.ShareService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ public class ShareController {
 
     // ================= CREATE =================
     @PostMapping("/create")
-    public ResponseEntity<ShareResponse> createShare(@RequestBody ShareRequest req, Authentication a) {
+    public ResponseEntity<ShareResponse> createShare(@Valid @RequestBody ShareRequest req, Authentication a) {
         return ResponseEntity.ok(shareService.createShareUnified(req, user(a)));
     }
 
@@ -56,10 +57,21 @@ public class ShareController {
     }
 
     // ================= REVOKE =================
-    @DeleteMapping("/{shareId}")
-    public ResponseEntity<SuccessResponse<Void>> revoke(@PathVariable Long shareId, Authentication a) {
+    @PatchMapping("/{shareId}/revoke")
+    public ResponseEntity<SuccessResponse<Void>> revokeShare(
+            @PathVariable Long shareId,
+            Authentication a) {
         shareService.revokeShare(shareId, user(a));
         return ResponseEntity.ok(new SuccessResponse<>("Share revoked successfully", null));
+    }
+
+    @PatchMapping("/recipient/{recipientId}/revoke")
+    public ResponseEntity<SuccessResponse<Void>> revokeRecipient(
+            @PathVariable Long recipientId,
+            Authentication a
+    ) {
+        shareService.revokeRecipient(recipientId, user(a));
+        return ResponseEntity.ok(new SuccessResponse<>("Recipient revoked successfully", null));
     }
 
     // ================= CLEANUP =================
@@ -86,12 +98,13 @@ public class ShareController {
     }
 
     // ================= STREAM =================
-    @GetMapping("/public/stream/{streamToken}")
+    @GetMapping("/public/stream/{streamToken}/{fileId}")
     public ResponseEntity<Resource> stream(
             @PathVariable String streamToken,
+            @PathVariable Long fileId,
             HttpServletRequest request
     ) throws IOException {
-        return fileStreamingService.streamByToken(streamToken, request);
+        return fileStreamingService.streamByToken(streamToken, fileId, request);
     }
 
     // ================= DOWNLOAD =================

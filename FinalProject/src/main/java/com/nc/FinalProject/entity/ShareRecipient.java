@@ -24,8 +24,6 @@ public class ShareRecipient {
     private String accessToken;
 
     // analytics
-    private Boolean opened;
-
     private Integer openCount;
 
     private Integer usedCount;

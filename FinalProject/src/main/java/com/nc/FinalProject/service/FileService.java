@@ -153,13 +153,19 @@ public class FileService {
     // ======================
     // RECYCLE BIN
     // ======================
-    public PagedResponse<FileResponse> recycleBin(Users user, Pageable pageable) {
+    public PagedResponse<RecycleBinResponse> recycleBin(Users user, Pageable pageable) {
 
         Page<FileEntity> page =
                 fileRepository.findByOwnerAndDeletedTrue(user, pageable);
 
-        Page<FileResponse> dtoPage =
-                page.map(this::mapToResponse);
+        Page<RecycleBinResponse> dtoPage =
+                page.map(f -> new RecycleBinResponse(
+                        f.getId(),
+                        f.getFileName(),
+                        f.getFileType(),
+                        f.getSize(),
+                        f.getDeletedAt()
+                ));
 
         return new PagedResponse<>(
                 dtoPage.getContent(),
@@ -336,6 +342,7 @@ public class FileService {
             shareRepository.saveAll(shares);
 
             file.setDeleted(true);
+            file.setDeletedAt(LocalDateTime.now());
 
             fileRepository.save(file);
 
@@ -356,6 +363,7 @@ public class FileService {
                 continue;
 
             file.setDeleted(false);
+            file.setDeletedAt(null);
 
             fileRepository.save(file);
 
@@ -441,24 +449,32 @@ public class FileService {
                 .toList();
     }
 
-    public List<FileResponse> latestDownloads(Users user) {
+    public List<FileDownloadResponse> latestDownloads(Users user) {
 
-        return activityRepository
-                .findTop4ByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
-                        user,
-                        "DOWNLOAD"
-                )
+        return fileRepository
+                .findTop4ByOwnerAndDeletedFalseAndLastDownloadedAtNotNullOrderByLastDownloadedAtDesc(user)
                 .stream()
-                .map(a -> mapToResponse(a.getFile()))
+                .map(f -> new FileDownloadResponse(
+                        f.getId(),
+                        f.getFileName(),
+                        f.getSize(),
+                        f.getLastDownloadedAt()
+                ))
                 .toList();
     }
 
-    public List<FileResponse> recentlyOpened(Users user) {
+    public List<RecentlyOpenedResponse> recentlyOpened(Users user) {
 
         return fileRepository
                 .findTop4ByOwnerAndDeletedFalseAndLastOpenedAtNotNullOrderByLastOpenedAtDesc(user)
                 .stream()
-                .map(this::mapToResponse)
+                .map(f -> new RecentlyOpenedResponse(
+                        f.getId(),
+                        f.getFileName(),
+                        f.getFileType(),
+                        f.getSize(),
+                        f.getLastOpenedAt()
+                ))
                 .toList();
     }
 
@@ -698,7 +714,7 @@ public class FileService {
         );
     }
 
-    public PagedResponse<FileResponse> getDownloadedFiles(
+    public PagedResponse<FileDownloadResponse> getDownloadedFiles(
             Users user,
             Pageable pageable
     ) {
@@ -711,8 +727,13 @@ public class FileService {
                                 pageable
                         );
 
-        Page<FileResponse> dtoPage =
-                page.map(a -> mapToResponse(a.getFile()));
+        Page<FileDownloadResponse> dtoPage =
+                page.map(a -> new FileDownloadResponse(
+                        a.getFile().getId(),
+                        a.getFile().getFileName(),
+                        a.getFile().getSize(),
+                        a.getCreatedAt()   // ✅ THIS is your download time
+                ));
 
         return new PagedResponse<>(
                 dtoPage.getContent(),
@@ -725,7 +746,7 @@ public class FileService {
         );
     }
 
-    public PagedResponse<FileResponse> getRecentlyOpenedFiles(
+    public PagedResponse<RecentlyOpenedResponse> getRecentlyOpenedFiles(
             Users user,
             Pageable pageable
     ) {
@@ -737,7 +758,14 @@ public class FileService {
                                 pageable
                         );
 
-        Page<FileResponse> dtoPage = page.map(this::mapToResponse);
+        Page<RecentlyOpenedResponse> dtoPage =
+                page.map(f -> new RecentlyOpenedResponse(
+                        f.getId(),
+                        f.getFileName(),
+                        f.getFileType(),
+                        f.getSize(),
+                        f.getLastOpenedAt()
+                ));
 
         return new PagedResponse<>(
                 dtoPage.getContent(),
@@ -749,7 +777,6 @@ public class FileService {
                 dtoPage.isLast()
         );
     }
-
     // ======================
     // TRACKING
     // ======================

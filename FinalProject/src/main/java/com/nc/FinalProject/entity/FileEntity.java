@@ -30,6 +30,8 @@ public class FileEntity {
 
     private Boolean deleted = false;
 
+    private LocalDateTime deletedAt;
+
     private LocalDateTime uploadedAt;
 
     private LocalDateTime lastDownloadedAt;

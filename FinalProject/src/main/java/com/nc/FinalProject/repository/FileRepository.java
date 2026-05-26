@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,4 +75,11 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
         GROUP BY f.fileType
     """)
     List<Object[]> storageBreakdown(@Param("user") Users user);
+
+    List<FileEntity> findByDeletedTrueAndDeletedAtBefore(
+            LocalDateTime date
+    );
+
+    List<FileEntity>
+    findTop4ByOwnerAndDeletedFalseAndLastDownloadedAtNotNullOrderByLastDownloadedAtDesc(Users user);
 }

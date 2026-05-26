@@ -7,10 +7,7 @@ import com.nc.FinalProject.exception.InvalidSharePasswordException;
 import com.nc.FinalProject.exception.LinkDisabledException;
 import com.nc.FinalProject.exception.LinkExpiredException;
 import com.nc.FinalProject.exception.MaxUsesExceededException;
-import com.nc.FinalProject.repository.FileRepository;
-import com.nc.FinalProject.repository.ShareRecipientRepository;
-import com.nc.FinalProject.repository.ShareRepository;
-import com.nc.FinalProject.repository.StreamTokenRepository;
+import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,6 +27,7 @@ public class ShareService {
     private final FileRepository fileRepository;
     private final StreamTokenRepository streamTokenRepository;
     private final ShareRecipientRepository shareRecipientRepository;
+    private final SharePasswordTokenRepository sharePasswordTokenRepository;
     private final MailService mailService;
 
     // ================= CREATE =================
@@ -39,7 +37,7 @@ public class ShareService {
                 .owner(user)
                 .expireAt(LocalDateTime.now().plusHours(req.getExpireHours()))
                 .maxUses(req.getMaxUses())
-                .password(req.getPassword())
+                .password(req.getPassword() != null && !req.getPassword().isBlank() ? req.getPassword() : null)
                 .message(req.getMessage())
                 .canDownload(req.getCanDownload() == null || req.getCanDownload())
                 .canView(req.getCanView() == null || req.getCanView())
@@ -208,16 +206,51 @@ public class ShareService {
                         .active(true)
                         .share(share)
                         .build())
-                .collect(Collectors.toList());
+                .toList();
 
         shareRecipientRepository.saveAll(recipients);
         share.setRecipients(recipients);
 
-        // send emails AFTER save
         for (ShareRecipient recipient : recipients) {
-            String url = "http://localhost:5175/share/" + recipient.getAccessToken();
-            mailService.sendShareEmail(recipient.getEmail(), url, req.getMessage());
+            String shareUrl = "http://localhost:5175/share/" + recipient.getAccessToken();
+
+            if (share.getPassword() != null && !share.getPassword().isBlank()) {
+                String passwordToken = UUID.randomUUID().toString();
+
+                SharePasswordToken token = SharePasswordToken.builder()
+                        .token(passwordToken)
+                        .password(share.getPassword())
+                        .used(false)
+                        .expiresAt(share.getExpireAt())
+                        .recipient(recipient)
+                        .build();
+
+                sharePasswordTokenRepository.save(token);
+
+                String passwordUrl = "http://localhost:5175/share-password/" + passwordToken;
+
+                mailService.sendSharePasswordEmail(recipient.getEmail(), shareUrl, passwordUrl, req.getMessage());
+            } else {
+                mailService.sendShareEmail(recipient.getEmail(), shareUrl, req.getMessage());
+            }
         }
+    }
+
+    @Transactional
+    public String revealPassword(String token) {
+        SharePasswordToken t = sharePasswordTokenRepository.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid link"));
+
+        if (t.isUsed()) {
+            throw new RuntimeException("Password already viewed");
+        }
+
+        if (t.getExpiresAt() != null && t.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Password link expired");
+        }
+
+        t.setUsed(true);
+        return t.getPassword();
     }
     // ================= MAPPING =================
     private ShareResponse map(Share s) {

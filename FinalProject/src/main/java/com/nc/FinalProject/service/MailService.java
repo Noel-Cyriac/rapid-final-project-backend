@@ -44,6 +44,25 @@ public class MailService {
         mailSender.send(message);
     }
 
+    public void sendSharePasswordEmail(String to, String shareLink, String passwordLink, String customMessage) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject("Password Protected File Shared With You");
+
+        String body = "A password protected file has been shared with you.\n\n";
+
+        if (customMessage != null && !customMessage.isBlank()) {
+            body += "Message from sender:\n" + customMessage + "\n\n";
+        }
+
+        body += "Open Share:\n" + shareLink + "\n\n" +
+                "Reveal Password (one-time use):\n" + passwordLink + "\n\n" +
+                "The password link works only once.";
+
+        message.setText(body);
+        mailSender.send(message);
+    }
+
     public void sendResetPasswordEmail(String to, String resetLink) {
 
         SimpleMailMessage message = new SimpleMailMessage();

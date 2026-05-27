@@ -3,10 +3,7 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.request.ShareRequest;
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
-import com.nc.FinalProject.exception.InvalidSharePasswordException;
-import com.nc.FinalProject.exception.LinkDisabledException;
-import com.nc.FinalProject.exception.LinkExpiredException;
-import com.nc.FinalProject.exception.MaxUsesExceededException;
+import com.nc.FinalProject.exception.*;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +62,7 @@ public class ShareService {
         r.setLastOpenedAt(LocalDateTime.now());
         shareRecipientRepository.save(r);
 
-        return mapMeta(s);
+        return mapMeta(s, r);
     }
 
     // ================= ACCESS =================
@@ -237,21 +234,33 @@ public class ShareService {
     }
 
     @Transactional
-    public String revealPassword(String token) {
-        SharePasswordToken t = sharePasswordTokenRepository.findByToken(token)
+    public SharePasswordResponse revealPassword(String token) {
+
+        SharePasswordToken t = sharePasswordTokenRepository
+                .findByToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid link"));
 
         if (t.isUsed()) {
-            throw new RuntimeException("Password already viewed");
+            throw new PasswordAlreadyViewedException("Password already viewed");
         }
 
-        if (t.getExpiresAt() != null && t.getExpiresAt().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Password link expired");
+        if (t.getExpiresAt() != null &&
+                t.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new PasswordLinkExpiredException("Password link expired");
         }
 
         t.setUsed(true);
-        return t.getPassword();
+
+        String shareUrl =
+                "http://localhost:5175/share/" +
+                        t.getRecipient().getAccessToken();
+
+        return SharePasswordResponse.builder()
+                .password(t.getPassword())
+                .shareUrl(shareUrl)
+                .build();
     }
+
     // ================= MAPPING =================
     private ShareResponse map(Share s) {
 
@@ -287,7 +296,7 @@ public class ShareService {
                 .build();
     }
 
-    private ShareMetaResponse mapMeta(Share s) {
+    private ShareMetaResponse mapMeta(Share s, ShareRecipient r) {
         List<FileMiniResponse> files;
 
         if (s.getType() == Share.ShareType.FILE) {
@@ -318,6 +327,9 @@ public class ShareService {
                 .canView(Boolean.TRUE.equals(s.getCanView()))
                 .message(s.getMessage())
                 .files(files)
+                .expiresAt(s.getExpireAt())
+                .maxUses(s.getMaxUses())
+                .usedCount(r.getUsedCount())
                 .build();
     }
 }

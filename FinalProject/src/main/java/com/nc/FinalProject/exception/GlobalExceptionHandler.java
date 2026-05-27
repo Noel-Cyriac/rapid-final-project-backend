@@ -141,6 +141,26 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler(PasswordAlreadyViewedException.class)
+    public ResponseEntity<ErrorResponse> handlePasswordViewed(
+            PasswordAlreadyViewedException ex) {
+
+        logger.warn("Password already viewed: {}", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.GONE)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(PasswordLinkExpiredException.class)
+    public ResponseEntity<ErrorResponse> handlePasswordExpired(
+            PasswordLinkExpiredException ex) {
+
+        logger.warn("Password link expired: {}", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.GONE)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
     // Generic Exception Fallback
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception ex) {

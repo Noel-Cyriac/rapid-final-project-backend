@@ -63,7 +63,10 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
             Pageable pageable
     );
 
-    Page<FileEntity> findByOwnerAndStarredTrue(Users user, Pageable pageable);
+    Page<FileEntity> findByOwnerAndStarredTrueAndDeletedFalse(
+            Users user,
+            Pageable pageable
+    );
 
     @Query("""
         SELECT 

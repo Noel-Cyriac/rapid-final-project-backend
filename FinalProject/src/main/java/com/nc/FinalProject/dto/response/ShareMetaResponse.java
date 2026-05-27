@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,4 +21,8 @@ public class ShareMetaResponse {
 
     private String message;
     private List<FileMiniResponse> files;
+
+    private LocalDateTime expiresAt;
+    private Integer maxUses;
+    private Integer usedCount;
 }

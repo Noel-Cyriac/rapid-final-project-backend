@@ -344,6 +344,9 @@ public class FileService {
             file.setDeleted(true);
             file.setDeletedAt(LocalDateTime.now());
 
+            file.setStarred(false);
+            file.setStarredAt(null);
+
             fileRepository.save(file);
 
             track(user, file, "DELETE", 0L);
@@ -898,7 +901,11 @@ public class FileService {
     public PagedResponse<FileResponse> getStarredFiles(Users user, Pageable pageable) {
 
         Page<FileEntity> page =
-                fileRepository.findByOwnerAndStarredTrue(user, pageable);
+                fileRepository
+                        .findByOwnerAndStarredTrueAndDeletedFalse(
+                                user,
+                                pageable
+                        );
 
         return new PagedResponse<>(
                 page.map(this::mapToResponse).getContent(),

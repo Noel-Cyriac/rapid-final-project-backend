@@ -97,12 +97,11 @@ public class ShareController {
         );
     }
 
-    @GetMapping("public/password/{token}")
-    public ResponseEntity<SuccessResponse<String>> revealPassword(@PathVariable String token) {
-        return ResponseEntity.ok(new SuccessResponse<>(
-                "Password fetched successfully",
-                shareService.revealPassword(token)
-        ));
+    @GetMapping("/public/password/{token}")
+    public ResponseEntity<SuccessResponse<SharePasswordResponse>> revealPassword(@PathVariable String token) {
+        return ResponseEntity.ok(
+                new SuccessResponse<>("Password fetched successfully", shareService.revealPassword(token))
+        );
     }
 
     // ================= STREAM =================

@@ -13,4 +13,5 @@ public class RecentlyOpenedResponse {
     private String fileType;
     private Long size;
     private LocalDateTime lastOpenedAt;
+    private boolean starred;
 }

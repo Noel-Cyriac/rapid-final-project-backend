@@ -12,4 +12,5 @@ public class FileDownloadResponse {
     private String fileName;
     private Long size;
     private LocalDateTime lastDownloadedAt;
+    private boolean starred;
 }

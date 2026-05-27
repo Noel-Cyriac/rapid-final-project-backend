@@ -1020,3 +1020,100 @@ org.springframework.web.servlet.resource.NoResourceFoundException: No static res
 2026-05-28T01:03:17.176+05:30  WARN 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 174 milliseconds ago at 2026-05-27T19:33:17.000Z. Current time: 2026-05-27T19:33:17.174Z. Allowed clock skew: 0 milliseconds.
 2026-05-28T01:03:17.177+05:30  WARN 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
 2026-05-28T01:03:17.227+05:30  INFO 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noelcyriac99@gmail.com
+2026-05-28T01:12:25.191+05:30  INFO 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Received request to send reset password email for: noelcyriac99@gmail.com
+2026-05-28T01:12:25.191+05:30  INFO 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Generated reset link for noelcyriac99@gmail.com: http://localhost:5175/reset-password/98246b98-b49c-423f-ae54-e0be3a0fb9a5
+2026-05-28T01:12:40.193+05:30  INFO 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Reset password email sent successfully to noelcyriac99@gmail.com
+2026-05-28T01:18:48.181+05:30  WARN 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 31180 milliseconds ago at 2026-05-27T19:48:17.000Z. Current time: 2026-05-27T19:48:48.180Z. Allowed clock skew: 0 milliseconds.
+2026-05-28T01:18:48.182+05:30  WARN 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-28T01:18:48.192+05:30  INFO 6164 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noelcyriac99@gmail.com
+2026-05-28T01:22:55.574+05:30  INFO 6164 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-28T01:22:55.585+05:30  INFO 6164 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-28T01:22:55.590+05:30  INFO 6164 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-28T01:22:55.592+05:30  INFO 6164 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-28T01:22:55.597+05:30  INFO 6164 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-28T01:23:01.136+05:30  INFO 13668 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.2 with PID 13668 (C:\Users\Noel Cyriac\Documents\RapidRise\rapid-final-project-backend\FinalProject\target\classes started by Noel Cyriac in C:\Users\Noel Cyriac\Documents\RapidRise\rapid-final-project-backend\FinalProject)
+2026-05-28T01:23:01.139+05:30 DEBUG 13668 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-28T01:23:01.140+05:30  INFO 13668 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-28T01:23:01.815+05:30  INFO 13668 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-28T01:23:01.894+05:30  INFO 13668 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 10 JPA repository interfaces.
+2026-05-28T01:23:02.396+05:30  INFO 13668 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-28T01:23:02.409+05:30  INFO 13668 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-28T01:23:02.410+05:30  INFO 13668 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-28T01:23:02.481+05:30  INFO 13668 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1295 ms
+2026-05-28T01:23:02.636+05:30  INFO 13668 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-28T01:23:02.712+05:30  INFO 13668 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-28T01:23:03.217+05:30  INFO 13668 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-28T01:23:03.254+05:30  INFO 13668 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-28T01:23:03.409+05:30  INFO 13668 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@c1a74d
+2026-05-28T01:23:03.411+05:30  INFO 13668 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-28T01:23:03.464+05:30  WARN 13668 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-28T01:23:03.485+05:30  INFO 13668 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.35
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-28T01:23:04.764+05:30  INFO 13668 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-28T01:23:04.846+05:30  INFO 13668 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-28T01:23:04.904+05:30  INFO 13668 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-28T01:23:05.629+05:30 DEBUG 13668 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-28T01:23:06.414+05:30  WARN 13668 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-28T01:23:06.901+05:30  INFO 13668 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-28T01:23:06.909+05:30  INFO 13668 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 6.277 seconds (process running for 6.798)
+2026-05-28T01:23:12.934+05:30  INFO 13668 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-28T01:23:12.934+05:30  INFO 13668 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-28T01:23:12.937+05:30  INFO 13668 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-05-28T01:29:21.534+05:30  INFO 13668 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-05-28T01:29:21.545+05:30  INFO 13668 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-05-28T01:29:21.550+05:30  INFO 13668 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-28T01:29:21.552+05:30  INFO 13668 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-28T01:29:21.559+05:30  INFO 13668 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-28T01:29:26.793+05:30  INFO 16464 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.2 with PID 16464 (C:\Users\Noel Cyriac\Documents\RapidRise\rapid-final-project-backend\FinalProject\target\classes started by Noel Cyriac in C:\Users\Noel Cyriac\Documents\RapidRise\rapid-final-project-backend\FinalProject)
+2026-05-28T01:29:26.795+05:30 DEBUG 16464 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-05-28T01:29:26.796+05:30  INFO 16464 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-28T01:29:27.438+05:30  INFO 16464 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-28T01:29:27.520+05:30  INFO 16464 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 10 JPA repository interfaces.
+2026-05-28T01:29:28.011+05:30  INFO 16464 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-05-28T01:29:28.024+05:30  INFO 16464 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-28T01:29:28.024+05:30  INFO 16464 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-05-28T01:29:28.093+05:30  INFO 16464 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1253 ms
+2026-05-28T01:29:28.231+05:30  INFO 16464 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-05-28T01:29:28.305+05:30  INFO 16464 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-05-28T01:29:28.814+05:30  INFO 16464 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-28T01:29:28.851+05:30  INFO 16464 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-28T01:29:29.003+05:30  INFO 16464 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@c1a74d
+2026-05-28T01:29:29.005+05:30  INFO 16464 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-28T01:29:29.057+05:30  WARN 16464 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-28T01:29:29.077+05:30  INFO 16464 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.35
+	Default catalog/schema: fileapp/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-28T01:29:30.338+05:30  INFO 16464 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-28T01:29:30.416+05:30  INFO 16464 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-28T01:29:30.469+05:30  INFO 16464 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-05-28T01:29:31.158+05:30 DEBUG 16464 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-05-28T01:29:31.887+05:30  WARN 16464 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-05-28T01:29:32.343+05:30  INFO 16464 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-05-28T01:29:32.352+05:30  INFO 16464 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 6.032 seconds (process running for 6.519)
+2026-05-28T01:29:32.491+05:30  INFO 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-28T01:29:32.491+05:30  INFO 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-28T01:29:32.492+05:30  INFO 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-05-28T01:30:22.181+05:30  WARN 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-28T01:30:22.325+05:30  WARN 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-28T01:34:05.173+05:30  WARN 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 17172 milliseconds ago at 2026-05-27T20:03:48.000Z. Current time: 2026-05-27T20:04:05.172Z. Allowed clock skew: 0 milliseconds.
+2026-05-28T01:34:05.174+05:30  WARN 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.s.JwtAuthenticationEntryPoint      : Unauthorized access: Full authentication is required to access this resource
+2026-05-28T01:34:05.233+05:30  INFO 16464 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.nc.FinalProject.service.AuthService    : Refresh SUCCESS for user: noelcyriac99@gmail.com

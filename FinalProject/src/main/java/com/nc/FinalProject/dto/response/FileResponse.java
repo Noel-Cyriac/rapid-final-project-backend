@@ -16,4 +16,5 @@ public class FileResponse {
     private Long size;
     private String filePath;
     private LocalDateTime uploadedAt;
+    private boolean starred;
 }

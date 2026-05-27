@@ -458,7 +458,8 @@ public class FileService {
                         f.getId(),
                         f.getFileName(),
                         f.getSize(),
-                        f.getLastDownloadedAt()
+                        f.getLastDownloadedAt(),
+                        f.isStarred()
                 ))
                 .toList();
     }
@@ -473,7 +474,8 @@ public class FileService {
                         f.getFileName(),
                         f.getFileType(),
                         f.getSize(),
-                        f.getLastOpenedAt()
+                        f.getLastOpenedAt(),
+                        f.isStarred()
                 ))
                 .toList();
     }
@@ -732,7 +734,7 @@ public class FileService {
                         a.getFile().getId(),
                         a.getFile().getFileName(),
                         a.getFile().getSize(),
-                        a.getCreatedAt()   // ✅ THIS is your download time
+                        a.getCreatedAt(),a.getFile().isStarred()
                 ));
 
         return new PagedResponse<>(
@@ -764,7 +766,8 @@ public class FileService {
                         f.getFileName(),
                         f.getFileType(),
                         f.getSize(),
-                        f.getLastOpenedAt()
+                        f.getLastOpenedAt(),
+                        f.isStarred()
                 ));
 
         return new PagedResponse<>(
@@ -840,7 +843,8 @@ public class FileService {
                 f.getFileType(),
                 f.getSize(),
                 f.getFilePath(),
-                f.getUploadedAt()
+                f.getUploadedAt(),
+                f.isStarred()
         );
     }
 

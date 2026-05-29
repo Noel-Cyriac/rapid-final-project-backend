@@ -28,5 +28,6 @@ public class SharePasswordToken {
     private LocalDateTime expiresAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipient_id")
     private ShareRecipient recipient;
 }

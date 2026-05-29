@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,21 +20,24 @@ public class ShareRecipient {
 
     private String email;
 
-    // unique URL token
     @Column(unique = true, nullable = false)
     private String accessToken;
 
-    // analytics
     private Integer openCount;
-
     private Integer usedCount;
 
     private LocalDateTime lastOpenedAt;
 
-    // revoke individual recipient
     private Boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "share_id")
     private Share share;
+
+    @OneToMany(
+            mappedBy = "recipient",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<SharePasswordToken> passwordTokens;
 }

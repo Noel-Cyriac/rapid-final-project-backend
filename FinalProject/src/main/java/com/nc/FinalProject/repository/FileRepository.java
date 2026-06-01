@@ -86,4 +86,23 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
 
     @Query("SELECT COALESCE(SUM(f.size), 0) FROM FileEntity f WHERE f.owner = :user AND f.deleted = false")
     Long getUsedStorage(@Param("user") Users user);
+
+    Page<FileEntity>
+    findByOwnerAndFolderAndDeletedFalse(
+            Users owner,
+            Folder folder,
+            Pageable pageable
+    );
+
+    List<FileEntity>
+    findByOwnerAndFolderAndDeletedFalse(
+            Users owner,
+            Folder folder
+    );
+
+    List<FileEntity>
+    findByOwnerAndFolder(
+            Users owner,
+            Folder folder
+    );
 }

@@ -1,5 +1,6 @@
 package com.nc.FinalProject.controller;
 
+import com.nc.FinalProject.dto.request.MoveFileRequest;
 import com.nc.FinalProject.dto.response.FileViewResponse;
 import com.nc.FinalProject.dto.response.SuccessResponse;
 import com.nc.FinalProject.entity.Users;
@@ -44,12 +45,28 @@ public class FileController {
     @PostMapping("/upload")
     public ResponseEntity<SuccessResponse> upload(
             @RequestParam("files") MultipartFile[] files,
+            @RequestParam(required = false) Long folderId,
+            Authentication auth
+    ) throws Exception {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Files uploaded successfully",
+                        fileService.uploadFiles(files, folderId, user(auth))
+                )
+        );
+    }
+
+    @PostMapping("/upload-folder")
+    public ResponseEntity<SuccessResponse> uploadFolder(
+            @RequestParam("files") MultipartFile[] files,
+            @RequestParam("paths") List<String> paths,
+            @RequestParam(required = false) Long parentId,
             Authentication auth
     ) throws Exception{
         return ResponseEntity.ok(
                 new SuccessResponse(
-                        "Files uploaded successfully",
-                        fileService.uploadFiles(files, user(auth))
+                        "Folder uploaded successfully",
+                        fileService.uploadFolder(files, paths, parentId, user(auth))
                 )
         );
     }
@@ -58,6 +75,7 @@ public class FileController {
     @GetMapping("/list")
     public ResponseEntity<SuccessResponse> list(
             Authentication auth,
+            @RequestParam(required = false) Long folderId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
@@ -66,6 +84,7 @@ public class FileController {
                         "Files fetched successfully",
                         fileService.listFiles(
                                 user(auth),
+                                folderId,
                                 PageRequest.of(page, size)
                         )
                 )
@@ -116,6 +135,18 @@ public class FileController {
         return fileStreamingService.streamByTokenForViewing(
                 token,
                 request
+        );
+    }
+
+    @PutMapping("/move")
+    public ResponseEntity<SuccessResponse> moveFiles(
+            @RequestBody MoveFileRequest request,
+            Authentication auth
+    ) {
+        fileService.moveFiles(request.getFileIds(), request.getTargetFolderId(), user(auth));
+
+        return ResponseEntity.ok(
+                new SuccessResponse("Files moved successfully", null)
         );
     }
 

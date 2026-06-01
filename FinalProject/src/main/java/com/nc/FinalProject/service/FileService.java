@@ -43,7 +43,7 @@ public class FileService {
     // ======================
     // MULTI UPLOAD
     // ======================
-    public List<FileResponse> uploadFiles(MultipartFile[] files, Users user) throws IOException {
+    public List<FileResponse> uploadFiles(MultipartFile[] files, Long folderId, Users user) throws IOException {
         final long MAX_TOTAL_SIZE = 100L * 1024 * 1024; // 100MB
         final long MAX_USER_STORAGE = 1024L * 1024 * 1024; // 1GB
 
@@ -51,17 +51,25 @@ public class FileService {
         List<FileResponse> list = new ArrayList<>();
         int uploadedCount = 0;
 
-        long currentUsage = fileRepository.getUsedStorage(user);
+        // optional folder lookup
+        Folder folder = null;
+        if (folderId != null) {
+            folder = folderRepository.findByIdAndOwner(folderId, user)
+                    .orElseThrow(() -> new BadRequestException("Folder not found"));
+        }
 
+        long currentUsage = fileRepository.getUsedStorage(user);
         long requestSize = Arrays.stream(files)
                 .filter(file -> !file.isEmpty())
                 .mapToLong(MultipartFile::getSize)
                 .sum();
 
+        // storage validation
         if (currentUsage + requestSize > MAX_USER_STORAGE) {
             throw new BadRequestException("Storage limit exceeded (1GB per user)");
         }
 
+        // request validation
         if (requestSize > MAX_TOTAL_SIZE) {
             throw new BadRequestException("Total upload size cannot exceed 100MB");
         }
@@ -69,8 +77,12 @@ public class FileService {
         for (MultipartFile file : files) {
             if (file.isEmpty()) continue;
 
-            String finalName = generateUniqueName(file.getOriginalFilename(), user, null);
-            String storedName = System.currentTimeMillis() + "_" + finalName;
+            String originalName = file.getOriginalFilename();
+            if (originalName == null || originalName.isBlank()) continue;
+
+            // unique name INSIDE current folder
+            String finalName = generateUniqueName(originalName, user, folder);
+            String storedName = System.currentTimeMillis() + "_" + UUID.randomUUID() + "_" + finalName;
             Path path = Paths.get(uploadDir, storedName);
 
             file.transferTo(path);
@@ -84,35 +96,148 @@ public class FileService {
                             .filePath(path.toString())
                             .uploadedAt(LocalDateTime.now())
                             .owner(user)
+                            .folder(folder) // NEW
                             .deleted(false)
                             .downloadCount(0)
                             .build()
             );
 
+            // existing tracking logic
             track(user, saved, "UPLOAD", file.getSize());
             list.add(mapToResponse(saved));
 
             uploadedCount++;
         }
 
+        // existing notification logic
         if (uploadedCount > 0) {
-            notificationService.create(
-                    user,
-                    "Upload Completed",
-                    uploadedCount + " file(s) uploaded successfully",
-                    NotificationType.UPLOAD
-            );
+            String message = folder != null
+                    ? uploadedCount + " file(s) uploaded to " + folder.getName()
+                    : uploadedCount + " file(s) uploaded successfully";
+
+            notificationService.create(user, "Upload Completed", message, NotificationType.UPLOAD);
         }
 
         return list;
     }
+
+    @Transactional
+    public List<FileResponse> uploadFolder(
+            MultipartFile[] files,
+            List<String> paths,
+            Long parentId,   // ✅ ADD THIS
+            Users user
+    ) throws IOException {
+
+        Files.createDirectories(Paths.get(uploadDir));
+        List<FileResponse> uploaded = new ArrayList<>();
+        Map<String, Folder> folderCache = new HashMap<>();
+
+        // ✅ FIX: inject starting parent context
+        Folder initialParent = null;
+
+        if (parentId != null) {
+            initialParent = folderRepository.findByIdAndOwner(parentId, user)
+                    .orElseThrow();
+        }
+
+        for (int i = 0; i < files.length; i++) {
+            MultipartFile file = files[i];
+            if (file.isEmpty()) continue;
+
+            String relativePath = paths.get(i);
+            String[] parts = relativePath.split("/");
+
+            // ✅ CHANGED ONLY THIS LINE
+            Folder currentParent = initialParent;
+
+            // create/find folder chain
+            for (int j = 0; j < parts.length - 1; j++) {
+                String folderName = parts[j];
+
+                String cacheKey = (currentParent == null ? "root" : currentParent.getId()) + "_" + folderName;
+                Folder folder = folderCache.get(cacheKey);
+
+                if (folder == null) {
+                    Folder finalParent = currentParent;
+
+                    folder = folderRepository.findByOwnerAndParentAndNameAndDeletedFalse(
+                                    user, finalParent, folderName)
+                            .orElseGet(() -> folderRepository.save(
+                                    Folder.builder()
+                                            .name(folderName)
+                                            .owner(user)
+                                            .parent(finalParent)
+                                            .createdAt(LocalDateTime.now())
+                                            .deleted(false)
+                                            .build()
+                            ));
+
+                    folderCache.put(cacheKey, folder);
+                }
+
+                currentParent = folder;
+            }
+
+            String fileName = parts[parts.length - 1];
+            String finalName = generateUniqueName(fileName, user, currentParent);
+
+            String storedName = System.currentTimeMillis() + "_" + UUID.randomUUID() + "_" + finalName;
+            Path path = Paths.get(uploadDir, storedName);
+
+            file.transferTo(path);
+
+            FileEntity saved = fileRepository.save(
+                    FileEntity.builder()
+                            .fileName(finalName)
+                            .storedName(storedName)
+                            .fileType(file.getContentType())
+                            .size(file.getSize())
+                            .filePath(path.toString())
+                            .uploadedAt(LocalDateTime.now())
+                            .owner(user)
+                            .folder(currentParent)
+                            .deleted(false)
+                            .downloadCount(0)
+                            .build()
+            );
+
+            track(user, saved, "UPLOAD", file.getSize());
+            uploaded.add(mapToResponse(saved));
+        }
+
+        notificationService.create(
+                user,
+                "Folder Upload Completed",
+                uploaded.size() + " file(s) uploaded",
+                NotificationType.UPLOAD
+        );
+
+        return uploaded;
+    }
     // ======================
     // LIST FILES
     // ======================
-    public PagedResponse<FileResponse> listFiles(Users user, Pageable pageable) {
+    public PagedResponse<FileResponse> listFiles(
+            Users user,
+            Long folderId,
+            Pageable pageable
+    ) {
+
+        Folder folder = null;
+
+        if (folderId != null) {
+            folder = folderRepository
+                    .findByIdAndOwner(folderId, user)
+                    .orElseThrow();
+        }
 
         Page<FileEntity> page =
-                fileRepository.findByOwnerAndDeletedFalse(user, pageable);
+                fileRepository.findByOwnerAndFolderAndDeletedFalse(
+                        user,
+                        folder,
+                        pageable
+                );
 
         Page<FileResponse> dtoPage =
                 page.map(this::mapToResponse);
@@ -127,7 +252,6 @@ public class FileService {
                 dtoPage.isLast()
         );
     }
-
     // ======================
     // RECYCLE BIN
     // ======================
@@ -154,6 +278,93 @@ public class FileService {
                 dtoPage.isFirst(),
                 dtoPage.isLast()
         );
+    }
+
+    @Transactional
+    public void moveFiles(List<Long> fileIds, Long targetFolderId, Users user) {
+
+        // 1. Resolve target folder
+        Folder targetFolder = null;
+
+        if (targetFolderId != null) {
+            targetFolder = folderRepository.findByIdAndOwner(targetFolderId, user)
+                    .orElseThrow(() -> new BadRequestException("Target folder not found"));
+        }
+
+        // 2. Fetch files
+        List<FileEntity> files = fileRepository.findAllById(fileIds);
+
+        if (files.isEmpty()) {
+            throw new BadRequestException("No files found");
+        }
+
+        // 3. Track validation results
+        List<FileEntity> validFiles = new ArrayList<>();
+
+        for (FileEntity file : files) {
+
+            if (!file.getOwner().getId().equals(user.getId())) {
+                continue;
+            }
+
+            if (file.getDeleted()) {
+                continue;
+            }
+
+            if (file.getFolder() != null && targetFolder != null
+                    && file.getFolder().getId().equals(targetFolder.getId())) {
+                continue;
+            }
+
+            if (file.getFolder() == null && targetFolder == null) {
+                continue;
+            }
+
+            validFiles.add(file);
+        }
+
+        if (validFiles.isEmpty()) {
+            throw new BadRequestException("No valid files to move");
+        }
+
+        // 4. Optional: duplicate name protection inside target folder
+        Map<String, Integer> nameCount = new HashMap<>();
+
+        for (FileEntity file : validFiles) {
+
+            String originalName = file.getFileName();
+            String newName = originalName;
+
+            if (targetFolder != null) {
+
+                boolean exists = fileRepository.existsByOwnerAndFolderAndFileNameAndDeletedFalse(
+                        user,
+                        targetFolder,
+                        originalName
+                );
+
+                if (exists) {
+                    int count = nameCount.getOrDefault(originalName, 1);
+
+                    String base = originalName;
+                    String ext = "";
+
+                    int dotIndex = originalName.lastIndexOf('.');
+                    if (dotIndex != -1) {
+                        base = originalName.substring(0, dotIndex);
+                        ext = originalName.substring(dotIndex);
+                    }
+
+                    newName = base + " (" + count + ")" + ext;
+                    nameCount.put(originalName, count + 1);
+                }
+            }
+
+            file.setFileName(newName);
+            file.setFolder(targetFolder);
+        }
+
+        fileRepository.saveAll(validFiles);
     }
 
     // ======================
@@ -407,13 +618,16 @@ public class FileService {
                 }
             }
 
-            // 3. delete physical file
+            // 3. delete stream tokens
+            streamTokenRepository.deleteByFileId(fileId);
+
+            // 4. delete physical file
             try {
                 Files.deleteIfExists(Paths.get(file.getFilePath()));
             } catch (Exception ignored) {
             }
 
-            // 4. delete file record
+            // 5. delete file record
             fileRepository.delete(file);
         }
     }

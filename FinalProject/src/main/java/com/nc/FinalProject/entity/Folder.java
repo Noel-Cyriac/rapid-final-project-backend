@@ -4,12 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Folder {
 
     @Id
@@ -18,11 +21,23 @@ public class Folder {
 
     private String name;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     private LocalDateTime createdAt;
 
-    @ManyToOne
+    private LocalDateTime deletedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     private Users owner;
 
-    @ManyToOne
+    // parent folder
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
     private Folder parent;
+
+    // child folders
+    @OneToMany(mappedBy = "parent")
+    private List<Folder> children = new ArrayList<>();
 }

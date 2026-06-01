@@ -45,7 +45,7 @@ public class FileController {
     public ResponseEntity<SuccessResponse> upload(
             @RequestParam("files") MultipartFile[] files,
             Authentication auth
-    ) {
+    ) throws Exception{
         return ResponseEntity.ok(
                 new SuccessResponse(
                         "Files uploaded successfully",

@@ -37,11 +37,10 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
     );
 
     @Query("""
-        SELECT COALESCE(SUM(f.size), 0)
-        FROM FileEntity f
-        WHERE f.owner = :user
-        AND f.deleted = false
-    """)
+    SELECT COALESCE(SUM(f.size), 0)
+    FROM FileEntity f
+    WHERE f.owner = :user
+""")
     Long totalUsed(@Param("user") Users user);
 
     List<FileEntity> findTop4ByOwnerAndDeletedFalseOrderByUploadedAtDesc(
@@ -74,7 +73,6 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
             COALESCE(SUM(f.size), 0)
         FROM FileEntity f
         WHERE f.owner = :user
-        AND f.deleted = false
         GROUP BY f.fileType
     """)
     List<Object[]> storageBreakdown(@Param("user") Users user);
@@ -85,4 +83,7 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
 
     List<FileEntity>
     findTop4ByOwnerAndDeletedFalseAndLastDownloadedAtNotNullOrderByLastDownloadedAtDesc(Users user);
+
+    @Query("SELECT COALESCE(SUM(f.size), 0) FROM FileEntity f WHERE f.owner = :user AND f.deleted = false")
+    Long getUsedStorage(@Param("user") Users user);
 }

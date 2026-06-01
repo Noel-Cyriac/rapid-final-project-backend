@@ -10,6 +10,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -159,6 +160,26 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.GONE)
                 .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ErrorResponse> handleMaxUploadSizeExceeded(MaxUploadSizeExceededException ex) {
+        Map<String, String> errors = Collections.singletonMap("file", "Maximum upload size is 100MB");
+
+        logger.error("Upload size exceeded: {}", ex.getMessage());
+
+        return ResponseEntity.badRequest()
+                .body(new ErrorResponse("Upload failed", errors));
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex) {
+        Map<String, String> errors = Collections.singletonMap("file", ex.getMessage());
+
+        logger.error("Bad request: {}", ex.getMessage());
+
+        return ResponseEntity.badRequest()
+                .body(new ErrorResponse("Upload failed", errors));
     }
 
     // Generic Exception Fallback

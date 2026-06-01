@@ -2,6 +2,7 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
+import com.nc.FinalProject.exception.BadRequestException;
 import com.nc.FinalProject.exception.SharedFileDeleteException;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
@@ -42,92 +43,69 @@ public class FileService {
     // ======================
     // MULTI UPLOAD
     // ======================
-    public List<FileResponse> uploadFiles(
-            MultipartFile[] files,
-            Users user
-    ) {
-        try {
+    public List<FileResponse> uploadFiles(MultipartFile[] files, Users user) throws IOException {
+        final long MAX_TOTAL_SIZE = 100L * 1024 * 1024; // 100MB
+        final long MAX_USER_STORAGE = 1024L * 1024 * 1024; // 1GB
 
-            Files.createDirectories(Paths.get(uploadDir));
+        Files.createDirectories(Paths.get(uploadDir));
+        List<FileResponse> list = new ArrayList<>();
+        int uploadedCount = 0;
 
-            List<FileResponse> list =
-                    new ArrayList<>();
+        long currentUsage = fileRepository.getUsedStorage(user);
 
-            int uploadedCount = 0;
-            long totalSize = 0;
+        long requestSize = Arrays.stream(files)
+                .filter(file -> !file.isEmpty())
+                .mapToLong(MultipartFile::getSize)
+                .sum();
 
-            for (MultipartFile file : files) {
+        if (currentUsage + requestSize > MAX_USER_STORAGE) {
+            throw new BadRequestException("Storage limit exceeded (1GB per user)");
+        }
 
-                if (file.isEmpty()) continue;
+        if (requestSize > MAX_TOTAL_SIZE) {
+            throw new BadRequestException("Total upload size cannot exceed 100MB");
+        }
 
-                String finalName =
-                        generateUniqueName(
-                                file.getOriginalFilename(),
-                                user,
-                                null
-                        );
+        for (MultipartFile file : files) {
+            if (file.isEmpty()) continue;
 
-                String storedName =
-                        System.currentTimeMillis()
-                                + "_"
-                                + finalName;
+            String finalName = generateUniqueName(file.getOriginalFilename(), user, null);
+            String storedName = System.currentTimeMillis() + "_" + finalName;
+            Path path = Paths.get(uploadDir, storedName);
 
-                Path path =
-                        Paths.get(uploadDir, storedName);
+            file.transferTo(path);
 
-                file.transferTo(path);
+            FileEntity saved = fileRepository.save(
+                    FileEntity.builder()
+                            .fileName(finalName)
+                            .storedName(storedName)
+                            .fileType(file.getContentType())
+                            .size(file.getSize())
+                            .filePath(path.toString())
+                            .uploadedAt(LocalDateTime.now())
+                            .owner(user)
+                            .deleted(false)
+                            .downloadCount(0)
+                            .build()
+            );
 
-                FileEntity saved =
-                        fileRepository.save(
-                                FileEntity.builder()
-                                        .fileName(finalName)
-                                        .storedName(storedName)
-                                        .fileType(file.getContentType())
-                                        .size(file.getSize())
-                                        .filePath(path.toString())
-                                        .uploadedAt(LocalDateTime.now())
-                                        .owner(user)
-                                        .deleted(false)
-                                        .downloadCount(0)
-                                        .build()
-                        );
+            track(user, saved, "UPLOAD", file.getSize());
+            list.add(mapToResponse(saved));
 
-                track(
-                        user,
-                        saved,
-                        "UPLOAD",
-                        file.getSize()
-                );
+            uploadedCount++;
+        }
 
-                list.add(
-                        mapToResponse(saved)
-                );
-
-                uploadedCount++;
-                totalSize += file.getSize();
-            }
-
-            // ADD HERE
-            if (uploadedCount > 0) {
-
-                notificationService.create(
-                        user,
-                        "Upload Completed",
-                        uploadedCount +
-                                " file(s) uploaded successfully",
-                        NotificationType.UPLOAD
-                );
-            }
-
-            return list;
-
-        } catch (Exception e) {
-            throw new RuntimeException(
-                    e.getMessage()
+        if (uploadedCount > 0) {
+            notificationService.create(
+                    user,
+                    "Upload Completed",
+                    uploadedCount + " file(s) uploaded successfully",
+                    NotificationType.UPLOAD
             );
         }
-    }
 
+        return list;
+    }
     // ======================
     // LIST FILES
     // ======================

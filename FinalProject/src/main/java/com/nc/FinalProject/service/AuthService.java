@@ -20,6 +20,7 @@ import com.nc.FinalProject.security.CustomUserDetails;
 import com.nc.FinalProject.security.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +79,7 @@ public class AuthService {
         return savedUser;
     }
 
-
+    @Transactional
     public LoginResponse login(
             LoginRequest request,
             HttpServletResponse response

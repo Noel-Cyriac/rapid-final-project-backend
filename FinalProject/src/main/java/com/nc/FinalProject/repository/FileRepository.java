@@ -105,4 +105,10 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
             Users owner,
             Folder folder
     );
+    List<FileEntity> findByOwnerAndFolderAndDeletedTrue(Users owner, Folder folder);
+
+    List<FileEntity> findByOwnerAndDeletedTrue(
+            Users user
+    );
+
 }

@@ -1,11 +1,13 @@
 package com.nc.FinalProject.repository;
 
+import com.nc.FinalProject.entity.FileEntity;
 import com.nc.FinalProject.entity.Folder;
 import com.nc.FinalProject.entity.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +50,13 @@ public interface FolderRepository
     findByOwnerAndParent(
             Users owner,
             Folder parent
+    );
+
+    List<Folder> findByOwnerAndParentIsNullAndDeletedFalse(Users user);
+
+    List<Folder> findByOwnerAndDeletedTrue(Users owner);
+    List<Folder> findByOwnerAndParentAndDeletedTrue(Users owner, Folder parent);
+    List<Folder> findByDeletedTrueAndDeletedAtBefore(
+            LocalDateTime date
     );
 }

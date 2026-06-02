@@ -1,6 +1,7 @@
 package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.entity.FileEntity;
+import com.nc.FinalProject.entity.Folder;
 import com.nc.FinalProject.entity.Share;
 import com.nc.FinalProject.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -19,55 +20,57 @@ import java.util.List;
 public class RecycleBinCleanupService {
 
     private final FileRepository fileRepository;
-    private final FileActivityRepository activityRepository;
-    private final ShareRepository shareRepository;
-    private final StreamTokenRepository streamTokenRepository;
+    private final FolderRepository folderRepository;
+    private final FileService fileService;
 
     @Scheduled(cron = "0 0 * * * *")
-    public void autoDeleteExpiredFiles() {
+    public void autoDeleteExpiredItems() {
         LocalDateTime cutoff = LocalDateTime.now().minusDays(30);
+
+        // delete expired folders first
+        List<Folder> expiredFolders = folderRepository.findByDeletedTrueAndDeletedAtBefore(cutoff);
+
+        for (Folder folder : expiredFolders) {
+            try {
+                // restore-safe permanent delete
+                deleteFolderPermanently(folder);
+                log.info("Auto deleted folder: {}", folder.getName());
+            } catch (Exception e) {
+                log.error("Failed to delete folder {}", folder.getName(), e);
+            }
+        }
+
+        // delete orphan files
         List<FileEntity> expiredFiles = fileRepository.findByDeletedTrueAndDeletedAtBefore(cutoff);
 
         for (FileEntity file : expiredFiles) {
+            // skip files already removed by folder deletion
+            if (file.getFolder() != null && file.getFolder().isDeleted()) {
+                continue;
+            }
+
             try {
-                Long fileId = file.getId();
-
-                // delete activities
-                activityRepository.deleteByFile_Id(fileId);
-
-                // remove shares
-                List<Share> relatedShares = shareRepository.findAllByFileOrFilesContains(file, file);
-
-                for (Share share : relatedShares) {
-                    if (share.getFile() != null && share.getFile().getId().equals(fileId)) {
-                        share.setFile(null);
-                    }
-
-                    if (share.getFiles() != null) {
-                        share.getFiles().removeIf(f -> f.getId().equals(fileId));
-                    }
-
-                    boolean emptySingle = share.getFile() == null;
-                    boolean emptyBundle = share.getFiles() == null || share.getFiles().isEmpty();
-
-                    if (emptySingle && emptyBundle) {
-                        streamTokenRepository.deleteByRecipient_Share_Id(share.getId());
-                        shareRepository.delete(share);
-                    } else {
-                        shareRepository.save(share);
-                    }
-                }
-
-                // delete physical file
-                Files.deleteIfExists(Paths.get(file.getFilePath()));
-
-                // delete db record
-                fileRepository.delete(file);
-
-                log.info("Auto deleted recycle bin file: {}", file.getFileName());
+                fileService.autoDeleteFile(file);
+                log.info("Auto deleted file: {}", file.getFileName());
             } catch (Exception e) {
-                log.error("Failed to auto delete file {}", file.getFileName(), e);
+                log.error("Failed to delete file {}", file.getFileName(), e);
             }
         }
+    }
+
+    private void deleteFolderPermanently(Folder folder) {
+        List<FileEntity> files = fileRepository.findByOwnerAndFolder(folder.getOwner(), folder);
+
+        for (FileEntity file : files) {
+            fileService.autoDeleteFile(file);
+        }
+
+        List<Folder> children = folderRepository.findByOwnerAndParent(folder.getOwner(), folder);
+
+        for (Folder child : children) {
+            deleteFolderPermanently(child);
+        }
+
+        folderRepository.delete(folder);
     }
 }

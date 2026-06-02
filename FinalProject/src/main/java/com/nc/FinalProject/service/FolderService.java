@@ -28,6 +28,7 @@ public class FolderService {
 
     private final FolderRepository folderRepository;
     private final FileRepository fileRepository;
+    private final FileService fileService;
 
     public FolderResponse createFolder(CreateFolderRequest request, Users user) {
 
@@ -151,14 +152,73 @@ public class FolderService {
             throw new BadRequestException("Cannot move folder into itself");
         }
 
+        // prevent moving into its own child/descendant
+        if (target != null && isDescendant(folder, target)) {
+            throw new BadRequestException("Cannot move folder into its child");
+        }
+
         folder.setParent(target);
         folderRepository.save(folder);
     }
 
+    private boolean isDescendant(Folder source, Folder target) {
+        Folder current = target;
+        while (current != null) {
+            if (current.getId().equals(source.getId())) {
+                return true;
+            }
+            current = current.getParent();
+        }
+        return false;
+    }
+
+    public List<FolderTreeResponse> getFolderTree(Users user) {
+
+        List<Folder> roots =
+                folderRepository.findByOwnerAndParentIsNullAndDeletedFalse(user);
+
+        return roots.stream()
+                .map(f -> buildTree(f, user))
+                .toList();
+    }
+
+    private FolderTreeResponse buildTree(Folder folder, Users user) {
+
+        List<Folder> children =
+                folderRepository.findByOwnerAndParentAndDeletedFalse(user, folder);
+
+        List<FolderTreeResponse> childDtos =
+                children.stream()
+                        .map(child -> buildTree(child, user))
+                        .toList();
+
+        return new FolderTreeResponse(
+                folder.getId(),
+                folder.getName(),
+                childDtos
+        );
+    }
+
     @Transactional
-    public void deleteFolder(Long folderId, Users user) {
-        Folder folder = folderRepository.findByIdAndOwner(folderId, user).orElseThrow();
-        recursiveDelete(folder, user);
+    public void deleteFolders(
+            List<Long> ids,
+            Users user
+    ) {
+
+        List<Folder> folders =
+                folderRepository.findAllById(ids);
+
+        for (Folder folder : folders) {
+
+            if (!folder.getOwner().getId()
+                    .equals(user.getId())) {
+                continue;
+            }
+
+            if (!folder.isDeleted()) {
+                recursiveDelete(folder, user);
+            }
+        }
     }
 
     private void recursiveDelete(Folder folder, Users user) {
@@ -180,9 +240,84 @@ public class FolderService {
     }
 
     @Transactional
-    public void restoreFolder(Long folderId, Users user) {
-        Folder folder = folderRepository.findByIdAndOwner(folderId, user).orElseThrow();
-        recursiveRestore(folder, user);
+    public void permanentlyDeleteFolders(
+            List<Long> ids,
+            Users user
+    ) {
+
+        List<Folder> folders =
+                folderRepository.findAllById(ids);
+
+        for (Folder folder : folders) {
+
+            if (!folder.getOwner().getId()
+                    .equals(user.getId())) {
+                continue;
+            }
+
+            if (!folder.isDeleted()) {
+                continue;
+            }
+
+            recursivePermanentDelete(folder);
+        }
+    }
+
+    private void recursivePermanentDelete(Folder folder) {
+        // delete files in current folder
+        List<FileEntity> files = fileRepository.findByOwnerAndFolder(folder.getOwner(), folder);
+
+        for (FileEntity file : files) {
+            fileService.autoDeleteFile(file);
+        }
+
+        // delete child folders first
+        List<Folder> children = folderRepository.findByOwnerAndParent(folder.getOwner(), folder);
+
+        for (Folder child : children) {
+            recursivePermanentDelete(child);
+        }
+
+        // delete folder record
+        folderRepository.delete(folder);
+    }
+
+    @Transactional
+    public void restoreFolders(
+            List<Long> ids,
+            Users user
+    ) {
+
+        List<Folder> folders =
+                folderRepository.findAllById(ids);
+
+        for (Folder folder : folders) {
+
+            if (!folder.getOwner().getId()
+                    .equals(user.getId())) {
+                continue;
+            }
+
+            if (!folder.isDeleted()) {
+                continue;
+            }
+
+            restoreParentChain(folder, user);
+            recursiveRestore(folder, user);
+        }
+    }
+
+    private void restoreParentChain(Folder folder, Users user) {
+
+        Folder parent = folder.getParent();
+
+        if (parent != null && parent.isDeleted()) {
+            parent.setDeleted(false);
+            parent.setDeletedAt(null);
+            folderRepository.save(parent);
+
+            restoreParentChain(parent, user);
+        }
     }
 
     private void recursiveRestore(Folder folder, Users user) {
@@ -196,18 +331,26 @@ public class FolderService {
         folder.setDeletedAt(null);
         folderRepository.save(folder);
 
-        List<FileEntity> files = fileRepository.findByOwnerAndFolder(user, folder);
+        // ✅ FIX: restore ONLY deleted files inside folder
+        List<FileEntity> files =
+                fileRepository.findByOwnerAndFolder(user, folder);
 
         for (FileEntity file : files) {
+            if (!file.getDeleted()) continue;
+
             file.setDeleted(false);
             file.setDeletedAt(null);
         }
-
         fileRepository.saveAll(files);
 
-        List<Folder> children = folderRepository.findByOwnerAndParent(user, folder);
+        // ✅ FIX: restore ONLY deleted children first
+        List<Folder> children =
+                folderRepository.findByOwnerAndParent(user, folder);
+
         for (Folder child : children) {
-            recursiveRestore(child, user);
+            if (child.isDeleted()) {
+                recursiveRestore(child, user);
+            }
         }
     }
 

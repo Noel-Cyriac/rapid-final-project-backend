@@ -179,7 +179,7 @@ public class GlobalExceptionHandler {
         logger.error("Bad request: {}", ex.getMessage());
 
         return ResponseEntity.badRequest()
-                .body(new ErrorResponse("Upload failed", errors));
+                .body(new ErrorResponse("Bad request", errors));
     }
 
     // Generic Exception Fallback

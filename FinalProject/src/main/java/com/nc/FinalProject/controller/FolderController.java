@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import com.nc.FinalProject.dto.request.BulkFolderActionRequest;
 
 @RestController
 @RequestMapping("/api/folders")
@@ -68,6 +69,16 @@ public class FolderController {
         );
     }
 
+    @GetMapping("/tree")
+    public ResponseEntity<SuccessResponse> getTree(Authentication auth) {
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Folder tree fetched",
+                        folderService.getFolderTree(user(auth))
+                )
+        );
+    }
+
     @GetMapping("/download/{id}")
     public ResponseEntity<StreamingResponseBody> downloadFolder(@PathVariable Long id, Authentication auth) {
         StreamingResponseBody stream = outputStream ->
@@ -99,15 +110,60 @@ public class FolderController {
         return new SuccessResponse("Folder moved", null);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<SuccessResponse> deleteFolder(@PathVariable Long id, Authentication auth) {
-        folderService.deleteFolder(id, user(auth));
-        return ResponseEntity.ok(new SuccessResponse("Folder moved to recycle bin", null));
+    @DeleteMapping
+    public ResponseEntity<SuccessResponse> deleteFolders(
+            @RequestBody BulkFolderActionRequest request,
+            Authentication auth
+    ) {
+
+        folderService.deleteFolders(
+                request.getIds(),
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Folders moved to recycle bin",
+                        null
+                )
+        );
     }
 
-    @PostMapping("/{id}/restore")
-    public ResponseEntity<SuccessResponse> restoreFolder(@PathVariable Long id, Authentication auth) {
-        folderService.restoreFolder(id, user(auth));
-        return ResponseEntity.ok(new SuccessResponse("Folder restored successfully", null));
+    @PostMapping("/restore")
+    public ResponseEntity<SuccessResponse> restoreFolders(
+            @RequestBody BulkFolderActionRequest request,
+            Authentication auth
+    ) {
+
+        folderService.restoreFolders(
+                request.getIds(),
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Folders restored successfully",
+                        null
+                )
+        );
+    }
+
+    @DeleteMapping("/permanent")
+    public ResponseEntity<SuccessResponse> permanentlyDeleteFolders(
+            @RequestBody BulkFolderActionRequest request,
+            Authentication auth
+    ) {
+
+        folderService.permanentlyDeleteFolders(
+                request.getIds(),
+                user(auth)
+        );
+
+        return ResponseEntity.ok(
+                new SuccessResponse(
+                        "Folders permanently deleted",
+                        null
+                )
+        );
     }
 }

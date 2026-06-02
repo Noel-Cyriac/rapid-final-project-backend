@@ -125,66 +125,113 @@ public class FileService {
     public List<FileResponse> uploadFolder(
             MultipartFile[] files,
             List<String> paths,
-            Long parentId,   // ✅ ADD THIS
+            Long parentId,
             Users user
     ) throws IOException {
 
+        final long MAX_TOTAL_SIZE = 100L * 1024 * 1024; // 100MB
+        final long MAX_USER_STORAGE = 1024L * 1024 * 1024; // 1GB
+
         Files.createDirectories(Paths.get(uploadDir));
+
         List<FileResponse> uploaded = new ArrayList<>();
         Map<String, Folder> folderCache = new HashMap<>();
 
-        // ✅ FIX: inject starting parent context
         Folder initialParent = null;
 
         if (parentId != null) {
             initialParent = folderRepository.findByIdAndOwner(parentId, user)
-                    .orElseThrow();
+                    .orElseThrow(() -> new BadRequestException("Parent folder not found"));
         }
 
+        // =========================
+        // 1. PRE-CALCULATE SIZE
+        // =========================
+        long requestSize = 0;
+
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                requestSize += file.getSize();
+            }
+        }
+
+        long currentUsage = fileRepository.getUsedStorage(user);
+
+        // =========================
+        // 2. VALIDATIONS
+        // =========================
+        if (requestSize > MAX_TOTAL_SIZE) {
+            throw new BadRequestException("Total upload size cannot exceed 100MB");
+        }
+
+        if (currentUsage + requestSize > MAX_USER_STORAGE) {
+            throw new BadRequestException("Storage limit exceeded (1GB per user)");
+        }
+
+        // =========================
+        // 3. PROCESS UPLOAD (NO MERGING, FULL ISOLATION)
+        // =========================
         for (int i = 0; i < files.length; i++) {
+
             MultipartFile file = files[i];
             if (file.isEmpty()) continue;
 
             String relativePath = paths.get(i);
             String[] parts = relativePath.split("/");
 
-            // ✅ CHANGED ONLY THIS LINE
             Folder currentParent = initialParent;
 
-            // create/find folder chain
+            StringBuilder pathKey = new StringBuilder();
+
             for (int j = 0; j < parts.length - 1; j++) {
+
                 String folderName = parts[j];
 
-                String cacheKey = (currentParent == null ? "root" : currentParent.getId()) + "_" + folderName;
-                Folder folder = folderCache.get(cacheKey);
+                pathKey.append("/").append(folderName);
+
+                String key = (currentParent == null ? "root" : currentParent.getId())
+                        + pathKey.toString();
+
+                Folder folder = folderCache.get(key);
 
                 if (folder == null) {
+
+                    String finalName = folderName;
+                    int count = 1;
+
+                    while (folderRepository.existsByOwnerAndParentAndNameAndDeletedFalse(
+                            user, currentParent, finalName)) {
+                        finalName = folderName + " (" + count + ")";
+                        count++;
+                    }
+
                     Folder finalParent = currentParent;
 
-                    folder = folderRepository.findByOwnerAndParentAndNameAndDeletedFalse(
-                                    user, finalParent, folderName)
-                            .orElseGet(() -> folderRepository.save(
-                                    Folder.builder()
-                                            .name(folderName)
-                                            .owner(user)
-                                            .parent(finalParent)
-                                            .createdAt(LocalDateTime.now())
-                                            .deleted(false)
-                                            .build()
-                            ));
+                    folder = folderRepository.save(
+                            Folder.builder()
+                                    .name(finalName)
+                                    .owner(user)
+                                    .parent(finalParent)
+                                    .createdAt(LocalDateTime.now())
+                                    .deleted(false)
+                                    .build()
+                    );
 
-                    folderCache.put(cacheKey, folder);
+                    folderCache.put(key, folder);
                 }
 
                 currentParent = folder;
             }
-
+            // =========================
+            // FILE CREATION
+            // =========================
             String fileName = parts[parts.length - 1];
             String finalName = generateUniqueName(fileName, user, currentParent);
 
-            String storedName = System.currentTimeMillis() + "_" + UUID.randomUUID() + "_" + finalName;
-            Path path = Paths.get(uploadDir, storedName);
+            String storedName =
+                    System.currentTimeMillis() + "_" + UUID.randomUUID() + "_" + finalName;
 
+            Path path = Paths.get(uploadDir, storedName);
             file.transferTo(path);
 
             FileEntity saved = fileRepository.save(
@@ -206,6 +253,9 @@ public class FileService {
             uploaded.add(mapToResponse(saved));
         }
 
+        // =========================
+        // 4. NOTIFICATION
+        // =========================
         notificationService.create(
                 user,
                 "Folder Upload Completed",
@@ -255,31 +305,71 @@ public class FileService {
     // ======================
     // RECYCLE BIN
     // ======================
-    public PagedResponse<RecycleBinResponse> recycleBin(Users user, Pageable pageable) {
+    public PagedResponse<RecycleItemResponse> recycleBin(
+            Users user,
+            Pageable pageable
+    ) {
 
-        Page<FileEntity> page =
-                fileRepository.findByOwnerAndDeletedTrue(user, pageable);
+        List<RecycleItemResponse> items = new ArrayList<>();
 
-        Page<RecycleBinResponse> dtoPage =
-                page.map(f -> new RecycleBinResponse(
-                        f.getId(),
-                        f.getFileName(),
-                        f.getFileType(),
-                        f.getSize(),
-                        f.getDeletedAt()
-                ));
+        // 1. FOLDERS (only top-level deleted folders)
+        List<Folder> deletedFolders =
+                folderRepository.findByOwnerAndDeletedTrue(user);
+
+        for (Folder f : deletedFolders) {
+            items.add(new RecycleItemResponse(
+                    "FOLDER",
+                    f.getId(),
+                    f.getName(),
+                    null,
+                    null,
+                    f.getDeletedAt(),
+                    f.getParent() != null ? f.getParent().getId() : null
+            ));
+        }
+
+        // 2. FILES (ONLY files NOT inside deleted folders)
+        List<FileEntity> deletedFiles =
+                fileRepository.findByOwnerAndDeletedTrue(user);
+
+        for (FileEntity f : deletedFiles) {
+
+            // IMPORTANT RULE:
+            if (f.getFolder() != null && f.getFolder().isDeleted()) {
+                continue; // skip → handled by folder
+            }
+
+            items.add(new RecycleItemResponse(
+                    "FILE",
+                    f.getId(),
+                    f.getFileName(),
+                    f.getSize(),
+                    f.getFileType(),
+                    f.getDeletedAt(),
+                    f.getFolder() != null ? f.getFolder().getId() : null
+            ));
+        }
+
+        // sort newest first
+        items.sort((a, b) -> b.getDeletedAt().compareTo(a.getDeletedAt()));
+
+        // manual pagination (since combined list)
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), items.size());
+
+        List<RecycleItemResponse> pageContent =
+                start >= items.size() ? List.of() : items.subList(start, end);
 
         return new PagedResponse<>(
-                dtoPage.getContent(),
-                dtoPage.getNumber(),
-                dtoPage.getSize(),
-                dtoPage.getTotalElements(),
-                dtoPage.getTotalPages(),
-                dtoPage.isFirst(),
-                dtoPage.isLast()
+                pageContent,
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                items.size(),
+                (int) Math.ceil((double) items.size() / pageable.getPageSize()),
+                pageable.getPageNumber() == 0,
+                end >= items.size()
         );
     }
-
     @Transactional
     public void moveFiles(List<Long> fileIds, Long targetFolderId, Users user) {
 
@@ -565,71 +655,65 @@ public class FileService {
 
     @Transactional
     public void deletePermanent(List<Long> ids, Users user) {
-
         List<FileEntity> files = fileRepository.findAllById(ids);
 
         for (FileEntity file : files) {
-
-            // ensure ownership
-            if (!file.getOwner().getId().equals(user.getId()))
+            if (!file.getOwner().getId().equals(user.getId())) {
                 continue;
-
-            Long fileId = file.getId();
-
-            // 1. delete activity rows
-            activityRepository.deleteByFile_Id(fileId);
-
-            // 2. handle shares referencing this file
-            List<Share> relatedShares =
-                    shareRepository.findAllByFileOrFilesContains(file, file);
-
-            for (Share share : relatedShares) {
-
-                // remove single-file relation
-                if (share.getFile() != null &&
-                        share.getFile().getId().equals(fileId)) {
-
-                    share.setFile(null);
-                }
-
-                // remove from bundle
-                if (share.getFiles() != null) {
-
-                    share.getFiles().removeIf(f ->
-                            f.getId().equals(fileId));
-                }
-
-                // determine if share is now empty
-                boolean emptySingle =
-                        share.getFile() == null;
-
-                boolean emptyBundle =
-                        share.getFiles() == null ||
-                                share.getFiles().isEmpty();
-
-                // delete empty share
-                if (emptySingle && emptyBundle) {
-                    streamTokenRepository.deleteByRecipient_Share_Id(share.getId());
-                    shareRepository.delete(share);
-                } else {
-
-                    // otherwise update modified share
-                    shareRepository.save(share);
-                }
             }
-
-            // 3. delete stream tokens
-            streamTokenRepository.deleteByFileId(fileId);
-
-            // 4. delete physical file
-            try {
-                Files.deleteIfExists(Paths.get(file.getFilePath()));
-            } catch (Exception ignored) {
-            }
-
-            // 5. delete file record
-            fileRepository.delete(file);
+            permanentlyDeleteFile(file);
         }
+    }
+
+    private void permanentlyDeleteFile(FileEntity file) {
+        Long fileId = file.getId();
+
+        // 1. delete activity rows
+        activityRepository.deleteByFile_Id(fileId);
+
+        // 2. handle shares referencing this file
+        List<Share> relatedShares = shareRepository.findAllByFileOrFilesContains(file, file);
+
+        for (Share share : relatedShares) {
+            // remove single-file relation
+            if (share.getFile() != null && share.getFile().getId().equals(fileId)) {
+                share.setFile(null);
+            }
+
+            // remove from bundle
+            if (share.getFiles() != null) {
+                share.getFiles().removeIf(f -> f.getId().equals(fileId));
+            }
+
+            // determine if share is empty
+            boolean emptySingle = share.getFile() == null;
+            boolean emptyBundle = share.getFiles() == null || share.getFiles().isEmpty();
+
+            // delete empty share
+            if (emptySingle && emptyBundle) {
+                streamTokenRepository.deleteByRecipient_Share_Id(share.getId());
+                shareRepository.delete(share);
+            } else {
+                shareRepository.save(share);
+            }
+        }
+
+        // 3. delete stream tokens
+        streamTokenRepository.deleteByFileId(fileId);
+
+        // 4. delete physical file
+        try {
+            Files.deleteIfExists(Paths.get(file.getFilePath()));
+        } catch (Exception ignored) {
+        }
+
+        // 5. delete DB record
+        fileRepository.delete(file);
+    }
+
+    @Transactional
+    public void autoDeleteFile(FileEntity file) {
+        permanentlyDeleteFile(file);
     }
 
     // ======================

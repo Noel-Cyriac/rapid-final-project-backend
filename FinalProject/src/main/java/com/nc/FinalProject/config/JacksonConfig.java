@@ -15,10 +15,8 @@ public class JacksonConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
 
-        // This allows the mapper to handle the LocalDateTime in your ErrorResponse
         mapper.registerModule(new JavaTimeModule());
 
-        // This prevents the timestamp from being a weird array of numbers
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         return mapper;

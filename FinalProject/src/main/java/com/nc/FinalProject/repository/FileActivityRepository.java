@@ -24,20 +24,6 @@ public interface FileActivityRepository extends JpaRepository<FileActivity, Long
                        @Param("action") String action);
 
     @Query("""
-        SELECT COALESCE(SUM(a.size), 0)
-        FROM FileActivity a
-        WHERE a.user = :user
-        AND a.action = :action
-    """)
-    Long totalBytes(@Param("user") Users user,
-                    @Param("action") String action);
-
-    List<FileActivity> findTop4ByUserAndActionOrderByCreatedAtDesc(
-            Users user,
-            String action
-    );
-
-    @Query("""
         SELECT COUNT(a)
         FROM FileActivity a
         WHERE a.user = :user
@@ -51,21 +37,10 @@ public interface FileActivityRepository extends JpaRepository<FileActivity, Long
     @Modifying
     void deleteByFile_Id(Long fileId);
 
-    Page<FileActivity> findByUserAndActionOrderByCreatedAtDesc(
-            Users user,
-            String action,
-            Pageable pageable
-    );
-
     Page<FileActivity> findByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
             Users user,
             String action,
             Pageable pageable
-    );
-
-    List<FileActivity> findTop4ByUserAndActionAndFile_DeletedFalseOrderByCreatedAtDesc(
-            Users user,
-            String action
     );
 
     @Query("""

@@ -15,16 +15,6 @@ import java.util.Optional;
 
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
 
-    Page<FileEntity> findByOwnerAndDeletedFalse(
-            Users user,
-            Pageable pageable
-    );
-
-    Page<FileEntity> findByOwnerAndDeletedTrue(
-            Users user,
-            Pageable pageable
-    );
-
     Optional<FileEntity> findByIdAndOwner(
             Long id,
             Users user

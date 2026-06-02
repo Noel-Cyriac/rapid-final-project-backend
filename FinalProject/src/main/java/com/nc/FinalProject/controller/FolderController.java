@@ -40,7 +40,7 @@ public class FolderController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folder created",
                         folderService.createFolder(
                                 request,
@@ -58,7 +58,7 @@ public class FolderController {
             Authentication auth
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folders fetched successfully",
                         folderService.listFolders(
                                 folderId,
@@ -72,7 +72,7 @@ public class FolderController {
     @GetMapping("/tree")
     public ResponseEntity<SuccessResponse> getTree(Authentication auth) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folder tree fetched",
                         folderService.getFolderTree(user(auth))
                 )
@@ -97,7 +97,7 @@ public class FolderController {
             Authentication auth
     ) {
         folderService.renameFolder(id, request.getName(), user(auth));
-        return new SuccessResponse("Folder renamed", null);
+        return new SuccessResponse<>("Folder renamed", null);
     }
 
     @PutMapping("/{id}/move")
@@ -107,7 +107,7 @@ public class FolderController {
             Authentication auth
     ) {
         folderService.moveFolder(id, request.getTargetFolderId(), user(auth));
-        return new SuccessResponse("Folder moved", null);
+        return new SuccessResponse<>("Folder moved", null);
     }
 
     @DeleteMapping
@@ -118,11 +118,12 @@ public class FolderController {
 
         folderService.deleteFolders(
                 request.getIds(),
-                user(auth)
+                user(auth),
+                request.isForce()
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folders moved to recycle bin",
                         null
                 )
@@ -141,7 +142,7 @@ public class FolderController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folders restored successfully",
                         null
                 )
@@ -160,7 +161,7 @@ public class FolderController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folders permanently deleted",
                         null
                 )

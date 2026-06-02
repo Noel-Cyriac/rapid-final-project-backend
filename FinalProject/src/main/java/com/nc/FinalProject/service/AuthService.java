@@ -6,11 +6,15 @@ import com.nc.FinalProject.dto.request.RegisterRequest;
 import com.nc.FinalProject.dto.request.ResetPasswordRequest;
 import com.nc.FinalProject.dto.response.RefreshResponse;
 import com.nc.FinalProject.entity.NotificationType;
+import com.nc.FinalProject.entity.PasswordResetToken;
+import com.nc.FinalProject.entity.RefreshToken;
 import com.nc.FinalProject.entity.Users;
 import com.nc.FinalProject.exception.EmailAlreadyExistsException;
 import com.nc.FinalProject.exception.InvalidRefreshTokenException;
 import com.nc.FinalProject.exception.InvalidTokenException;
 import com.nc.FinalProject.exception.PasswordMismatchException;
+import com.nc.FinalProject.repository.PasswordResetTokenRepository;
+import com.nc.FinalProject.repository.RefreshTokenRepository;
 import com.nc.FinalProject.repository.UserRepository;
 import com.nc.FinalProject.security.CustomUserDetails;
 import com.nc.FinalProject.security.JwtUtil;
@@ -19,11 +23,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +47,10 @@ public class AuthService {
     // Map to store reset tokens temporarily (replace with DB in production)
     private final Map<String, String> resetTokens = new HashMap<>();
     private final NotificationService notificationService;
+    private final RefreshTokenRepository refreshTokenRepository;
+    @Value("${jwt.refresh.expiration}")
+    private long refreshExpiration;
+    private final PasswordResetTokenRepository resetTokenRepository;
 
 
     public Users register(RegisterRequest request) {
@@ -69,7 +79,10 @@ public class AuthService {
     }
 
 
-    public LoginResponse login(LoginRequest request, HttpServletResponse response) {
+    public LoginResponse login(
+            LoginRequest request,
+            HttpServletResponse response
+    ) {
 
         var auth = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -84,20 +97,45 @@ public class AuthService {
         String email = userDetails.getUsername();
 
         Users user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
-        String accessToken = jwtUtil.generateAccessToken(email);
-        String refreshToken = jwtUtil.generateRefreshToken(email);
+        String accessToken =
+                jwtUtil.generateAccessToken(email);
 
-        Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
+        String refreshToken =
+                jwtUtil.generateRefreshToken(email);
+
+        // one login = one refresh token
+        refreshTokenRepository.deleteByUser(user);
+
+        refreshTokenRepository.save(
+                RefreshToken.builder()
+                        .token(refreshToken)
+                        .user(user)
+                        .expiryDate(
+                                Instant.now()
+                                        .plusMillis(refreshExpiration)
+                        )
+                        .build()
+        );
+
+        Cookie refreshCookie =
+                new Cookie("refreshToken", refreshToken);
+
         refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(false);
+        refreshCookie.setSecure(false); // true in prod
         refreshCookie.setPath("/api/auth/refresh");
-        refreshCookie.setMaxAge(7 * 24 * 60 * 60);
+        refreshCookie.setMaxAge(
+                (int) (refreshExpiration / 1000)
+        );
 
         response.addCookie(refreshCookie);
 
-        logger.info("Login SUCCESS for user: {}", email);
+        logger.info(
+                "Login SUCCESS for user: {}",
+                email
+        );
 
         return new LoginResponse(
                 accessToken,
@@ -106,113 +144,113 @@ public class AuthService {
                 user.getEmail()
         );
     }
+
+
     public RefreshResponse refreshToken(
             String refreshToken,
             HttpServletResponse response
     ) {
 
         if (refreshToken == null) {
-            logger.warn("Refresh FAILED: Missing token");
-            throw new InvalidRefreshTokenException(
-                    "Refresh token missing"
-            );
+            throw new InvalidRefreshTokenException("Missing refresh token");
         }
 
+        // 1. DB FIRST (source of truth)
+        RefreshToken storedToken =
+                refreshTokenRepository.findByToken(refreshToken)
+                        .orElseThrow(() -> new InvalidRefreshTokenException("Token revoked"));
+
+        // 2. DB expiry check
+        if (storedToken.getExpiryDate().isBefore(Instant.now())) {
+            refreshTokenRepository.delete(storedToken);
+            throw new InvalidRefreshTokenException("Token expired");
+        }
+
+        // 3. JWT validation (optional safety layer)
         if (!jwtUtil.validateRefreshToken(refreshToken)) {
-            logger.warn("Refresh FAILED: Invalid or expired token");
-
-            throw new InvalidRefreshTokenException(
-                    "Invalid or expired refresh token"
-            );
+            refreshTokenRepository.delete(storedToken);
+            throw new InvalidRefreshTokenException("Invalid token");
         }
 
-        String email =
-                jwtUtil.extractEmail(refreshToken);
+        String email = storedToken.getUser().getEmail();
 
-        String newAccessToken =
-                jwtUtil.generateAccessToken(email);
+        String newAccessToken = jwtUtil.generateAccessToken(email);
+        String newRefreshToken = jwtUtil.generateRefreshToken(email);
 
-        String newRefreshToken =
-                jwtUtil.generateRefreshToken(email);
-
-        Cookie refreshCookie =
-                new Cookie(
-                        "refreshToken",
-                        newRefreshToken
-                );
-
-        refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(false);
-        refreshCookie.setPath("/api/auth/refresh");
-        refreshCookie.setMaxAge(
-                (int) (jwtUtil.getRefreshExpiration() / 1000)
+        // 4. ROTATE TOKEN (update same DB row)
+        storedToken.setToken(newRefreshToken);
+        storedToken.setExpiryDate(
+                Instant.now().plusMillis(refreshExpiration)
         );
 
-        response.addCookie(refreshCookie);
+        refreshTokenRepository.save(storedToken);
 
-        logger.info("Refresh SUCCESS for user: {}", email);
+        Cookie cookie = new Cookie("refreshToken", newRefreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/api/auth/refresh");
+        cookie.setMaxAge((int) (refreshExpiration / 1000));
+
+        response.addCookie(cookie);
 
         return new RefreshResponse(newAccessToken);
     }
-    public void sendResetPasswordEmail(String email) {
 
-        logger.info("Received request to send reset password email for: {}", email);
+    public void sendResetPasswordEmail(String email) {
 
         Users user = userRepository.findByEmail(email).orElse(null);
 
-        if (user == null) {
-            logger.warn("No user found with email: {}. Skipping email send.", email);
-            return;
-        }
+        if (user == null) return;
+
+        // optional: remove old tokens
+        resetTokenRepository.deleteByUser(user);
 
         String token = UUID.randomUUID().toString();
-        resetTokens.put(token, user.getEmail());
+
+        PasswordResetToken resetToken = PasswordResetToken.builder()
+                .token(token)
+                .user(user)
+                .expiryDate(Instant.now().plusSeconds(15 * 60)) // 15 min expiry
+                .build();
+
+        resetTokenRepository.save(resetToken);
 
         String resetLink = "http://localhost:5175/reset-password/" + token;
 
-        logger.info("Generated reset link for {}: {}", email, resetLink);
-
-        // ✅ ACTUAL EMAIL SEND USING YOUR MAIL SERVICE
         mailService.sendResetPasswordEmail(user.getEmail(), resetLink);
-
-        logger.info("Reset password email sent successfully to {}", email);
     }
 
     public void resetPassword(ResetPasswordRequest request) {
-        logger.info("Received reset token: {}", request.getToken());
 
-        // ✅ Check password match here
         if (!request.getNewPassword().equals(request.getConfirmPassword())) {
             throw new PasswordMismatchException("Passwords do not match");
         }
 
-        // ✅ Check token
-        String email = resetTokens.get(request.getToken());
-        if (email == null) {
-            throw new InvalidTokenException("Invalid or expired reset token");
+        PasswordResetToken resetToken =
+                resetTokenRepository.findByToken(request.getToken())
+                        .orElseThrow(() ->
+                                new InvalidTokenException("Invalid reset token")
+                        );
+
+        if (resetToken.getExpiryDate().isBefore(Instant.now())) {
+            resetTokenRepository.delete(resetToken);
+            throw new InvalidTokenException("Reset token expired");
         }
 
+        Users user = resetToken.getUser();
 
-// ✅ Create a Users object with only email set (or fetch it if needed)
-        Users user = userRepository.findByEmail(email).orElse(null);
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
 
-// ✅ Update password
-        if (user != null) {
-            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
-            userRepository.save(user);
+        // invalidate token after use
+        resetTokenRepository.delete(resetToken);
 
-
-        // ✅ Invalidate token
-        resetTokens.remove(request.getToken());
-        logger.info("Password reset successful for user: {}", email);
-
-            notificationService.create(
-                    user,
-                    "Password Reset Successful",
-                    "Your password was reset using email link",
-                    NotificationType.SECURITY
-            );
-    }
+        notificationService.create(
+                user,
+                "Password Reset Successful",
+                "Your password was reset using email link",
+                NotificationType.SECURITY
+        );
     }
 
     public void changePassword(Users user, String oldPassword, String newPassword, String confirmPassword) {
@@ -238,5 +276,20 @@ public class AuthService {
                 "Your password was updated successfully",
                 NotificationType.SECURITY
         );
+    }
+
+    public void logout(String refreshToken, HttpServletResponse response) {
+
+        if (refreshToken != null) {
+            refreshTokenRepository.deleteByToken(refreshToken);
+        }
+
+        Cookie cookie = new Cookie("refreshToken", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/api/auth/refresh");
+        cookie.setMaxAge(0);
+
+        response.addCookie(cookie);
     }
 }

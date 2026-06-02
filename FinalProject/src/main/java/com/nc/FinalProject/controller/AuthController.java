@@ -28,24 +28,20 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
-    private final JwtUtil jwtUtil;
-    private final AuthenticationManager authManager;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
         Users user = authService.register(request);
         return ResponseEntity.ok(
-                new SuccessResponse("User registered successfully", Map.of("email", user.getEmail()))
+                new SuccessResponse<>("User registered successfully", Map.of("email", user.getEmail()))
         );
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
         LoginResponse loginResponse = authService.login(request, response);
-        return ResponseEntity.ok(new SuccessResponse("Login successful", loginResponse));
+        return ResponseEntity.ok(new SuccessResponse<>("Login successful", loginResponse));
     }
 
     @PostMapping("/refresh")
@@ -54,7 +50,7 @@ public class AuthController {
             HttpServletResponse response) {
         RefreshResponse res = authService.refreshToken(refreshToken, response);
         return ResponseEntity.ok(
-                new SuccessResponse("Token refreshed successfully", res)
+                new SuccessResponse<>("Token refreshed successfully", res)
         );
     }
 
@@ -62,7 +58,7 @@ public class AuthController {
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         System.out.println(request);
         authService.sendResetPasswordEmail(request.getEmail());
-        return ResponseEntity.ok(new SuccessResponse(
+        return ResponseEntity.ok(new SuccessResponse<>(
                 "If an account with that email exists, a reset link has been sent.", null
         ));
     }
@@ -70,7 +66,7 @@ public class AuthController {
     @PostMapping("/reset-password")
     public ResponseEntity<SuccessResponse> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         authService.resetPassword(request);
-        return ResponseEntity.ok(new SuccessResponse("Password reset successfully", null)
+        return ResponseEntity.ok(new SuccessResponse<>("Password reset successfully", null)
         );
     }
 
@@ -85,7 +81,7 @@ public class AuthController {
         authService.sendResetPasswordEmail(user.getEmail());
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Reset link sent to your registered email",
                         null
                 )
@@ -109,7 +105,19 @@ public class AuthController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse("Password changed successfully", null)
+                new SuccessResponse<>("Password changed successfully", null)
+        );
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<SuccessResponse> logout(
+            @CookieValue(value = "refreshToken", required = false) String refreshToken,
+            HttpServletResponse response
+    ) {
+        authService.logout(refreshToken, response);
+
+        return ResponseEntity.ok(
+                new SuccessResponse<>("Logged out successfully", null)
         );
     }
 }

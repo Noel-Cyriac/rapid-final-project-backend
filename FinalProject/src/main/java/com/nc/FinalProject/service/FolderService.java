@@ -4,6 +4,7 @@ import com.nc.FinalProject.dto.request.CreateFolderRequest;
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
 import com.nc.FinalProject.exception.BadRequestException;
+import com.nc.FinalProject.exception.SharedFileDeleteException;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -29,6 +31,7 @@ public class FolderService {
     private final FolderRepository folderRepository;
     private final FileRepository fileRepository;
     private final FileService fileService;
+    private final ShareRepository shareRepository;
 
     public FolderResponse createFolder(CreateFolderRequest request, Users user) {
 
@@ -202,12 +205,35 @@ public class FolderService {
     @Transactional
     public void deleteFolders(
             List<Long> ids,
-            Users user
+            Users user,
+            boolean force
     ) {
 
         List<Folder> folders =
                 folderRepository.findAllById(ids);
 
+        List<String> shared = new ArrayList<>();
+
+        // validate shared files
+        for (Folder folder : folders) {
+
+            if (!folder.getOwner().getId()
+                    .equals(user.getId())) {
+                continue;
+            }
+
+            collectSharedFiles(folder, user, shared);
+        }
+
+        // same behavior as deleteFiles()
+        if (!shared.isEmpty() && !force) {
+            throw new SharedFileDeleteException(
+                    "Files inside folder are currently shared",
+                    shared
+            );
+        }
+
+        // proceed delete
         for (Folder folder : folders) {
 
             if (!folder.getOwner().getId()
@@ -221,6 +247,40 @@ public class FolderService {
         }
     }
 
+    private void collectSharedFiles(
+            Folder folder,
+            Users user,
+            List<String> shared
+    ) {
+
+        List<FileEntity> files =
+                fileRepository.findByOwnerAndFolderAndDeletedFalse(
+                        user,
+                        folder
+                );
+
+        for (FileEntity file : files) {
+
+            boolean sharedExists =
+                    shareRepository.existsByFileAndActiveTrue(file)
+                            || shareRepository.existsByFilesContainsAndActiveTrue(file);
+
+            if (sharedExists) {
+                shared.add(file.getFileName());
+            }
+        }
+
+        List<Folder> children =
+                folderRepository.findByOwnerAndParentAndDeletedFalse(
+                        user,
+                        folder
+                );
+
+        for (Folder child : children) {
+            collectSharedFiles(child, user, shared);
+        }
+    }
+
     private void recursiveDelete(Folder folder, Users user) {
         folder.setDeleted(true);
         folder.setDeletedAt(LocalDateTime.now());
@@ -228,8 +288,20 @@ public class FolderService {
 
         List<FileEntity> files = fileRepository.findByOwnerAndFolderAndDeletedFalse(user, folder);
         for (FileEntity file : files) {
+
+            // revoke shares
+            List<Share> shares =
+                    shareRepository.findAllByFileOrFilesContains(
+                            file,
+                            file
+                    );
+
+            shares.forEach(s -> s.setActive(false));
+            shareRepository.saveAll(shares);
+
             file.setDeleted(true);
             file.setDeletedAt(LocalDateTime.now());
+
             fileRepository.save(file);
         }
 
@@ -343,7 +415,6 @@ public class FolderService {
         }
         fileRepository.saveAll(files);
 
-        // ✅ FIX: restore ONLY deleted children first
         List<Folder> children =
                 folderRepository.findByOwnerAndParent(user, folder);
 

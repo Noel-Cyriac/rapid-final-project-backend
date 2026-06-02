@@ -31,7 +31,7 @@ public class NotificationController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Notifications fetched",
                         notificationService.list(
                                 user(auth),
@@ -53,7 +53,7 @@ public class NotificationController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Notification marked read",
                         null
                 )
@@ -70,7 +70,7 @@ public class NotificationController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "All notifications marked read",
                         null
                 )
@@ -87,7 +87,7 @@ public class NotificationController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Notifications cleared",
                         null
                 )
@@ -106,7 +106,7 @@ public class NotificationController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Notification removed",
                         null
                 )
@@ -119,7 +119,7 @@ public class NotificationController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Unread count fetched",
                         notificationService.unreadCount(
                                 user(auth)

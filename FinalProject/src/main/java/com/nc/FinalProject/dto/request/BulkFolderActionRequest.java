@@ -10,4 +10,6 @@ import java.util.List;
 public class BulkFolderActionRequest {
 
     private List<Long> ids;
+    private boolean force = false;
+
 }

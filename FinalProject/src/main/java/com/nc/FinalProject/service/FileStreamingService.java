@@ -270,11 +270,4 @@ public class FileStreamingService {
         return token;
     }
 
-    public boolean isBundle(String streamToken) {
-
-        StreamToken token = validateToken(streamToken);
-
-        return token.getRecipient()
-                .getShare()
-                .getType() == Share.ShareType.BUNDLE;    }
 }

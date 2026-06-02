@@ -94,8 +94,4 @@ public class JwtUtil {
         }
     }
 
-    // Optional (used for cookie maxAge)
-    public long getRefreshExpiration() {
-        return refreshExpiration;
-    }
 }

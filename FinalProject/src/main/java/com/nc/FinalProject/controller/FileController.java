@@ -49,7 +49,7 @@ public class FileController {
             Authentication auth
     ) throws Exception {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Files uploaded successfully",
                         fileService.uploadFiles(files, folderId, user(auth))
                 )
@@ -64,7 +64,7 @@ public class FileController {
             Authentication auth
     ) throws Exception{
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Folder uploaded successfully",
                         fileService.uploadFolder(files, paths, parentId, user(auth))
                 )
@@ -80,7 +80,7 @@ public class FileController {
             @RequestParam(defaultValue = "20") int size
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Files fetched successfully",
                         fileService.listFiles(
                                 user(auth),
@@ -116,7 +116,7 @@ public class FileController {
                         user(auth)
                 );
 
-        return new SuccessResponse(
+        return new SuccessResponse<>(
                 "Stream token created",
                 Map.of(
                         "url",
@@ -146,7 +146,7 @@ public class FileController {
         fileService.moveFiles(request.getFileIds(), request.getTargetFolderId(), user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse("Files moved successfully", null)
+                new SuccessResponse<>("Files moved successfully", null)
         );
     }
 
@@ -164,7 +164,7 @@ public class FileController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "File(s) moved to recycle bin",
                         null
                 )
@@ -179,7 +179,7 @@ public class FileController {
         fileService.restoreFiles(ids, user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse("File(s) restored successfully", null)
+                new SuccessResponse<>("File(s) restored successfully", null)
         );
     }
 
@@ -190,7 +190,7 @@ public class FileController {
             @RequestParam(defaultValue = "20") int size
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Recycle bin fetched successfully",
                         fileService.recycleBin(
                                 user(auth),
@@ -207,7 +207,7 @@ public class FileController {
     ) {
         fileService.deletePermanent(ids, user(auth));
         return ResponseEntity.ok(
-                new SuccessResponse("File(s) deleted permanently", null)
+                new SuccessResponse<>("File(s) deleted permanently", null)
         );
     }
 
@@ -217,7 +217,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Latest uploads fetched",
                         fileService.latestUploads(
                                 user(auth)
@@ -232,7 +232,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Latest downloads fetched",
                         fileService.latestDownloads(
                                 user(auth)
@@ -247,7 +247,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Recently opened files fetched",
                         fileService.recentlyOpened(
                                 user(auth)
@@ -262,7 +262,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Dashboard stats fetched",
                         fileService.dashboardStats(
                                 user(auth)
@@ -277,7 +277,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Storage breakdown fetched",
                         fileService.storageBreakdown(
                                 user(auth)
@@ -293,7 +293,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Activity trend fetched",
                         fileService.activityTrend(
                                 user(auth),
@@ -310,7 +310,7 @@ public class FileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Transfer usage fetched",
                         fileService.transferUsage(
                                 user(auth),
@@ -387,7 +387,7 @@ public class FileController {
             @RequestParam(defaultValue = "20") int size
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Uploaded files fetched",
                         fileService.getUploadedFiles(
                                 user(auth),
@@ -404,7 +404,7 @@ public class FileController {
             @RequestParam(defaultValue = "20") int size
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Downloaded files fetched",
                         fileService.getDownloadedFiles(
                                 user(auth),
@@ -421,7 +421,7 @@ public class FileController {
             @RequestParam(defaultValue = "20") int size
     ) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Recently opened files fetched",
                         fileService.getRecentlyOpenedFiles(
                                 user(auth),
@@ -439,7 +439,7 @@ public class FileController {
         fileService.starFiles(ids, user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse("Files starred successfully", null)
+                new SuccessResponse<>("Files starred successfully", null)
         );
     }
 
@@ -451,14 +451,14 @@ public class FileController {
         fileService.unstarFiles(ids, user(auth));
 
         return ResponseEntity.ok(
-                new SuccessResponse("Files unstarred successfully", null)
+                new SuccessResponse<>("Files unstarred successfully", null)
         );
     }
 
     @GetMapping("/starred")
     public ResponseEntity<SuccessResponse> starred(Authentication auth, Pageable pageable) {
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Starred files fetched successfully",
                         fileService.getStarredFiles(user(auth), pageable)
                 )

@@ -43,7 +43,7 @@ public class ProfileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Profile updated successfully",
                         profileService.updateProfile(
                                 user(auth),
@@ -62,7 +62,7 @@ public class ProfileController {
     ) {
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Profile fetched successfully",
                         profileService.getProfile(
                                 user(auth)
@@ -91,7 +91,7 @@ public class ProfileController {
         );
 
         return ResponseEntity.ok(
-                new SuccessResponse(
+                new SuccessResponse<>(
                         "Profile picture deleted successfully",
                         null
                 )

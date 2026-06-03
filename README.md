@@ -1,6 +1,6 @@
-# ⚙️ DriftBox Backend
+# ⚙️ Driftbox Backend
 
-DriftBox Backend is the server-side application for the DriftBox file sharing and cloud storage platform, built for the Rapid Rise Final Project. It provides secure authentication, file and folder management, sharing, storage tracking, notifications, and user management through REST APIs.
+Driftbox Backend is the server-side application for the Driftbox file sharing and cloud storage platform, built for the Rapid Rise Final Project. It provides secure authentication, file and folder management, sharing, storage tracking, notifications, and user management through REST APIs.
 
 Built with **Spring Boot, Spring Security, JWT Authentication, JPA/Hibernate, and MySQL**.
 

@@ -1,11 +1,19 @@
 package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.request.CreateFolderRequest;
-import com.nc.FinalProject.dto.response.*;
-import com.nc.FinalProject.entity.*;
-import com.nc.FinalProject.exception.BadRequestException;
+import com.nc.FinalProject.dto.response.FileResponse;
+import com.nc.FinalProject.dto.response.FolderResponse;
+import com.nc.FinalProject.dto.response.FolderTreeResponse;
+import com.nc.FinalProject.dto.response.PagedResponse;
+import com.nc.FinalProject.entity.FileEntity;
+import com.nc.FinalProject.entity.Folder;
+import com.nc.FinalProject.entity.Share;
+import com.nc.FinalProject.entity.Users;
+import com.nc.FinalProject.exception.MoveException;
 import com.nc.FinalProject.exception.SharedFileDeleteException;
-import com.nc.FinalProject.repository.*;
+import com.nc.FinalProject.repository.FileRepository;
+import com.nc.FinalProject.repository.FolderRepository;
+import com.nc.FinalProject.repository.ShareRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -152,12 +160,12 @@ public class FolderService {
 
         // prevent moving into itself
         if (target != null && target.getId().equals(folder.getId())) {
-            throw new BadRequestException("Cannot move folder into itself");
+            throw new MoveException("Cannot move folder into itself");
         }
 
         // prevent moving into its own child/descendant
         if (target != null && isDescendant(folder, target)) {
-            throw new BadRequestException("Cannot move folder into its child");
+            throw new MoveException("Cannot move folder into its child");
         }
 
         folder.setParent(target);

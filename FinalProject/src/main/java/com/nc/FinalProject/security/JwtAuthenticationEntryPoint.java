@@ -28,10 +28,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException authException)
             throws IOException, ServletException {
 
-        log.warn("Unauthorized access: {}", authException.getMessage());
-
         // Using your new DTO (Message, Errors) - Timestamp is auto-generated
-        ErrorResponse error = new ErrorResponse("Unauthorized: Authentication is required", null);
+        ErrorResponse error = new ErrorResponse("Unauthorized: accesstoken is required", null);
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

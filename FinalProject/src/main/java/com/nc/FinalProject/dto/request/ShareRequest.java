@@ -28,7 +28,10 @@ public class ShareRequest {
     @Min(value = 1, message = "Max uses must be at least 1")
     private Integer maxUses;
 
-    @Size(max = 100, message = "Password too long")
+    @Pattern(
+            regexp = "^(\\S{6,})$",
+            message = "Password must be at least 6 characters with no spaces"
+    )
     private String password;
 
     private Boolean canDownload = true;

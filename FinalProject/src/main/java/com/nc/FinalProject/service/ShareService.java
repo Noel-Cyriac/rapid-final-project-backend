@@ -79,7 +79,7 @@ public class ShareService {
             throw new MaxUsesExceededException("Max uses exceeded");
         }
         if (!Boolean.TRUE.equals(s.getCanView()) && !Boolean.TRUE.equals(s.getCanDownload())) {
-            throw new RuntimeException("Share access disabled");
+            throw new ShareException("Share access disabled");
         }
 
         r.setUsedCount(r.getUsedCount() + 1);
@@ -98,10 +98,10 @@ public class ShareService {
     @Transactional
     public void revokeShare(Long id, Users user) {
         Share s = shareRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Share not found"));
+                .orElseThrow(() -> new ShareException("Share not found"));
 
         if (!s.getOwner().getId().equals(user.getId())) {
-            throw new RuntimeException("Unauthorized");
+            throw new UnauthorizedException("Unauthorized");
         }
 
         s.setActive(false);
@@ -117,12 +117,12 @@ public class ShareService {
     public void revokeRecipient(Long recipientId, Users user) {
 
         ShareRecipient r = shareRecipientRepository.findById(recipientId)
-                .orElseThrow(() -> new RuntimeException("Recipient not found"));
+                .orElseThrow(() -> new ShareException("Recipient not found"));
 
         Share share = r.getShare();
 
         if (!share.getOwner().getId().equals(user.getId())) {
-            throw new RuntimeException("Unauthorized");
+            throw new UnauthorizedException("Unauthorized");
         }
 
         r.setActive(false);
@@ -238,7 +238,7 @@ public class ShareService {
 
         SharePasswordToken t = sharePasswordTokenRepository
                 .findByToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid link"));
+                .orElseThrow(() -> new ShareException("Invalid link"));
 
         if (t.isUsed()) {
             throw new PasswordAlreadyViewedException("Password already viewed");

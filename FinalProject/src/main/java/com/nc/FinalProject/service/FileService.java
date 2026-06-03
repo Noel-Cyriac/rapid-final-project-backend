@@ -2,8 +2,7 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.response.*;
 import com.nc.FinalProject.entity.*;
-import com.nc.FinalProject.exception.BadRequestException;
-import com.nc.FinalProject.exception.SharedFileDeleteException;
+import com.nc.FinalProject.exception.*;
 import com.nc.FinalProject.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +54,7 @@ public class FileService {
         Folder folder = null;
         if (folderId != null) {
             folder = folderRepository.findByIdAndOwner(folderId, user)
-                    .orElseThrow(() -> new BadRequestException("Folder not found"));
+                    .orElseThrow(() -> new FileUploadException("Folder not found"));
         }
 
         long currentUsage = fileRepository.getUsedStorage(user);
@@ -66,12 +65,12 @@ public class FileService {
 
         // storage validation
         if (currentUsage + requestSize > MAX_USER_STORAGE) {
-            throw new BadRequestException("Storage limit exceeded (1GB per user)");
+            throw new FileUploadException("Storage limit exceeded (1GB per user)");
         }
 
         // request validation
         if (requestSize > MAX_TOTAL_SIZE) {
-            throw new BadRequestException("Total upload size cannot exceed 100MB");
+            throw new FileUploadException("Total upload size cannot exceed 100MB");
         }
 
         for (MultipartFile file : files) {
@@ -141,7 +140,7 @@ public class FileService {
 
         if (parentId != null) {
             initialParent = folderRepository.findByIdAndOwner(parentId, user)
-                    .orElseThrow(() -> new BadRequestException("Parent folder not found"));
+                    .orElseThrow(() -> new FolderUploadException("Parent folder not found"));
         }
 
         // =========================
@@ -161,11 +160,11 @@ public class FileService {
         // 2. VALIDATIONS
         // =========================
         if (requestSize > MAX_TOTAL_SIZE) {
-            throw new BadRequestException("Total upload size cannot exceed 100MB");
+            throw new FolderUploadException("Total upload size cannot exceed 100MB");
         }
 
         if (currentUsage + requestSize > MAX_USER_STORAGE) {
-            throw new BadRequestException("Storage limit exceeded (1GB per user)");
+            throw new FolderUploadException("Storage limit exceeded (1GB per user)");
         }
 
         // =========================
@@ -378,14 +377,14 @@ public class FileService {
 
         if (targetFolderId != null) {
             targetFolder = folderRepository.findByIdAndOwner(targetFolderId, user)
-                    .orElseThrow(() -> new BadRequestException("Target folder not found"));
+                    .orElseThrow(() -> new MoveException("Target folder not found"));
         }
 
         // 2. Fetch files
         List<FileEntity> files = fileRepository.findAllById(fileIds);
 
         if (files.isEmpty()) {
-            throw new BadRequestException("No files found");
+            throw new MoveException("No files found");
         }
 
         // 3. Track validation results
@@ -414,7 +413,7 @@ public class FileService {
         }
 
         if (validFiles.isEmpty()) {
-            throw new BadRequestException("No valid files to move");
+            throw new MoveException("No valid files to move");
         }
 
         // 4. Optional: duplicate name protection inside target folder

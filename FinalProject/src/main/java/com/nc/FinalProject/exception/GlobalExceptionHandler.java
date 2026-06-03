@@ -1,6 +1,7 @@
 package com.nc.FinalProject.exception;
 
 import com.nc.FinalProject.dto.response.ErrorResponse;
+import org.apache.coyote.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,6 @@ public class GlobalExceptionHandler {
 
         logger.error("Validation failed: {}", errors);
 
-        // Constructor now only needs (message, errors)
         return ResponseEntity.badRequest()
                 .body(new ErrorResponse("Validation failed", errors));
     }
@@ -82,10 +82,52 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(FileUploadException.class)
-    public ResponseEntity<ErrorResponse> fileUploadException(FileUploadException ex) {
+    public ResponseEntity<ErrorResponse> handleFileUpload(FileUploadException ex) {
         logger.warn("File upload error: {}", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONTENT_TOO_LARGE)
-                .body(new ErrorResponse("File size exceeded", null));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(FileStreamException.class)
+    public ResponseEntity<ErrorResponse> handleFileStream(FileStreamException ex) {
+        logger.warn("File stream error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorized(UnauthorizedException ex) {
+        logger.warn("Unauthorized access: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(ProfileException.class)
+    public ResponseEntity<ErrorResponse> handleProfile(ProfileException ex) {
+        logger.warn("Profile error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(ShareException.class)
+    public ResponseEntity<ErrorResponse> handleShare(ShareException ex) {
+        logger.warn("Share error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(FolderUploadException.class)
+    public ResponseEntity<ErrorResponse> handleFolderUpload(FolderUploadException ex) {
+        logger.warn("Folder upload error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage(), null));
+    }
+
+    @ExceptionHandler(MoveException.class)
+    public ResponseEntity<ErrorResponse> handleMove(MoveException ex) {
+        logger.warn("Move operation error: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(ex.getMessage(), null));
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -170,16 +212,6 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest()
                 .body(new ErrorResponse("Upload failed", errors));
-    }
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex) {
-        Map<String, String> errors = Collections.singletonMap("file", ex.getMessage());
-
-        logger.error("Bad request: {}", ex.getMessage());
-
-        return ResponseEntity.badRequest()
-                .body(new ErrorResponse("Bad request", errors));
     }
 
     // Generic Exception Fallback

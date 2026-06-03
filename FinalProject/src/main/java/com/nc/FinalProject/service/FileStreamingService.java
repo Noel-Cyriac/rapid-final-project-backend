@@ -5,6 +5,7 @@ import com.nc.FinalProject.entity.FileEntity;
 import com.nc.FinalProject.entity.Share;
 import com.nc.FinalProject.entity.ShareRecipient;
 import com.nc.FinalProject.entity.StreamToken;
+import com.nc.FinalProject.exception.FileStreamException;
 import com.nc.FinalProject.repository.StreamTokenRepository;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -42,7 +43,7 @@ public class FileStreamingService {
         // 2. Extract the file securely from the token mapping
         FileEntity file = token.getFile();
         if (file == null) {
-            throw new RuntimeException("No file associated with this stream token");
+            throw new FileStreamException("No file associated with this stream token");
         }
 
         // 3. Stream it out safely
@@ -64,7 +65,7 @@ public class FileStreamingService {
         Share share = recipient.getShare();
 
         if (!Boolean.TRUE.equals(share.getCanView())) {
-            throw new RuntimeException("Viewing not allowed");
+            throw new FileStreamException("Viewing not allowed");
         }
 
         FileEntity file =
@@ -83,7 +84,7 @@ public class FileStreamingService {
         if (share.getType() == Share.ShareType.FILE) {
 
             if (!share.getFile().getId().equals(fileId)) {
-                throw new RuntimeException("File not part of share");
+                throw new FileStreamException("File not part of share");
             }
 
             return share.getFile();
@@ -92,7 +93,7 @@ public class FileStreamingService {
         return share.getFiles().stream()
                 .filter(f -> f.getId().equals(fileId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("File not in bundle"));
+                .orElseThrow(() -> new FileStreamException("File not in bundle"));
     }
 
     // =====================================================
@@ -103,7 +104,7 @@ public class FileStreamingService {
         Share share = token.getRecipient().getShare();
 
         if (!Boolean.TRUE.equals(share.getCanDownload())) {
-            throw new RuntimeException("Download not allowed");
+            throw new FileStreamException("Download not allowed");
         }
 
         FileEntity file = resolveFileFromShare(share, fileId);
@@ -125,10 +126,10 @@ public class FileStreamingService {
         Share share = token.getRecipient().getShare();
 
         if (!Boolean.TRUE.equals(share.getCanDownload())) {
-            throw new RuntimeException("Download not allowed");
+            throw new FileStreamException("Download not allowed");
         }
         if (share.getType() != Share.ShareType.BUNDLE) {
-            throw new RuntimeException("Not a bundle share");
+            throw new FileStreamException("Not a bundle share");
         }
 
         ZipOutputStream zos = new ZipOutputStream(outputStream);
@@ -149,30 +150,6 @@ public class FileStreamingService {
 
         zos.finish();
         zos.close();
-    }
-
-    // =====================================================
-    // SHARE RESOLUTION
-    // =====================================================
-    private FileViewResponse resolveFileView(Share share) {
-
-        if (share.getType() == Share.ShareType.FILE) {
-
-            FileEntity file = share.getFile();
-
-            return new FileViewResponse(
-                    file.getFilePath(),
-                    file.getFileType()
-            );
-        }
-
-        // BUNDLE → just pick first file for preview OR custom UI
-        FileEntity file = share.getFiles().get(0);
-
-        return new FileViewResponse(
-                file.getFilePath(),
-                file.getFileType()
-        );
     }
 
     // =====================================================
@@ -261,10 +238,10 @@ public class FileStreamingService {
     private StreamToken validateToken(String streamToken) {
 
         StreamToken token = streamTokenRepository.findByToken(streamToken)
-                .orElseThrow(() -> new RuntimeException("Invalid stream token"));
+                .orElseThrow(() -> new FileStreamException("Invalid stream token"));
 
         if (token.getExpiresAt().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Stream expired");
+            throw new FileStreamException("Stream expired");
         }
 
         return token;

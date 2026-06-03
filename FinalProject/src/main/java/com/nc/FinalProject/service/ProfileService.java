@@ -2,6 +2,7 @@ package com.nc.FinalProject.service;
 
 import com.nc.FinalProject.dto.response.ProfileResponse;
 import com.nc.FinalProject.entity.Users;
+import com.nc.FinalProject.exception.ProfileException;
 import com.nc.FinalProject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Service
 @RequiredArgsConstructor
@@ -46,13 +48,21 @@ public class ProfileService {
             }
 
             if (dob != null && !dob.isBlank()) {
-                user.setDob(LocalDate.parse(dob));
+
+                LocalDate parsedDob = LocalDate.parse(dob);
+
+                int age = Period.between(parsedDob, LocalDate.now()).getYears();
+
+                if (age < 13) {
+                    throw new ProfileException("User must be at least 13 years old");
+                }
+
+                user.setDob(parsedDob);
             }
 
             if (profilePic != null && !profilePic.isEmpty()) {
 
-                Path profileDir =
-                        Paths.get(uploadDir, "profile");
+                Path profileDir = Paths.get(uploadDir, "profile");
 
                 Files.createDirectories(profileDir);
 
@@ -60,10 +70,7 @@ public class ProfileService {
                 if (user.getProfilePicture() != null &&
                         !user.getProfilePicture().isBlank()) {
 
-                    Path oldFile =
-                            profileDir.resolve(
-                                    user.getProfilePicture()
-                            );
+                    Path oldFile = profileDir.resolve(user.getProfilePicture());
 
                     try {
                         Files.deleteIfExists(oldFile);
@@ -81,21 +88,19 @@ public class ProfileService {
                                 + "_"
                                 + profilePic.getOriginalFilename();
 
-                Path path =
-                        profileDir.resolve(fileName);
+                Path path = profileDir.resolve(fileName);
 
                 profilePic.transferTo(path);
 
                 user.setProfilePicture(fileName);
             }
 
-            Users saved =
-                    userRepository.save(user);
+            Users saved = userRepository.save(user);
 
             return map(saved);
 
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new ProfileException("Failed to update profile");
         }
     }
 
@@ -155,7 +160,7 @@ public class ProfileService {
                     .body(resource);
 
         } catch (Exception e) {
-            throw new RuntimeException(
+            throw new ProfileException(
                     e.getMessage()
             );
         }
@@ -173,7 +178,7 @@ public class ProfileService {
             if (profilePicture == null ||
                     profilePicture.isBlank()) {
 
-                throw new RuntimeException(
+                throw new ProfileException(
                         "No profile picture found"
                 );
             }
@@ -196,7 +201,7 @@ public class ProfileService {
             return map(saved);
 
         } catch (Exception e) {
-            throw new RuntimeException(
+            throw new ProfileException(
                     e.getMessage()
             );
         }

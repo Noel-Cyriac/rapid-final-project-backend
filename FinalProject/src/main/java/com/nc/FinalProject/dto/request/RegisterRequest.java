@@ -1,9 +1,10 @@
 package com.nc.FinalProject.dto.request;
 
 import jakarta.validation.constraints.*;
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Data
 public class RegisterRequest {
@@ -19,6 +20,7 @@ public class RegisterRequest {
     private String email;
 
     @NotNull(message = "Date of birth is required")
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dob;
 
     @NotBlank(message = "Password is required")
@@ -30,4 +32,13 @@ public class RegisterRequest {
 
     @NotBlank(message = "Confirm password is required")
     private String confirmPassword;
+
+    @AssertTrue(message = "User must be at least 13 years old")
+    public boolean isAtLeast13YearsOld() {
+        if (dob == null) {
+            return true; // let @NotNull handle null validation
+        }
+
+        return Period.between(dob, LocalDate.now()).getYears() >= 13;
+    }
 }

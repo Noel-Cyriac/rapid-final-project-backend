@@ -3,6 +3,7 @@ package com.nc.FinalProject.service;
 import com.nc.FinalProject.dto.response.PagedResponse;
 import com.nc.FinalProject.dto.response.NotificationResponse;
 import com.nc.FinalProject.entity.*;
+import com.nc.FinalProject.exception.UnauthorizedException;
 import com.nc.FinalProject.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -63,7 +64,7 @@ public class NotificationService {
 
         if (!notification.getUser().getId()
                 .equals(user.getId())) {
-            throw new RuntimeException("Unauthorized");
+            throw new UnauthorizedException("Unauthorized");
         }
 
         notification.setReadStatus(true);

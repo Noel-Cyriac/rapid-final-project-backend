@@ -45,8 +45,6 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final MailService mailService;
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
-    // Map to store reset tokens temporarily (replace with DB in production)
-    private final Map<String, String> resetTokens = new HashMap<>();
     private final NotificationService notificationService;
     private final RefreshTokenRepository refreshTokenRepository;
     @Value("${jwt.refresh.expiration}")
@@ -126,7 +124,7 @@ public class AuthService {
 
         refreshCookie.setHttpOnly(true);
         refreshCookie.setSecure(false); // true in prod
-        refreshCookie.setPath("/api/auth/refresh");
+        refreshCookie.setPath("/api/auth");
         refreshCookie.setMaxAge(
                 (int) (refreshExpiration / 1000)
         );
@@ -189,7 +187,7 @@ public class AuthService {
         Cookie cookie = new Cookie("refreshToken", newRefreshToken);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
-        cookie.setPath("/api/auth/refresh");
+        cookie.setPath("/api/auth");
         cookie.setMaxAge((int) (refreshExpiration / 1000));
 
         response.addCookie(cookie);
@@ -279,6 +277,7 @@ public class AuthService {
         );
     }
 
+    @Transactional
     public void logout(String refreshToken, HttpServletResponse response) {
 
         if (refreshToken != null) {
@@ -288,7 +287,7 @@ public class AuthService {
         Cookie cookie = new Cookie("refreshToken", null);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
-        cookie.setPath("/api/auth/refresh");
+        cookie.setPath("/api/auth");
         cookie.setMaxAge(0);
 
         response.addCookie(cookie);

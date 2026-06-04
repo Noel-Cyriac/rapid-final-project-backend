@@ -91,19 +91,6 @@ public class FileController {
         );
     }
 
-    @GetMapping("/view/{id}")
-    public ResponseEntity<Resource> view(
-            @PathVariable Long id,
-            Authentication auth,
-            HttpServletRequest request
-    ) throws Exception {
-
-        FileViewResponse file =
-                fileService.viewFile(id, user(auth));
-
-        return fileStreamingService.streamFile(file, request);
-    }
-
     @GetMapping("/{id}/stream-token")
     public SuccessResponse getStreamToken(
             @PathVariable Long id,

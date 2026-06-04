@@ -1126,21 +1126,6 @@ public class FileService {
         );
     }
 
-    public FileViewResponse viewFile(Long id, Users user) {
-
-        FileEntity file = fileRepository.findByIdAndOwner(id, user)
-                .orElseThrow();
-
-        file.setLastOpenedAt(LocalDateTime.now());
-
-        fileRepository.save(file);
-
-        return new FileViewResponse(
-                file.getFilePath(),
-                file.getFileType()
-        );
-    }
-
     public void starFiles(List<Long> ids, Users user) {
 
         List<FileEntity> files = fileRepository.findAllById(ids);

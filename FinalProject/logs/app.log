@@ -1,20 +1,20 @@
-2026-06-04T10:48:44.240+05:30  INFO 7784 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 7784 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T10:48:44.250+05:30 DEBUG 7784 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T10:48:44.251+05:30  INFO 7784 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T10:48:46.259+05:30  INFO 7784 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T10:48:46.346+05:30  INFO 7784 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 11 JPA repository interfaces.
-2026-06-04T10:48:47.332+05:30  INFO 7784 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T10:48:47.358+05:30  INFO 7784 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T10:48:47.359+05:30  INFO 7784 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T10:48:47.412+05:30  INFO 7784 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2975 ms
-2026-06-04T10:48:47.859+05:30  INFO 7784 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T10:48:47.998+05:30  INFO 7784 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T10:48:48.842+05:30  INFO 7784 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T10:48:48.907+05:30  INFO 7784 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T10:48:50.759+05:30  INFO 7784 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c25daad
-2026-06-04T10:48:50.762+05:30  INFO 7784 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T10:48:51.094+05:30  WARN 7784 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T10:48:51.146+05:30  INFO 7784 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-06-10T15:58:28.039+05:30  INFO 32809 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 32809 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-06-10T15:58:28.055+05:30 DEBUG 32809 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-06-10T15:58:28.057+05:30  INFO 32809 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-06-10T15:58:29.716+05:30  INFO 32809 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-10T15:58:29.806+05:30  INFO 32809 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 11 JPA repository interfaces.
+2026-06-10T15:58:30.572+05:30  INFO 32809 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-10T15:58:30.592+05:30  INFO 32809 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-10T15:58:30.592+05:30  INFO 32809 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-06-10T15:58:30.659+05:30  INFO 32809 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2477 ms
+2026-06-10T15:58:30.936+05:30  INFO 32809 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-10T15:58:31.039+05:30  INFO 32809 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-06-10T15:58:31.741+05:30  INFO 32809 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-10T15:58:31.791+05:30  INFO 32809 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-10T15:58:34.363+05:30  INFO 32809 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@8b1202a
+2026-06-10T15:58:34.462+05:30  INFO 32809 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-10T15:58:35.507+05:30  WARN 32809 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-10T15:58:35.532+05:30  INFO 32809 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -26,330 +26,75 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-06-04T10:48:53.166+05:30  INFO 7784 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T10:48:53.597+05:30  INFO 7784 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T10:48:53.701+05:30  INFO 7784 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T10:48:54.767+05:30 DEBUG 7784 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T10:48:56.269+05:30  WARN 7784 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T10:48:58.469+05:30  INFO 7784 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T10:48:58.486+05:30  INFO 7784 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 15.002 seconds (process running for 15.828)
-2026-06-04T10:49:52.737+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-04T10:49:52.738+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-04T10:49:52.740+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-06-04T10:49:53.008+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T10:49:53.491+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T10:53:22.403+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.nc.FinalProject.service.AuthService    : New user registered: akshayakr2000@gmail.com
-2026-06-04T10:53:51.061+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
-2026-06-04T10:54:06.906+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: akshayakr2000@gmail.com
-2026-06-04T10:58:51.607+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488607 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.607Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.605+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488603 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.603Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.608+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488608 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.608Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.611+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488611 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.611Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.612+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488612 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.612Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.613+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488613 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.613Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.619+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488618 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.618Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.621+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488621 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.621Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.613+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488613 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.613Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.623+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488623 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.623Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.614+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488614 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.614Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.615+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488614 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.614Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:58:51.626+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 62488626 milliseconds ago at 2026-06-03T12:07:23.000Z. Current time: 2026-06-04T05:28:51.626Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T10:59:29.253+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: akshayakr2000@gmail.com
-2026-06-04T11:01:19.423+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:01:20.416+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:01:21.413+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:18.759+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:19.765+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:20.765+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:21.769+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:22.769+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:23.768+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:44.217+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:45.223+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:46.225+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:47.226+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:48.224+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:48.326+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:49.338+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:02:50.340+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:03:46.134+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:03:47.137+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:09:37.787+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+2026-06-10T15:58:37.254+05:30  INFO 32809 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-10T15:58:38.343+05:30  INFO 32809 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T15:58:38.455+05:30  INFO 32809 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-10T15:58:39.305+05:30 DEBUG 32809 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-10T15:58:40.562+05:30  WARN 32809 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-10T15:58:41.202+05:30  INFO 32809 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-10T15:58:41.212+05:30  INFO 32809 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 13.788 seconds (process running for 14.318)
+2026-06-10T15:59:30.958+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-10T15:59:30.959+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-10T15:59:30.961+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-06-10T15:59:31.277+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044276 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.276Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.278+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-11] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044277 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.277Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.278+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044277 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.277Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.279+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044276 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.276Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.277+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044277 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.277Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.278+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044278 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.278Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.370+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044370 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.370Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.372+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044370 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.370Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.373+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044373 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.373Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.372+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044372 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.372Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.372+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044372 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.372Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.375+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044374 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.374Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.377+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044377 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.377Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.380+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044380 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.380Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.380+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044380 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.380Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.382+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044382 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.382Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T15:59:31.385+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-11] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 77044384 milliseconds ago at 2026-06-09T13:05:27.000Z. Current time: 2026-06-10T10:29:31.384Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T17:19:05.631+05:30 ERROR 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Email already exists: Email already registered
+2026-06-10T17:20:51.569+05:30 ERROR 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-11] c.n.F.exception.GlobalExceptionHandler   : Email already exists: Email already registered
+2026-06-10T17:22:33.639+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.nc.FinalProject.service.AuthService    : New user registered: noel.cyriac@innovaturelabs.com
+2026-06-10T17:23:22.837+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel.cyriac@innovaturelabs.com
+2026-06-10T17:37:01.250+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-11] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-06-10T17:43:22.298+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-13] c.n.F.exception.GlobalExceptionHandler   : Password already viewed: Password already viewed
+2026-06-10T17:45:55.762+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:45:56.291+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-14] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:45:56.689+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:45:57.011+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:45:57.289+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:45:57.525+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-12] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:46:05.945+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
+2026-06-10T17:47:31.584+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Link disabled: Disabled
+2026-06-10T17:52:01.174+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 149 milliseconds ago at 2026-06-10T12:22:01.000Z. Current time: 2026-06-10T12:22:01.149Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T17:52:01.174+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 151 milliseconds ago at 2026-06-10T12:22:01.000Z. Current time: 2026-06-10T12:22:01.151Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T17:59:46.742+05:30 ERROR 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
 
-org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: Broken pipe
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:340) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:399) ~[spring-web-7.0.5.jar:7.0.5]
-	at java.base/java.io.InputStream.transferTo(InputStream.java:797) ~[na:na]
-	at java.base/java.io.BufferedInputStream.implTransferTo(BufferedInputStream.java:652) ~[na:na]
-	at java.base/java.io.BufferedInputStream.transferTo(BufferedInputStream.java:631) ~[na:na]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeContent(ResourceHttpMessageConverter.java:158) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeInternal(ResourceHttpMessageConverter.java:114) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeInternal(ResourceHttpMessageConverter.java:47) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.AbstractHttpMessageConverter.write(AbstractHttpMessageConverter.java:232) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:341) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ResponseEntityReturnValueHandler.handleReturnValue(ResponseEntityReturnValueHandler.java:80) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
-	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:328) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.appendByteArray(OutputBuffer.java:734) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:662) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:363) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:99) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.write(OnCommittedResponseWrapper.java:639) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:396) ~[spring-web-7.0.5.jar:7.0.5]
-	... 102 common frames omitted
-Caused by: java.io.IOException: Broken pipe
-	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method) ~[na:na]
-	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:65) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58) ~[na:na]
-	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542) ~[na:na]
-	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:129) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1419) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:747) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:587) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:535) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:537) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.filters.IdentityOutputFilter.doWrite(IdentityOutputFilter.java:71) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.Response.doWrite(Response.java:633) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:316) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	... 109 common frames omitted
-
-2026-06-04T11:09:37.801+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Failure in @ExceptionHandler com.nc.FinalProject.exception.GlobalExceptionHandler#handleAllExceptions(Exception)
-
-org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class com.nc.FinalProject.dto.response.ErrorResponse] with preset Content-Type 'video/mp4'
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:364) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:460) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:72) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:176) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1227) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1035) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:980) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-
-2026-06-04T11:10:11.738+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
-2026-06-04T11:10:16.718+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
-2026-06-04T11:10:19.442+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Invalid share password attempt
-2026-06-04T11:10:42.127+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Password already viewed: Password already viewed
-2026-06-04T11:10:46.829+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Password already viewed: Password already viewed
-2026-06-04T11:10:48.897+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Password already viewed: Password already viewed
-2026-06-04T11:11:30.244+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Link disabled: Recipient revoked
-2026-06-04T11:14:50.902+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 21900 milliseconds ago at 2026-06-04T05:44:29.000Z. Current time: 2026-06-04T05:44:50.900Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T11:18:27.702+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
-2026-06-04T11:18:48.666+05:30  INFO 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: akshayakr2000@gmail.com
-2026-06-04T11:24:06.401+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:07.402+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:08.405+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:09.407+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:10.408+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:11.409+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:24:12.413+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:33:50.691+05:30  WARN 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 2689 milliseconds ago at 2026-06-04T06:03:48.000Z. Current time: 2026-06-04T06:03:50.689Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T11:34:27.374+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:34:28.378+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:34:29.380+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:36:15.814+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:36:16.818+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:36:17.819+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:36:18.821+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:36:19.823+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:37:15.170+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
-
-org.springframework.web.multipart.MultipartException: Failed to parse multipart servlet request
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.handleParseFailure(StandardMultipartHttpServletRequest.java:134) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:112) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:88) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:72) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.MultipartResolutionDelegate.resolveMultipartArgument(MultipartResolutionDelegate.java:124) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.resolveName(RequestParamMethodArgumentResolver.java:165) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:117) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:174) ~[spring-web-7.0.5.jar:7.0.5]
+org.springframework.dao.InvalidDataAccessApiUsageException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:493) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:112) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:576) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222) ~[spring-aop-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy150.deleteByUser(Unknown Source) ~[na:na]
+	at com.nc.FinalProject.service.AuthService.sendResetPasswordEmail(AuthService.java:206) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:715) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.nc.FinalProject.service.AuthService$$SpringCGLIB$$0.sendResetPasswordEmail(<generated>) ~[classes/:na]
+	at com.nc.FinalProject.controller.AuthController.forgotPassword(AuthController.java:60) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
@@ -366,7 +111,7 @@ org.springframework.web.multipart.MultipartException: Failed to parse multipart 
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
@@ -385,8 +130,7 @@ org.springframework.web.multipart.MultipartException: Failed to parse multipart 
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at com.nc.FinalProject.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:82) ~[classes/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
@@ -442,198 +186,53 @@ org.springframework.web.multipart.MultipartException: Failed to parse multipart 
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: org.apache.tomcat.util.http.fileupload.FileUploadException: java.net.SocketTimeoutException
-	at org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:483) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.Request.parseParts(Request.java:2576) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.Request.getParts(Request.java:2439) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.RequestFacade.getParts(RequestFacade.java:540) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at jakarta.servlet.http.HttpServletRequestWrapper.getParts(HttpServletRequestWrapper.java:315) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.parseRequest(StandardMultipartHttpServletRequest.java:95) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.<init>(StandardMultipartHttpServletRequest.java:88) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.multipart.support.StandardServletMultipartResolver.resolveMultipart(StandardServletMultipartResolver.java:112) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.checkMultipart(DispatcherServlet.java:1102) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:947) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	... 87 common frames omitted
-Caused by: org.apache.catalina.connector.ClientAbortException: java.net.SocketTimeoutException
-	at org.apache.catalina.connector.InputBuffer.realReadBytes(InputBuffer.java:303) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.InputBuffer.checkByteBufferEof(InputBuffer.java:590) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.InputBuffer.read(InputBuffer.java:348) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteInputStream.read(CoyoteInputStream.java:81) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at java.base/java.io.FilterInputStream.read(FilterInputStream.java:119) ~[na:na]
-	at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.read(LimitedInputStream.java:157) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.MultipartStream$ItemInputStream.makeAvailable(MultipartStream.java:263) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.MultipartStream$ItemInputStream.read(MultipartStream.java:328) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at java.base/java.io.InputStream.read(InputStream.java:220) ~[na:na]
-	at org.apache.tomcat.util.http.fileupload.util.Streams.copy(Streams.java:119) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.util.Streams.copy(Streams.java:90) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.MultipartStream.readBodyData(MultipartStream.java:764) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.MultipartStream.discardBodyData(MultipartStream.java:688) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.MultipartStream.skipPreamble(MultipartStream.java:953) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.findNextItem(FileItemIteratorImpl.java:229) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.impl.FileItemIteratorImpl.<init>(FileItemIteratorImpl.java:142) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.FileUploadBase.getItemIterator(FileUploadBase.java:303) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.http.fileupload.FileUploadBase.parseRequest(FileUploadBase.java:452) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	... 98 common frames omitted
-	Suppressed: org.apache.catalina.connector.ClientAbortException: java.net.SocketTimeoutException
-		at org.apache.catalina.connector.InputBuffer.realReadBytes(InputBuffer.java:303) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.catalina.connector.InputBuffer.checkByteBufferEof(InputBuffer.java:590) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.catalina.connector.InputBuffer.read(InputBuffer.java:348) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.catalina.connector.CoyoteInputStream.read(CoyoteInputStream.java:81) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at java.base/java.io.FilterInputStream.read(FilterInputStream.java:119) ~[na:na]
-		at org.apache.tomcat.util.http.fileupload.util.LimitedInputStream.read(LimitedInputStream.java:157) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.tomcat.util.http.fileupload.MultipartStream$ItemInputStream.makeAvailable(MultipartStream.java:263) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.tomcat.util.http.fileupload.MultipartStream$ItemInputStream.close(MultipartStream.java:196) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.tomcat.util.http.fileupload.MultipartStream$ItemInputStream.close(MultipartStream.java:176) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		at org.apache.tomcat.util.http.fileupload.util.Streams.copy(Streams.java:115) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-		... 106 common frames omitted
-	Caused by: java.net.SocketTimeoutException
-		at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1307)
-		at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1223)
-		at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:776)
-		at org.apache.coyote.http11.Http11InputBuffer$SocketInputBuffer.doRead(Http11InputBuffer.java:829)
-		at org.apache.coyote.http11.filters.IdentityInputFilter.doRead(IdentityInputFilter.java:94)
-		at org.apache.coyote.http11.Http11InputBuffer.doRead(Http11InputBuffer.java:229)
-		at org.apache.coyote.Request.doRead(Request.java:681)
-		at org.apache.catalina.connector.InputBuffer.realReadBytes(InputBuffer.java:294)
-		... 115 common frames omitted
-Caused by: java.net.SocketTimeoutException
-	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.fillReadBuffer(NioEndpoint.java:1307) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.read(NioEndpoint.java:1223) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11InputBuffer.fill(Http11InputBuffer.java:776) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11InputBuffer$SocketInputBuffer.doRead(Http11InputBuffer.java:829) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.filters.IdentityInputFilter.doRead(IdentityInputFilter.java:94) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11InputBuffer.doRead(Http11InputBuffer.java:229) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.Request.doRead(Request.java:681) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.InputBuffer.realReadBytes(InputBuffer.java:294) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	... 115 common frames omitted
+Caused by: jakarta.persistence.TransactionRequiredException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:371) ~[spring-orm-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy138.remove(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$DeleteExecution.doExecute(JpaQueryExecution.java:419) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135) ~[spring-tx-7.0.5.jar:7.0.5]
+	... 107 common frames omitted
 
-2026-06-04T11:38:27.698+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:28.042+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:29.050+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:30.053+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:31.053+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:32.055+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:33.056+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:49.640+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:38:50.646+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:39:00.198+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:39:01.242+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:39:17.835+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:39:18.840+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:23.475+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:24.479+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:25.480+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:26.481+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:27.480+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:28.484+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:28.496+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:29.508+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:30.510+05:30 ERROR 7784 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:40:52.453+05:30  INFO 7784 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T11:40:52.507+05:30  INFO 7784 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T11:40:52.533+05:30  INFO 7784 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T11:40:52.567+05:30  INFO 7784 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T11:40:52.593+05:30  INFO 7784 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-04T11:41:01.766+05:30  INFO 11491 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 11491 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T11:41:01.772+05:30 DEBUG 11491 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T11:41:01.775+05:30  INFO 11491 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T11:41:03.698+05:30  INFO 11491 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T11:41:03.818+05:30  INFO 11491 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102 ms. Found 11 JPA repository interfaces.
-2026-06-04T11:41:04.748+05:30  INFO 11491 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T11:41:04.787+05:30  INFO 11491 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T11:41:04.787+05:30  INFO 11491 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T11:41:04.843+05:30  INFO 11491 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2947 ms
-2026-06-04T11:41:05.255+05:30  INFO 11491 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T11:41:05.353+05:30  INFO 11491 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T11:41:06.015+05:30  INFO 11491 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T11:41:06.068+05:30  INFO 11491 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T11:41:06.355+05:30  INFO 11491 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@42ffbab6
-2026-06-04T11:41:06.358+05:30  INFO 11491 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T11:41:06.502+05:30  WARN 11491 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T11:41:06.534+05:30  INFO 11491 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 8.0.46
-	Default catalog/schema: fileapp/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-06-04T11:41:08.144+05:30  INFO 11491 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T11:41:08.550+05:30  INFO 11491 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T11:41:08.674+05:30  INFO 11491 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T11:41:09.489+05:30 DEBUG 11491 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T11:41:10.727+05:30  WARN 11491 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T11:41:11.375+05:30  INFO 11491 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T11:41:11.385+05:30  INFO 11491 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 10.804 seconds (process running for 13.802)
-2026-06-04T11:41:28.584+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-04T11:41:28.585+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-04T11:41:28.588+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-06-04T11:41:54.424+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:55.418+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:56.419+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:57.421+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:58.431+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:58.528+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:58.560+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:41:59.551+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:42:00.554+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:42:01.559+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:02.571+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:03.581+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:04.581+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:05.579+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:06.579+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:43:07.581+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:47:12.128+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:47:12.549+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:47:31.794+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:47:32.164+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:50:11.324+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:50:12.600+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Missing refresh token
-2026-06-04T11:56:59.165+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
-2026-06-04T11:57:20.362+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:21.381+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:22.384+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:23.390+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:24.390+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:25.393+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:57:26.394+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:58:14.624+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T11:58:15.626+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T12:12:00.230+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1210 milliseconds ago at 2026-06-04T06:41:59.000Z. Current time: 2026-06-04T06:42:00.210Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T12:27:01.811+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1810 milliseconds ago at 2026-06-04T06:57:00.000Z. Current time: 2026-06-04T06:57:01.810Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T12:42:02.678+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1678 milliseconds ago at 2026-06-04T07:12:01.000Z. Current time: 2026-06-04T07:12:02.678Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T12:57:02.684+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 684 milliseconds ago at 2026-06-04T07:27:02.000Z. Current time: 2026-06-04T07:27:02.684Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T13:12:02.689+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 689 milliseconds ago at 2026-06-04T07:42:02.000Z. Current time: 2026-06-04T07:42:02.689Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T13:27:02.694+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 694 milliseconds ago at 2026-06-04T07:57:02.000Z. Current time: 2026-06-04T07:57:02.694Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T13:42:02.700+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 699 milliseconds ago at 2026-06-04T08:12:02.000Z. Current time: 2026-06-04T08:12:02.699Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T13:53:08.208+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
-2026-06-04T13:54:16.098+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:17.101+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:18.102+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:19.105+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:20.109+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:21.108+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:22.112+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:23.116+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:24.119+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:54:25.126+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T13:57:00.927+05:30  INFO 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
-2026-06-04T13:58:52.320+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+2026-06-10T18:00:54.098+05:30 ERROR 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-12] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
 
-org.springframework.web.multipart.support.MissingServletRequestPartException: Required part 'files' is not present.
-	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValueInternal(RequestParamMethodArgumentResolver.java:215) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:195) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:174) ~[spring-web-7.0.5.jar:7.0.5]
+org.springframework.dao.InvalidDataAccessApiUsageException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:493) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:112) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:576) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222) ~[spring-aop-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy150.deleteByUser(Unknown Source) ~[na:na]
+	at com.nc.FinalProject.service.AuthService.sendResetPasswordEmail(AuthService.java:206) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:715) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.nc.FinalProject.service.AuthService$$SpringCGLIB$$0.sendResetPasswordEmail(<generated>) ~[classes/:na]
+	at com.nc.FinalProject.controller.AuthController.forgotPassword(AuthController.java:60) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
@@ -650,7 +249,7 @@ org.springframework.web.multipart.support.MissingServletRequestPartException: Re
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
@@ -669,8 +268,7 @@ org.springframework.web.multipart.support.MissingServletRequestPartException: Re
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at com.nc.FinalProject.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:82) ~[classes/:na]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
 	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
@@ -726,49 +324,54 @@ org.springframework.web.multipart.support.MissingServletRequestPartException: Re
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: jakarta.persistence.TransactionRequiredException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:371) ~[spring-orm-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy138.remove(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$DeleteExecution.doExecute(JpaQueryExecution.java:419) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135) ~[spring-tx-7.0.5.jar:7.0.5]
+	... 107 common frames omitted
 
-2026-06-04T14:00:23.030+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:00.390+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:01.389+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:02.390+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:03.395+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:04.418+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:05.396+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:06.399+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:36.242+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:02:36.727+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:30.278+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:31.292+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:32.857+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:33.295+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:34.294+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:35.311+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:05:36.298+05:30 ERROR 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:08:09.906+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1857 milliseconds ago at 2026-06-04T08:38:08.000Z. Current time: 2026-06-04T08:38:09.857Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T14:08:09.926+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Token revoked
-2026-06-04T14:08:12.028+05:30  WARN 11491 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Token revoked
-2026-06-04T14:12:36.268+05:30  INFO 11491 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T14:12:36.417+05:30  INFO 11491 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T14:12:36.592+05:30  INFO 11491 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:12:36.711+05:30  INFO 11491 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T14:12:36.715+05:30  INFO 11491 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-04T14:13:14.542+05:30  INFO 18004 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 18004 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T14:13:14.551+05:30 DEBUG 18004 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T14:13:14.552+05:30  INFO 18004 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T14:13:16.591+05:30  INFO 18004 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T14:13:16.733+05:30  INFO 18004 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 119 ms. Found 11 JPA repository interfaces.
-2026-06-04T14:13:17.553+05:30  INFO 18004 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T14:13:17.584+05:30  INFO 18004 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T14:13:17.585+05:30  INFO 18004 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T14:13:17.629+05:30  INFO 18004 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 2931 ms
-2026-06-04T14:13:17.993+05:30  INFO 18004 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T14:13:18.122+05:30  INFO 18004 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T14:13:18.716+05:30  INFO 18004 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T14:13:18.766+05:30  INFO 18004 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T14:13:19.117+05:30  INFO 18004 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71f29d91
-2026-06-04T14:13:19.120+05:30  INFO 18004 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T14:13:19.727+05:30  WARN 18004 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T14:13:19.831+05:30  INFO 18004 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-06-10T18:03:55.770+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-06-10T18:15:51.355+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.n.F.exception.GlobalExceptionHandler   : Password already viewed: Password already viewed
+2026-06-10T18:18:58.605+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3605 milliseconds ago at 2026-06-10T12:48:55.000Z. Current time: 2026-06-10T12:48:58.605Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T18:25:25.003+05:30  INFO 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
+2026-06-10T18:40:25.772+05:30  WARN 32809 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1772 milliseconds ago at 2026-06-10T13:10:24.000Z. Current time: 2026-06-10T13:10:25.772Z. Allowed clock skew: 0 milliseconds.
+2026-06-10T18:48:51.133+05:30  INFO 32809 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-10T18:48:51.461+05:30  INFO 32809 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-10T18:48:51.818+05:30  INFO 32809 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T18:48:52.077+05:30  INFO 32809 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-10T18:48:52.080+05:30  INFO 32809 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-10T18:51:20.616+05:30  INFO 53084 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 53084 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-06-10T18:51:20.637+05:30 DEBUG 53084 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-06-10T18:51:20.639+05:30  INFO 53084 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-06-10T18:51:23.328+05:30  INFO 53084 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-10T18:51:23.542+05:30  INFO 53084 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 192 ms. Found 11 JPA repository interfaces.
+2026-06-10T18:51:24.845+05:30  INFO 53084 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-10T18:51:24.888+05:30  INFO 53084 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-10T18:51:24.889+05:30  INFO 53084 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-06-10T18:51:25.479+05:30  INFO 53084 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 4628 ms
+2026-06-10T18:51:25.995+05:30  INFO 53084 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-10T18:51:26.101+05:30  INFO 53084 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-06-10T18:51:26.672+05:30  INFO 53084 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-10T18:51:26.718+05:30  INFO 53084 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-10T18:51:27.822+05:30  INFO 53084 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6b3b4f37
+2026-06-10T18:51:27.833+05:30  INFO 53084 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-10T18:51:28.159+05:30  WARN 53084 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-10T18:51:28.218+05:30  INFO 53084 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -780,137 +383,51 @@ org.springframework.web.multipart.support.MissingServletRequestPartException: Re
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-06-04T14:13:22.614+05:30  INFO 18004 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T14:13:23.660+05:30  INFO 18004 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:13:23.778+05:30  INFO 18004 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T14:13:24.675+05:30 DEBUG 18004 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T14:13:25.957+05:30  WARN 18004 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T14:13:26.851+05:30  INFO 18004 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T14:13:26.861+05:30  INFO 18004 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 13.685 seconds (process running for 16.688)
-2026-06-04T14:14:00.526+05:30  INFO 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-04T14:14:00.527+05:30  INFO 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-04T14:14:00.529+05:30  INFO 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-06-04T14:14:05.949+05:30  WARN 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Token revoked
-2026-06-04T14:14:09.169+05:30  WARN 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Invalid refresh token: Token revoked
-2026-06-04T14:14:55.364+05:30  INFO 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noel@gmail.com
-2026-06-04T14:15:57.206+05:30 ERROR 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:19:14.894+05:30 ERROR 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-6] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:19:54.011+05:30 ERROR 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-10] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:20:10.811+05:30 ERROR 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-9] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:21:04.097+05:30 ERROR 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Upload size exceeded: Maximum upload size exceeded
-2026-06-04T14:29:58.630+05:30  WARN 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-11] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3583 milliseconds ago at 2026-06-04T08:59:55.000Z. Current time: 2026-06-04T08:59:58.583Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T14:29:58.630+05:30  WARN 18004 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 3581 milliseconds ago at 2026-06-04T08:59:55.000Z. Current time: 2026-06-04T08:59:58.581Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T14:36:54.896+05:30  INFO 18004 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T14:36:54.953+05:30  INFO 18004 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T14:36:54.973+05:30  INFO 18004 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:36:54.989+05:30  INFO 18004 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T14:36:55.067+05:30  INFO 18004 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-04T14:37:05.679+05:30  INFO 19526 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 19526 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T14:37:05.682+05:30 DEBUG 19526 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T14:37:05.683+05:30  INFO 19526 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T14:37:08.098+05:30  INFO 19526 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T14:37:08.203+05:30  INFO 19526 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 11 JPA repository interfaces.
-2026-06-04T14:37:08.988+05:30  INFO 19526 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T14:37:09.019+05:30  INFO 19526 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T14:37:09.020+05:30  INFO 19526 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T14:37:09.066+05:30  INFO 19526 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3227 ms
-2026-06-04T14:37:09.494+05:30  INFO 19526 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T14:37:09.595+05:30  INFO 19526 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T14:37:10.193+05:30  INFO 19526 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T14:37:10.235+05:30  INFO 19526 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T14:37:10.495+05:30  INFO 19526 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@294ebe11
-2026-06-04T14:37:10.498+05:30  INFO 19526 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T14:37:10.594+05:30  WARN 19526 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T14:37:10.643+05:30  INFO 19526 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 8.0.46
-	Default catalog/schema: fileapp/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-06-04T14:37:12.665+05:30  INFO 19526 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T14:37:12.783+05:30  INFO 19526 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:37:12.918+05:30  INFO 19526 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T14:37:13.685+05:30 DEBUG 19526 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T14:37:14.978+05:30  WARN 19526 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T14:37:15.757+05:30  INFO 19526 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T14:37:15.768+05:30  INFO 19526 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 11.251 seconds (process running for 13.307)
-2026-06-04T14:37:31.545+05:30  INFO 19526 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-04T14:37:31.545+05:30  INFO 19526 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-04T14:37:31.548+05:30  INFO 19526 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-06-04T14:39:15.644+05:30  INFO 19526 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T14:39:15.646+05:30  INFO 19526 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T14:39:15.651+05:30  INFO 19526 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:39:15.653+05:30  INFO 19526 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T14:39:15.683+05:30  INFO 19526 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-04T14:39:22.354+05:30  INFO 19687 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 19687 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T14:39:22.357+05:30 DEBUG 19687 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T14:39:22.358+05:30  INFO 19687 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T14:39:23.178+05:30  INFO 19687 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T14:39:23.268+05:30  INFO 19687 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 11 JPA repository interfaces.
-2026-06-04T14:39:23.765+05:30  INFO 19687 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T14:39:23.777+05:30  INFO 19687 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T14:39:23.778+05:30  INFO 19687 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T14:39:23.837+05:30  INFO 19687 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1426 ms
-2026-06-04T14:39:23.998+05:30  INFO 19687 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T14:39:24.046+05:30  INFO 19687 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T14:39:24.477+05:30  INFO 19687 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T14:39:24.505+05:30  INFO 19687 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T14:39:24.693+05:30  INFO 19687 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@42ffbab6
-2026-06-04T14:39:24.696+05:30  INFO 19687 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T14:39:24.749+05:30  WARN 19687 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T14:39:24.766+05:30  INFO 19687 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
-	Database driver: MySQL Connector/J
-	Database dialect: MySQLDialect
-	Database version: 8.0.46
-	Default catalog/schema: fileapp/undefined
-	Autocommit mode: undefined/unknown
-	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
-	JDBC fetch size: none
-	Pool: DataSourceConnectionProvider
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2026-06-04T14:39:25.970+05:30  INFO 19687 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T14:39:26.108+05:30  INFO 19687 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T14:39:26.215+05:30  INFO 19687 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T14:39:26.860+05:30 DEBUG 19687 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T14:39:28.006+05:30  WARN 19687 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T14:39:28.511+05:30  INFO 19687 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T14:39:28.520+05:30  INFO 19687 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 6.744 seconds (process running for 7.661)
-2026-06-04T14:39:31.504+05:30  INFO 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-06-04T14:39:31.505+05:30  INFO 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-06-04T14:39:31.507+05:30  INFO 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2026-06-04T14:39:57.666+05:30 ERROR 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
+2026-06-10T18:51:30.523+05:30  INFO 53084 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-10T18:51:31.906+05:30  INFO 53084 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T18:51:32.795+05:30  INFO 53084 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-10T18:51:34.718+05:30 DEBUG 53084 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-10T18:51:36.218+05:30  WARN 53084 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-10T18:51:37.479+05:30  INFO 53084 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-10T18:51:37.497+05:30  INFO 53084 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 17.712 seconds (process running for 21.332)
+2026-06-10T18:51:52.050+05:30  INFO 53084 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-10T18:51:52.061+05:30  INFO 53084 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-10T18:51:52.068+05:30  INFO 53084 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-06-10T18:51:54.918+05:30 ERROR 53084 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Unexpected error: 
 
-org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: Broken pipe
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:340) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:399) ~[spring-web-7.0.5.jar:7.0.5]
-	at java.base/java.io.InputStream.transferTo(InputStream.java:797) ~[na:na]
-	at java.base/java.io.BufferedInputStream.implTransferTo(BufferedInputStream.java:652) ~[na:na]
-	at java.base/java.io.BufferedInputStream.transferTo(BufferedInputStream.java:631) ~[na:na]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeContent(ResourceHttpMessageConverter.java:158) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeInternal(ResourceHttpMessageConverter.java:114) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.ResourceHttpMessageConverter.writeInternal(ResourceHttpMessageConverter.java:47) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.http.converter.AbstractHttpMessageConverter.write(AbstractHttpMessageConverter.java:232) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:341) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ResponseEntityReturnValueHandler.handleReturnValue(ResponseEntityReturnValueHandler.java:80) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135) ~[spring-webmvc-7.0.5.jar:7.0.5]
+org.springframework.dao.InvalidDataAccessApiUsageException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:493) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:112) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:576) ~[spring-orm-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:137) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222) ~[spring-aop-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy150.deleteByUser(Unknown Source) ~[na:na]
+	at com.nc.FinalProject.service.AuthService.sendResetPasswordEmail(AuthService.java:206) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:715) ~[spring-aop-7.0.5.jar:7.0.5]
+	at com.nc.FinalProject.service.AuthService$$SpringCGLIB$$0.sendResetPasswordEmail(<generated>) ~[classes/:na]
+	at com.nc.FinalProject.controller.AuthController.forgotPassword(AuthController.java:60) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.5.jar:7.0.5]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.5.jar:7.0.5]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.18.jar:6.1]
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
@@ -993,160 +510,49 @@ org.springframework.web.context.request.async.AsyncRequestNotUsableException: Se
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe
-	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:328) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.appendByteArray(OutputBuffer.java:734) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:662) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:363) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:99) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.write(OnCommittedResponseWrapper.java:639) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:396) ~[spring-web-7.0.5.jar:7.0.5]
-	... 102 common frames omitted
-Caused by: java.io.IOException: Broken pipe
-	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method) ~[na:na]
-	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:65) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102) ~[na:na]
-	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58) ~[na:na]
-	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542) ~[na:na]
-	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:129) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1419) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:747) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:587) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:535) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:537) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.filters.IdentityOutputFilter.doWrite(IdentityOutputFilter.java:71) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.Response.doWrite(Response.java:633) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:316) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	... 109 common frames omitted
+Caused by: jakarta.persistence.TransactionRequiredException: No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:371) ~[spring-orm-7.0.5.jar:7.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy138.remove(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$DeleteExecution.doExecute(JpaQueryExecution.java:419) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:99) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:164) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:154) ~[spring-data-jpa-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:167) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69) ~[spring-data-commons-4.0.3.jar:4.0.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.5.jar:7.0.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.5.jar:7.0.5]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135) ~[spring-tx-7.0.5.jar:7.0.5]
+	... 107 common frames omitted
 
-2026-06-04T14:39:57.676+05:30  WARN 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Failure in @ExceptionHandler com.nc.FinalProject.exception.GlobalExceptionHandler#handleAllExceptions(Exception)
-
-org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class com.nc.FinalProject.dto.response.ErrorResponse] with preset Content-Type 'audio/mpeg'
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:364) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:135) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:460) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:72) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:176) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:78) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1227) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1035) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:980) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.5.jar:7.0.5]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.18.jar:6.1]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:235) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:371) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:380) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195) ~[spring-security-web-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317) ~[spring-security-config-7.0.3.jar:7.0.3]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.5.jar:7.0.5]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.18.jar:11.0.18]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-
-2026-06-04T14:45:03.286+05:30  WARN 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 5263 milliseconds ago at 2026-06-04T09:14:58.000Z. Current time: 2026-06-04T09:15:03.263Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T15:00:04.798+05:30  WARN 19687 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-8] c.n.F.security.JwtAuthenticationFilter   : JWT extraction failed: JWT expired 1798 milliseconds ago at 2026-06-04T09:30:03.000Z. Current time: 2026-06-04T09:30:04.798Z. Allowed clock skew: 0 milliseconds.
-2026-06-04T15:02:25.059+05:30  INFO 19687 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T15:02:25.169+05:30  INFO 19687 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T15:02:25.268+05:30  INFO 19687 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T15:02:25.325+05:30  INFO 19687 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T15:02:25.503+05:30  INFO 19687 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-06-04T15:02:36.822+05:30  INFO 20886 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 20886 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
-2026-06-04T15:02:36.825+05:30 DEBUG 20886 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
-2026-06-04T15:02:36.826+05:30  INFO 20886 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
-2026-06-04T15:02:39.145+05:30  INFO 20886 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-04T15:02:39.241+05:30  INFO 20886 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 11 JPA repository interfaces.
-2026-06-04T15:02:39.998+05:30  INFO 20886 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-06-04T15:02:40.033+05:30  INFO 20886 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-06-04T15:02:40.034+05:30  INFO 20886 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-06-04T15:02:40.081+05:30  INFO 20886 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3095 ms
-2026-06-04T15:02:40.476+05:30  INFO 20886 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-06-04T15:02:40.574+05:30  INFO 20886 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-06-04T15:02:41.962+05:30  INFO 20886 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-04T15:02:42.113+05:30  INFO 20886 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-04T15:02:42.918+05:30  INFO 20886 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7672960e
-2026-06-04T15:02:42.921+05:30  INFO 20886 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-04T15:02:43.244+05:30  WARN 20886 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-04T15:02:43.331+05:30  INFO 20886 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-06-10T18:55:12.849+05:30  INFO 53084 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-10T18:55:12.892+05:30  INFO 53084 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-10T18:55:12.908+05:30  INFO 53084 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T18:55:12.916+05:30  INFO 53084 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-10T18:55:12.961+05:30  INFO 53084 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-10T18:55:23.695+05:30  INFO 53551 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Starting FinalProjectApplication using Java 21.0.11 with PID 53551 (/home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject/target/classes started by noelcyriac in /home/noelcyriac/Documents/April_Projects/rapid-final-project-backend/FinalProject)
+2026-06-10T18:55:23.709+05:30 DEBUG 53551 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-06-10T18:55:23.711+05:30  INFO 53551 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-06-10T18:55:25.685+05:30  INFO 53551 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-10T18:55:25.794+05:30  INFO 53551 --- [FinalProject] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 97 ms. Found 11 JPA repository interfaces.
+2026-06-10T18:55:26.851+05:30  INFO 53551 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-10T18:55:26.889+05:30  INFO 53551 --- [FinalProject] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-10T18:55:26.890+05:30  INFO 53551 --- [FinalProject] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-06-10T18:55:26.941+05:30  INFO 53551 --- [FinalProject] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 3060 ms
+2026-06-10T18:55:27.435+05:30  INFO 53551 --- [FinalProject] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-10T18:55:27.574+05:30  INFO 53551 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-06-10T18:55:28.207+05:30  INFO 53551 --- [FinalProject] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-10T18:55:28.265+05:30  INFO 53551 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-10T18:55:28.564+05:30  INFO 53551 --- [FinalProject] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6143b2b1
+2026-06-10T18:55:28.567+05:30  INFO 53551 --- [FinalProject] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-10T18:55:28.762+05:30  WARN 53551 --- [FinalProject] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-10T18:55:28.786+05:30  INFO 53551 --- [FinalProject] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/fileapp?useSSL=false&serverTimezone=UTC]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -1158,15 +564,29 @@ org.springframework.http.converter.HttpMessageNotWritableException: No converter
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-06-04T15:02:46.214+05:30  INFO 20886 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-04T15:02:46.638+05:30  INFO 20886 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T15:02:46.764+05:30  INFO 20886 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-04T15:02:47.517+05:30 DEBUG 20886 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
-2026-06-04T15:02:48.946+05:30  WARN 20886 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-04T15:02:49.955+05:30  INFO 20886 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-06-04T15:02:49.964+05:30  INFO 20886 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 14.52 seconds (process running for 16.558)
-2026-06-04T15:02:54.649+05:30  INFO 20886 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
-2026-06-04T15:02:54.653+05:30  INFO 20886 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
-2026-06-04T15:02:54.659+05:30  INFO 20886 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-06-04T15:02:54.662+05:30  INFO 20886 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-06-04T15:02:54.689+05:30  INFO 20886 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-06-10T18:55:30.356+05:30  INFO 53551 --- [FinalProject] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-10T18:55:30.518+05:30  INFO 53551 --- [FinalProject] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T18:55:30.619+05:30  INFO 53551 --- [FinalProject] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-10T18:55:31.385+05:30 DEBUG 53551 --- [FinalProject] [main] c.n.F.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-06-10T18:55:32.524+05:30  WARN 53551 --- [FinalProject] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-10T18:55:33.309+05:30  INFO 53551 --- [FinalProject] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-10T18:55:33.321+05:30  INFO 53551 --- [FinalProject] [main] c.n.F.FinalProjectApplication            : Started FinalProjectApplication in 11.087 seconds (process running for 12.725)
+2026-06-10T18:55:47.379+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-10T18:55:47.380+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-10T18:55:47.382+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-06-10T18:57:16.450+05:30  WARN 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-1] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
+2026-06-10T18:57:29.480+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noelcyriac99@gmail.com
+2026-06-10T18:58:03.894+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.nc.FinalProject.service.AuthService    : Changing password for user: noelcyriac99@gmail.com
+2026-06-10T18:58:03.971+05:30 ERROR 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Password mismatch: Old password is incorrect
+2026-06-10T18:58:21.934+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.nc.FinalProject.service.AuthService    : Changing password for user: noelcyriac99@gmail.com
+2026-06-10T18:58:22.019+05:30 ERROR 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-5] c.n.F.exception.GlobalExceptionHandler   : Password mismatch: Old password is incorrect
+2026-06-10T18:58:27.460+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.nc.FinalProject.service.AuthService    : Changing password for user: noelcyriac99@gmail.com
+2026-06-10T18:58:27.760+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-3] c.nc.FinalProject.service.AuthService    : Password successfully updated for user: noelcyriac99@gmail.com
+2026-06-10T19:00:06.029+05:30  WARN 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-2] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
+2026-06-10T19:00:16.642+05:30  WARN 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-7] c.n.F.exception.GlobalExceptionHandler   : Login failed: Invalid credentials
+2026-06-10T19:00:22.745+05:30  INFO 53551 --- [FinalProject] [http-nio-0.0.0.0-8080-exec-4] c.nc.FinalProject.service.AuthService    : Login SUCCESS for user: noelcyriac99@gmail.com
+2026-06-10T19:04:05.252+05:30  INFO 53551 --- [FinalProject] [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-10T19:04:05.255+05:30  INFO 53551 --- [FinalProject] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2026-06-10T19:04:05.262+05:30  INFO 53551 --- [FinalProject] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-10T19:04:05.264+05:30  INFO 53551 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-06-10T19:04:05.293+05:30  INFO 53551 --- [FinalProject] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

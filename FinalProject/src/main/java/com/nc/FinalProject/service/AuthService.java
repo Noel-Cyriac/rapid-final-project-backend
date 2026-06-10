@@ -196,6 +196,7 @@ public class AuthService {
         return new RefreshResponse(newAccessToken);
     }
 
+    @Transactional
     public void sendResetPasswordEmail(String email) {
 
         Users user = userRepository.findByEmail(email).orElse(null);
